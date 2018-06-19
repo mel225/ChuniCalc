@@ -1,6 +1,5 @@
 javascript:
 (function() {
-  
   var test2 = function(){
     alert("test2");
   };
