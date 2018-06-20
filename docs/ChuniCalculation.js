@@ -35,7 +35,7 @@
     divdoc = document.getElementById("music_detail");
     databoxes = document.getElementsByClassName("box02 w400");
     
-    Array.prototype.forEach.call(databoxes, setCalcDiv(item));
+    Array.prototype.forEach.call(databoxes, setCalcDiv);
 
     /* set <div> statement */
     function setCalcDiv(item){
