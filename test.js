@@ -5,8 +5,6 @@
 
   alert("選択した値を、ほかの値によって計算します。");
 
-  addCalcDiv();
-
   alert("実行ができてない");
   /*
   $('.btn_calc').css({
@@ -32,7 +30,7 @@
   */
   
   /* add <div> Tag */
-  addCalcDiv = function(){
+  var addCalcDiv = function(){
     alert("test");
     divdoc = document.getElementById("music_detail");
     databoxes = document.getElementsByClassName("box02 w400");
@@ -95,5 +93,7 @@
     /*};*/
     });
   };
+  
   addCalcDiv();
+  
 }) ();
