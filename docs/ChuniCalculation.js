@@ -5,6 +5,7 @@
 
   alert("選択した値を、ほかの値によって計算します。");
 
+  addCalcDiv();
   /*
   $('.btn_calc').css({
     "display":"inline-block",
@@ -29,7 +30,7 @@
   */
   
   /* add <div> Tag */
-  var addCalcDiv = function(){
+  function addCalcDiv(){
     alert("test");
     divdoc = document.getElementById("music_detail");
     databoxes = document.getElementsByClassName("box02 w400");
@@ -37,7 +38,7 @@
     Array.prototype.forEach.call(databoxes, setCalcDiv(item));
 
     /* set <div> statement */
-    setCalcDiv = function(item){
+    function setCalcDiv(item){
       databox = item;
       parentclass = databox.parentNode.className;
       
@@ -91,7 +92,4 @@
       }
     };
   };
-  
-  addCalcDiv();
-  
 }) ();
