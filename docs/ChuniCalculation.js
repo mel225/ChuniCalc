@@ -5,7 +5,6 @@
 
   alert("選択した値を、ほかの値によって計算します。");
 
-  alert("実行ができてない");
   /*
   $('.btn_calc').css({
     "display":"inline-block",
@@ -35,10 +34,10 @@
     divdoc = document.getElementById("music_detail");
     databoxes = document.getElementsByClassName("box02 w400");
     
-    Array.prototype.forEach.call(databoxes, function(item){
+    Array.prototype.forEach.call(databoxes, setCalcDiv(item));
 
     /* set <div> statement */
-    /*setCalcDiv = function(item){*/
+    setCalcDiv = function(item){
       databox = item;
       parentclass = databox.parentNode.className;
       
@@ -90,8 +89,7 @@
         buttonDiv.innerHTML = '' +
           '<div><a herf="javascript:void(0);" class="btn_calc" onclick="test2()">CALC</button></div>';
       }
-    /*};*/
-    });
+    };
   };
   
   addCalcDiv();
