@@ -87,7 +87,8 @@
                   '<div><input type="radio" name="'+difficulty+'">' +
                     '<input type="text"  style="width:80px;" name="miss_'+difficulty+'">MISS</div>';
         buttonDiv.innerHTML = '' +
-          '<div><a herf="javascript:void(0);" class="btn_calc" onclick="test2()">CALC</button></div>';
+          '<a herf="javascript:void(0);" onclick="test2()">' + 
+           '<div class="honor_now btn_calc">計算</div></a>';
       }
     };
   };
