@@ -40,66 +40,67 @@
   
   /* add <div> Tag */
   function addCalcDiv(){
-    divdoc = document.getElementById("music_detail");
-    databoxes = document.getElementsByClassName("box02 w400");
+    databoxes = document.getElementsByClassName("w420 music_box");
     
     Array.prototype.forEach.call(databoxes, setCalcDiv);
-
-    /* set <div> statement */
-    function setCalcDiv(item){
-      databox = item;
-      parentclass = databox.parentNode.className;
-      
+  };
+  
+  /* set <div> statement */
+  function setCalcDiv(databox){
+    parentclass = databox.className;
+    
       /* get difficulty of databox */
-      if(parentclass.search("basic") != -1){
-        difficulty = "basic";
-      }else if(parentclass.search("advanced") != -1){
-        difficulty = "advanced";
-      }else if(parentclass.search("expert") != -1){
-        difficulty = "expert";
-      }else if(parentclass.search("master") != -1){
-        difficulty = "master";
-      }
+    /*
+    if(parentclass.search("basic") != -1){
+      difficulty = "basic";
+    }else if(parentclass.search("advanced") != -1){
+      difficulty = "advanced";
+    }else if(parentclass.search("expert") != -1){
+      difficulty = "expert";
+    }else if(parentclass.search("master") != -1){
+      difficulty = "master";
+    }
+     */
+    difficulty = parentclass.slice(parentclass.indexOf('bg_'));
+    
+    /* 既にツールが展開されていれば実行しない */
+    always = document.getElementById("scoreDiv_" + difficulty);
+    if(always == undefined) {
       
-      /* 既にツールが展開されていれば実行しない */
-      always = document.getElementById("scoreDiv_" + difficulty);
-      if(always == undefined) {
-        
-        /* それぞれのdivのプロパティを設定 */
-        scoreDiv = document.createElement("div");
-        notesDiv = document.createElement("div");
-        buttonDiv = document.createElement("div");
-        
-        scoreDiv.className = "block_underline ptb_5";
-        notesDiv.className = "block_underline ptb_5";
-        buttonDiv.className = "block_underline ptb_5";
-        
-        scoreDiv.id = "scoreDiv_" + difficulty;
-        notesDiv.id = "notesDiv_" + difficulty;
-        buttonDiv.id = "buttonDiv_" + difficulty;
-        
-        iconDiv = databox.getElementsByClassName("play_musicdata_icon").item(0);
-        databox.insertBefore(scoreDiv, iconDiv);
-        databox.insertBefore(notesDiv, iconDiv);
-        databox.insertBefore(buttonDiv, iconDiv);
-        
-        /* innerHTML */
-        scoreDiv.innerHTML = '' + 
-          '<div><input type="radio" name="'+difficulty+'">' + 
-            '<input type="text" style="width:150px;" name="score_'+difficulty+'">(SCORE)</div>'/* +
+      /* それぞれのdivのプロパティを設定 */
+      scoreDiv = document.createElement("div");
+      notesDiv = document.createElement("div");
+      buttonDiv = document.createElement("div");
+      
+      scoreDiv.className = "block_underline ptb_5";
+      notesDiv.className = "block_underline ptb_5";
+      buttonDiv.className = "block_underline ptb_5";
+      
+      scoreDiv.id = "scoreDiv_" + difficulty;
+      notesDiv.id = "notesDiv_" + difficulty;
+      buttonDiv.id = "buttonDiv_" + difficulty;
+      
+      iconDiv = databox.getElementsByClassName("play_musicdata_icon").item(0);
+      databox.insertBefore(scoreDiv, iconDiv);
+      databox.insertBefore(notesDiv, iconDiv);
+      databox.insertBefore(buttonDiv, iconDiv);
+      
+      /* innerHTML */
+      scoreDiv.innerHTML = '' + 
+        '<div><input type="radio" name="'+difficulty+'">' + 
+          '<input type="text" style="width:150px;" id="score_'+difficulty+'">(SCORE)</div>'/* +
               '<a href="javascript:void(0);" onclick="test2()"><strong>test2</strong></a>'*/;
-        notesDiv.innerHTML = '' + 
-          '<div><input type="radio" name="'+difficulty+'">'+
-            '<input type="text" style="width:80px;"name="justice_'+difficulty+'">JUSTICE</div>' +
-              '<div><input type="radio" name="'+difficulty+'">'+
-                '<input type="text" style="width:80px;" name="attack_'+difficulty+'">ATTACK</div>' +
-                  '<div><input type="radio" name="'+difficulty+'">' +
-                    '<input type="text"  style="width:80px;" name="miss_'+difficulty+'">MISS</div>';
-        buttonDiv.innerHTML = '' +
-          '<a herf="javascript:void(0);" onclick="test2" class="btn_calc_back">' + 
-           '<div id="calc_button" class="honor_now btn_calc">計算</div></a>';
-      }
-    };
+      notesDiv.innerHTML = '' + 
+        '<div><input type="radio" name="'+difficulty+'">'+
+          '<input type="text" style="width:80px;" id="justice_'+difficulty+'">JUSTICE</div>' +
+            '<div><input type="radio" name="'+difficulty+'">'+
+              '<input type="text" style="width:80px;" id="attack_'+difficulty+'">ATTACK</div>' +
+                '<div><input type="radio" name="'+difficulty+'">' +
+                  '<input type="text"  style="width:80px;" id="miss_'+difficulty+'">MISS</div>';
+      buttonDiv.innerHTML = '' +
+        '<a herf="javascript:void(0);" onclick="test2" class="btn_calc_back">' + 
+          '<div id="calc_button" class="honor_now btn_calc">計算</div></a>';
+    }
   };
   
   /* setting of contents.css in this repositry */
@@ -109,4 +110,19 @@
     link_tag.href = "https://mel225.github.io/ChuniCalc/contents.css";
     document.getElementsByTagName('head')[0].appendChild(link_tag);
   };
+
+  /* setting of score point */
+  function setScorePoint {
+    var databoxes = document.getElementsByClassName("w420 music_box");
+
+    array.prototype.forEach.call(databoxes, function(databox){
+      var boxesclass = databox.className;
+      var difficulty = boxesclass.slice(boxesclass.indexOf('bg_'));
+      var scoreInput = databox.getElementById("scoreDiv").getElementById("score_" + difficulty);
+      var highScoreDiv = databox.getElementsByClassName("text_b")[0];
+
+      var score = perseInt(highScoreDiv.textContent);
+      scoreInput.value = score;
+    });
+  }
 }) ();
