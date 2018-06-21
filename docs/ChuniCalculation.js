@@ -119,7 +119,7 @@
   function setScorePoint() {
     var databoxes = document.getElementsByClassName("w420 music_box");
 
-    array.prototype.forEach.call(databoxes, function(databox){
+    Array.prototype.forEach.call(databoxes, function(databox){
       var boxesclass = databox.className;
       var difficulty = boxesclass.slice(boxesclass.indexOf('bg_'));
       var scoreInput = databox.getElementById("scoreDiv").getElementById("score_" + difficulty);
