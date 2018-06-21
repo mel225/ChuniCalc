@@ -12,6 +12,8 @@
   console.log("addCalcDiv()");
   
   alert("すべての設定が完了しました。");
+
+  console.log(d.getElementById("calc_button").width);
   
   /*
   $('.btn_calc').css({
@@ -95,7 +97,7 @@
                     '<input type="text"  style="width:80px;" name="miss_'+difficulty+'">MISS</div>';
         buttonDiv.innerHTML = '' +
           '<a herf="javascript:void(0);" onclick="test2">' + 
-           '<div class="honor_now btn_calc">計算</div></a>';
+           '<div id="calc_button" class="honor_now btn_calc">計算</div></a>';
       }
     };
   };
