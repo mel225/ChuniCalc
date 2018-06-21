@@ -5,7 +5,9 @@
 
   alert("選択した値を、ほかの値によって計算します。");
 
-  setCSS();
+  setContentsCSS();
+  
+  test2();
   
   addCalcDiv();
   
@@ -97,7 +99,7 @@
   };
   
   /* setting of contents.css in this repositry */
-  function setCSS(){
+  function setContentsCSS(){
     alert("set CSS");
     var link_tag = document.createElement('link');
     link_tag.rel = "stylesheet";
