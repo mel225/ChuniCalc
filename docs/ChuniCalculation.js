@@ -98,9 +98,11 @@
   
   /* setting of contents.css in this repositry */
   function setCSS(){
+    alert("set CSS");
     var link_tag = document.createElement('link');
     link_tag.rel = "stylesheet";
     link_tag.href = "https://mel225.github.io/ChuniCalc/contents.css";
     document.getElementsByTagName('head')[0].appendChild(link_tag);
+    alert("did set CSS");
   };
 }) ();
