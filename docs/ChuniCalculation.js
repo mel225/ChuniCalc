@@ -84,11 +84,12 @@
       scoreDiv.id = "scoreDiv_" + difficulty;
       notesDiv.id = "notesDiv_" + difficulty;
       buttonDiv.id = "buttonDiv_" + difficulty;
-      
+
+      parentNode = databox.getElementsByClassName("box02 w400")[0];
       iconDiv = databox.getElementsByClassName("play_musicdata_icon").item(0);
-      iconDiv.insertBefore(scoreDiv, iconDiv);
-      iconDiv.insertBefore(notesDiv, iconDiv);
-      iconDiv.insertBefore(buttonDiv, iconDiv);
+      parentNode.insertBefore(scoreDiv, iconDiv);
+      parentNode.insertBefore(notesDiv, iconDiv);
+      parentNode.insertBefore(buttonDiv, iconDiv);
       
       /* innerHTML */
       scoreDiv.innerHTML = '' + 
