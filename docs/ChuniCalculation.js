@@ -64,7 +64,8 @@
       difficulty = "master";
     }
      */
-    difficulty = parentclass.slice(parentclass.indexOf('bg_'));
+    str = 'bg_'
+    difficulty = parentclass.slice(parentclass.indexOf(str) + str.length);
     console.log(difficulty);
     
     /* 既にツールが展開されていれば実行しない */
