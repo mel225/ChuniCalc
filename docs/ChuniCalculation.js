@@ -65,6 +65,7 @@
     }
      */
     difficulty = parentclass.slice(parentclass.indexOf('bg_'));
+    console.log(difficulty);
     
     /* 既にツールが展開されていれば実行しない */
     always = document.getElementById("scoreDiv_" + difficulty);
