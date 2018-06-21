@@ -10,6 +10,9 @@
   
   addCalcDiv();
   console.log("addCalcDiv()");
+
+  setScorePoint();
+  console.log("setScorePoint()");
   
   alert("すべての設定が完了しました。");
 
@@ -112,7 +115,7 @@
   };
 
   /* setting of score point */
-  function setScorePoint {
+  function setScorePoint() {
     var databoxes = document.getElementsByClassName("w420 music_box");
 
     array.prototype.forEach.call(databoxes, function(databox){
