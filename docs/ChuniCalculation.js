@@ -5,7 +5,7 @@
 
   alert("選択した値を、ほかの値によって計算します。");
 
-  setCSS(document);
+  setCSS();
   
   addCalcDiv();
   
@@ -96,10 +96,11 @@
     };
   };
   
-  function setCSS(d){
-    var link_tag = d.createElement('link');
+  /* setting of contents.css in this repositry */
+  function setCSS(){
+    var link_tag = document.createElement('link');
     link_tag.rel = "stylesheet";
     link_tag.href = "https://mel225.github.io/ChuniCalc/contents.css";
-    d.getElementsByTagName('head')[0].appendChild(link_tag);
+    document.getElementsByTagName('head')[0].appendChild(link_tag);
   };
 }) ();
