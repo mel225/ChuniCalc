@@ -1,11 +1,14 @@
 (function() {
-  var test2 = function(){
+  function test2(){
     alert("test2");
   };
 
   alert("選択した値を、ほかの値によって計算します。");
 
+  setCSS(document);
+  
   addCalcDiv();
+  
   /*
   $('.btn_calc').css({
     "display":"inline-block",
@@ -87,9 +90,16 @@
                   '<div><input type="radio" name="'+difficulty+'">' +
                     '<input type="text"  style="width:80px;" name="miss_'+difficulty+'">MISS</div>';
         buttonDiv.innerHTML = '' +
-          '<a herf="javascript:void(0);" onclick="test2()">' + 
+          '<a herf="javascript:void(0);" onclick="test2">' + 
            '<div class="honor_now btn_calc">計算</div></a>';
       }
     };
+  };
+  
+  function setCSS(d){
+    var link_tag = d.createElement('link');
+    link_tag.rel = "stylesheet";
+    link_tag.href = "https://mel225.github.io/ChuniCalc/contents.css";
+    d.getElementsByTagName('head')[0].appendChild(link_tag);
   };
 }) ();
