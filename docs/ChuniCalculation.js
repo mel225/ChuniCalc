@@ -13,7 +13,7 @@
   
   alert("すべての設定が完了しました。");
 
-  console.log(d.getElementById("calc_button").width);
+  console.log(document.getElementById("calc_button").width);
   
   /*
   $('.btn_calc').css({
