@@ -31,7 +31,6 @@
   
   /* add <div> Tag */
   function addCalcDiv(){
-    alert("test");
     divdoc = document.getElementById("music_detail");
     databoxes = document.getElementsByClassName("box02 w400");
     
@@ -78,8 +77,8 @@
         /* innerHTML */
         scoreDiv.innerHTML = '' + 
           '<div><input type="radio" name="'+difficulty+'">' + 
-            '<input type="text" style="width:150px;" name="score_'+difficulty+'">(SCORE)</div>' +
-              '<a href="javascript:void(0);" onclick="test2()"><strong>test2</strong></a>';
+            '<input type="text" style="width:150px;" name="score_'+difficulty+'">(SCORE)</div>'/* +
+              '<a href="javascript:void(0);" onclick="test2()"><strong>test2</strong></a>'*/;
         notesDiv.innerHTML = '' + 
           '<div><input type="radio" name="'+difficulty+'">'+
             '<input type="text" style="width:80px;"name="justice_'+difficulty+'">JUSTICE</div>' +
