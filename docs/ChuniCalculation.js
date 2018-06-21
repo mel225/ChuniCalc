@@ -86,9 +86,9 @@
       buttonDiv.id = "buttonDiv_" + difficulty;
       
       iconDiv = databox.getElementsByClassName("play_musicdata_icon").item(0);
-      databox.insertBefore(scoreDiv, iconDiv);
-      databox.insertBefore(notesDiv, iconDiv);
-      databox.insertBefore(buttonDiv, iconDiv);
+      iconDiv.insertBefore(scoreDiv, iconDiv);
+      iconDiv.insertBefore(notesDiv, iconDiv);
+      iconDiv.insertBefore(buttonDiv, iconDiv);
       
       /* innerHTML */
       scoreDiv.innerHTML = '' + 
