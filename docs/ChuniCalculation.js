@@ -6,10 +6,10 @@
   alert("選択した値を、ほかの値によって計算します。");
 
   setContentsCSS();
-  Console.log("setContentsCSS()");
+  console.log("setContentsCSS()");
   
   addCalcDiv();
-  Console.log("addCalcDiv()");
+  console.log("addCalcDiv()");
   
   alert("すべての設定が完了しました。");
   
