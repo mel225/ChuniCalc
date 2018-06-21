@@ -6,10 +6,12 @@
   alert("選択した値を、ほかの値によって計算します。");
 
   setContentsCSS();
-  
-  test2();
+  Console.log("setContentsCSS()");
   
   addCalcDiv();
+  Console.log("addCalcDiv()");
+  
+  alert("すべての設定が完了しました。");
   
   /*
   $('.btn_calc').css({
