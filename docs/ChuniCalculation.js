@@ -126,8 +126,7 @@
       console.log(typeof databox);
       var boxesclass = databox.className;
       var difficulty = boxesclass.slice(boxesclass.indexOf('bg_'));
-      var scoreDiv = databox.getElementById("scoreDiv")
-      var scoreInput = scoreDiv.getElementById("score_" + difficulty);
+      var scoreInput = document.getElementById("score_" + difficulty);
       var highScoreDiv = databox.getElementsByClassName("text_b")[0];
 
       var score = perseInt(highScoreDiv.textContent);
