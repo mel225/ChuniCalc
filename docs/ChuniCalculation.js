@@ -129,7 +129,7 @@
       var scoreInput = document.getElementById("score_" + difficulty);
       var highScoreDiv = databox.getElementsByClassName("text_b")[0];
 
-      var score = perseInt(highScoreDiv.textContent);
+      var score = parseInt(highScoreDiv.textContent);
       scoreInput.value = score;
     });
   }
