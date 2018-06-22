@@ -122,13 +122,14 @@
     var databoxes = document.getElementsByClassName("w420 music_box");
 
     Array.prototype.forEach.call(databoxes, function(databox){
-      console.log(typeof document);
-      console.log(typeof databox);
+      var str = 'bg_';
+      
       var boxesclass = databox.className;
-      var difficulty = boxesclass.slice(boxesclass.indexOf('bg_'));
-      var scoreInput = document.getElementById("score_" + difficulty);
+      var difficulty = boxesclass.slice(boxesclass.indexOf(str));
+      console.log(difficulty);
       var highScoreDiv = databox.getElementsByClassName("text_b")[0];
-      var highScore = parseInt(highScoreDiv.textContent.split(',').join('').trim());
+      var highScore = highScoreDiv.textContent.split(',').join('').trim();
+      var scoreInput = document.getElementById("score_" + difficulty);
       scoreInput.value = highScore;
     });
   }
