@@ -14,6 +14,9 @@
   setScorePoint();
   console.log("setScorePoint()");
   
+  getMaxChain();
+  console.log("getMaxChain()");
+  
   alert("すべての設定が完了しました。");
 
   console.log(document.getElementById("calc_button").clientWidth);
