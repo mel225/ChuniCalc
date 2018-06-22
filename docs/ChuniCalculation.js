@@ -124,12 +124,16 @@
     Array.prototype.forEach.call(databoxes, function(databox){
       var str = 'bg_';
       
+      /* get input statement of SCORE */
       var boxesclass = databox.className;
-      var difficulty = boxesclass.slice(boxesclass.indexOf(str));
+      var difficulty = boxesclass.slice(boxesclass.indexOf(str) + str.length);
       console.log(difficulty);
+      var scoreInput = document.getElementById("score_" + difficulty);
+      
+      /* get high score */
       var highScoreDiv = databox.getElementsByClassName("text_b")[0];
       var highScore = highScoreDiv.textContent.split(',').join('').trim();
-      var scoreInput = document.getElementById("score_" + difficulty);
+      
       scoreInput.value = highScore;
     });
   }
