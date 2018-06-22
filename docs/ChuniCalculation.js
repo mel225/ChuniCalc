@@ -128,6 +128,7 @@
       var difficulty = boxesclass.slice(boxesclass.indexOf('bg_'));
       var scoreInput = document.getElementById("score_" + difficulty);
       var highScoreDiv = databox.getElementsByClassName("text_b")[0];
+      highScoreDiv = highScoreDiv.split(',').join('').trim();
 
       console.log(highScoreDiv.textContent.replace(",", ""));
       var score = parseInt(highScoreDiv.textContent);
