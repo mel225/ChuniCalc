@@ -93,7 +93,7 @@
       
       /* innerHTML */
       scoreDiv.innerHTML = '' + 
-        '<div><input type="radio" name="'+difficulty+'">' + 
+        '<div><input type="radio" name="'+difficulty+'"　checked="checked">' + 
           '<input type="text" style="width:150px;" id="score_'+difficulty+'">(SCORE)</div>'/* +
               '<a href="javascript:void(0);" onclick="test2()"><strong>test2</strong></a>'*/;
       notesDiv.innerHTML = '' + 
@@ -136,5 +136,18 @@
       
       scoreInput.value = highScore;
     });
+  }
+  
+  /* get num of notes by name of the tune */
+  function getMaxChain(){
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+      console.log(this.responseXML.title);
+    }
+    xhr.open("GET", "http://www.sdvx.in/chunithm/01/01115mst.htm");
+    xhr.responseType = "document";
+    xhr.send();
+    var docMusicNote = xhr;
+    console.log(toString.call(docMusicNote));
   }
 }) ();
