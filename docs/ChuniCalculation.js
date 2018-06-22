@@ -122,6 +122,7 @@
     var databoxes = document.getElementsByClassName("w420 music_box");
 
     Array.prototype.forEach.call(databoxes, function(databox){
+      console.log(typeof document);
       console.log(typeof databox);
       var boxesclass = databox.className;
       var difficulty = boxesclass.slice(boxesclass.indexOf('bg_'));
