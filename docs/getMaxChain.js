@@ -4,7 +4,7 @@
   var tables = getLevelTables(docs);
   console.log(docs.length, docs);
   
-  var getHTMLdocsByURLs = function(URLs){
+  function getHTMLdocsByURLs(URLs){
     var Docs = [];
     var index = 0;
 
@@ -39,7 +39,7 @@
     });
   };
   
-  var getLevelURLs = function(){
+  function getLevelURLs(){
     var URLs = [
       "https://chunithm.gamerch.com/CHUNITHM%20STAR%20楽曲一覧（Lv順）",
       "https://chunithm.gamerch.com/CHUNITHM%20STAR%20楽曲一覧（Lv順）2",
@@ -76,7 +76,7 @@
   }
 
   /* useful method */
-  var getArrayByList = function(list){
+  function getArrayByList(list){
     return [].map.call(list, (node)=>{return node;});
   };
   var getList_FoundByArray = function(array, callback){
@@ -91,7 +91,7 @@
     return ret;
   };
   
-  var getLevelTables = function(promise){
+  function getLevelTables(promise){
     var tables = [];
     return promise.then(function(docs){
       console.log(docs + "in then function");
