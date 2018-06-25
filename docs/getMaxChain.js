@@ -91,7 +91,7 @@
       console.log(index);
       if(index < 0) break;
       ret.push(array[index]);
-      array = array.slice(index);
+      array = array.slice(index+1);
     }
     console.log("returned by getList_FoundByArray(): " + ret);
     return ret;
