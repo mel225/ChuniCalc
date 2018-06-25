@@ -83,13 +83,15 @@
   };
   var getList_FoundByArray = function(array, callback){
     console.log("call function getList_FoundByArray()");
+    console.log("-- array: " + array);
     var ret = [];
     var index = 0;
     while(true){
-      array = array.slice(index);
       index = array.findIndex(callback);
+      console.log(index);
       if(index == undefined || index === undefined) break;
       ret.push(array[index]);
+      array = array.slice(index);
     }
     console.log("returned by getList_FoundByArray(): " + ret);
     return ret;
