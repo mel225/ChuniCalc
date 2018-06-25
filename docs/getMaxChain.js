@@ -88,7 +88,7 @@
     while(true){
       array = array.slice(index);
       index = array.findIndex(callback);
-      if(index == undefined) break;
+      if(index == undefined || index === undefined) break;
       ret.push(array[index]);
     }
     console.log("returned by getList_FoundByArray(): " + ret);
