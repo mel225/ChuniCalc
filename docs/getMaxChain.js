@@ -88,6 +88,7 @@
       if(index == undefined) break;
       ret.push(array[index]);
     }
+    console.log("returned by getList_FoundByArray(): " + ret);
     return ret;
   };
   
@@ -98,7 +99,9 @@
       [].forEach.call(docs, function(doc){
         console.log(doc + " in getLevelTables");
         var elements = getArrayByList(doc.getElementById("js_async_main_column_text").children);
+        console.log("check end function getArrayByList()");
         var mainSection = getList_FoundByArray(elements, (e)=>{return(e.className=='t-line-img');})[0];
+        console.log("check end function getList_FoundByArray())";
         elements = getArrayByList(mainSection.children);
         var docTables = getList_FoundByArray(elements, (e)=>{return(e.tagName=='table');});
         tables.push(getList_FoundByArray(docTables, function(t){
