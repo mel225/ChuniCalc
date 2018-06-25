@@ -108,7 +108,7 @@
         var mainSection = getList_FoundByArray(elements, function(e){return(e.className=='t-line-img');})[0];
         console.log("check end function getList_FoundByArray()");
         elements = getArrayByList(mainSection.children);
-        var docTables = getList_FoundByArray(elements, function(e){return(e.tagName=='table');});
+        var docTables = getList_FoundByArray(elements, function(e){console.log(e, e.toString());return(e.toString().indexOf('<table'));});
         tables.push(getList_FoundByArray(docTables, function(t){
           console.log(t);
           return (t.rows[0].length > 1);
