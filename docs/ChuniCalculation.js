@@ -1,5 +1,5 @@
 (function() {
-  function test2(){
+  var test2 = function(){
     alert("test2");
   };
 
