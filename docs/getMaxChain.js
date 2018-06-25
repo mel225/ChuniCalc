@@ -77,9 +77,12 @@
 
   /* useful method */
   function getArrayByList(list){
-    return [].map.call(list, (node)=>{return node;});
+    console.log("call function getArrayByList()");
+    //return [].map.call(list, (node)=>{return node;});
+    return [].map.call(list, function(item){ return item;});
   };
   var getList_FoundByArray = function(array, callback){
+    console.log("call function getList_FoundByArray()");
     var ret = [];
     var index = 0;
     while(true){
