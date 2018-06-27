@@ -192,7 +192,7 @@
             }
             // 難易度番号を取得し、ノーツ数を登録する。
             console.log(musics[title].getTitle());
-            diffNum = musics[title].getDifficultyNum(prevDiff);
+            diffNum = musics[title].getDifficultyNum(prevdiff);
             musics[title].setNotes(diffNum, notesNum);
             // debug print
             if(onceExe){
