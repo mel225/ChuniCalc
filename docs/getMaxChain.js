@@ -142,7 +142,7 @@
     var rowLen, colLen; // 行数 列数
     var i, j; // カウンタ
     var music; // MusicData オブジェクト
-    var musics = [];
+    var musics = {};
     var title; // 曲名
     var html; // outerHTML
     var diffName; // 難易度
