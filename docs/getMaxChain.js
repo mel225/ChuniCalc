@@ -166,11 +166,12 @@
       
       [].forEach.call(tables, function(table){
         rowLen = table.rows.length;
-        title = undefined;
-        diffName = undefined;
-        notesNum = undefined;
         for(i=1; i<rowLen; i++){
           colLen = table.rows[i].cells.length;
+          title = undefined;
+          diffName = undefined;
+          notesNum = undefined;
+          Col0 = false;
           for(j=0; j<colLen; j++){
             html = table.rows[i].cells[j];
             switch(html.getAttribute('data-col')){
@@ -182,7 +183,7 @@
             }
             if(diffName != undefined) Col0 = true;
           }
-          if(Col0){
+          if(Col0 == true && i==10){
             alert(title + "\n" + diffName + "\n" + notesNum);
           }
           if(title != undefined){
@@ -202,7 +203,6 @@
           }
         }
         onceExe = false;
-        Col0 = false;
       });
 
       console.log("musics.length: " + Object.keys(musics).length);
