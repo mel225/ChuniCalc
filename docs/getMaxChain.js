@@ -151,7 +151,7 @@
           colLen = cols.length;
           for(j=0; j<colLen; j++){
             if(i==0){
-              console.log(table.rows[i].cells[j]);
+              console.log(table.rows[i].cells[j].length);
             }
             // music = new MusicData(title);
           }
