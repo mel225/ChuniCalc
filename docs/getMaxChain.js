@@ -66,15 +66,23 @@
         var diff = difficulty.toLowerCase();
         var ret;
         switch(diff){
-        case "basic": ret = 1; break;
-        case "advance": ret = 2; break;
-        case "expert": ret = 3; break;
-        case "master": ret = 4; break;
+        case "basic": case "BAS": ret = 1; break;
+        case "advance": case "ADV": ret = 2; break;
+        case "expert": case "EXP": ret = 3; break;
+        case "master": case "MAS": ret = 4; break;
         default: ret = 0;
         }
         return ret;
       };
-      
+      p.setTitle = function(title){
+        this.title = title;
+      };
+      p.getData = function(diffNum){
+        return this.notes[diffNum];
+      };
+      p.getTitle = function(){
+        return this.title;
+      };
     }
   }
 
@@ -137,6 +145,9 @@
     var musics = [];
     var title; // 曲名
     var html; // outerHTML
+    var diffName; // 難易度
+    var diffNum; // 難易度番号
+    var notesNum; // ノーツ数
 
     return promise.then(function(tables){
       console.log("function: createListByDataTable(), tables(" + tables.length + "): " + tables);
@@ -144,18 +155,39 @@
       
       [].forEach.call(tables, function(table){
         rowLen = table.rows.length;
-        for(i=0; i<rowLen; i++){
+        for(i=1; i<rowLen; i++){
           colLen = table.rows[i].cells.length;
           for(j=0; j<colLen; j++){
             html = table.rows[i].cells[j];
-            if(onceExe){
-              console.log("data-col: " + html.getAttribute('data-col'), "innerText: " + html.innerText);
+            switch(html.getAttribute('data-col')){
+              case '0': diffName = html.innerText; break;
+              case '2': title = html.innerText; break;
+              case '3': notesNum = html.innerText; break;
             }
-            // music = new MusicData(title);
           }
+          // titleで既にデータが存在してるか確認
+          if(musics[title]){
+            musics[title] = new MusicData(title);
+          }
+          // 難易度番号を取得し、ノーツ数を登録する。
+          diffNum = MusicData.prototype.getDifficultyNum(diffName);
+          musics[title].setNotes(diffNum, notesNum);
         }
         onceExe = false;
       });
+      for(music in musics){
+        console.log(music.getTitle);
+        var diffName;
+        for(i=1; i<=4; i++){
+          switch(i){
+            case 1: diffName = "BASIC"; break;
+            case 2: diffName = "ADVANCED"; break;
+            case 3: diffName = "EXPERT"; break;
+            case 4: diffName = "MASTER"; break;
+          }
+          console.log(diffName, music.getData(i));
+        }
+      }
       return musics;
     });
   };
