@@ -90,7 +90,6 @@
         for(i=1; i<=4; i++){
           s += "," + this.notes[i]; 
         }
-        s += "<br>";
         return s;
       }
     }
@@ -231,15 +230,15 @@
     var writeString = "";
     return promise.then(function(musicList){
       for(key in musicList){
-        writeString += musicList[key].print();
+        writeString += musicList[key].print() + "\r\n";
       }
       /* テキストエリアを作成してCSV形式で書き込む */
       var menu = document.getElementById("目次");
       var area = document.createElement('textarea');
-      menu.parentNode.insertBefore(area, menu);
-      area.width = menu.parentNode.width - 20;
-      area.height = 300;
+      area.width = menu.parentNode.width;
+      area.height = 3000;
       area.innerText = writeString;
+      menu.parentNode.insertBefore(area, menu);
     });
   };
     
