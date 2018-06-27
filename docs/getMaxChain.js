@@ -100,7 +100,7 @@
 
   /********** 楽曲データ表をすべて取得(Lv.1 - Lv.14) **********/
   function getLevelTables(promise){
-    var tables;
+    var tables = [];
     var elements;
     var mainSection;
     var docTables;
