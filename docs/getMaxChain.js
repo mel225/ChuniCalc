@@ -55,12 +55,12 @@
   MusicData:{
     MusicData = function(title){ /* this is constlactor */
       this.title = title;
-      this.notes = [];
+      this.notes = new Array(5);
       
       /* methods */
       var p = MusicData.prototype;
       p.setNotes = function(diffNum, notesNum){
-        this.notes[diffNum] = notesNum;
+        this.notes[Number(diffNum)] = notesNum;
       };
       p.getDifficultyNum = function(difficulty){
         var diff = difficulty.toLowerCase();
