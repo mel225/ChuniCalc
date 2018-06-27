@@ -162,7 +162,7 @@
             switch(html.getAttribute('data-col')){
             case '0': diffName = html.innerText; break;
             case '2':
-              var tagA = td.getElementsByTagName('a')[0];
+              var tagA = html.getElementsByTagName('a')[0];
               title = tagA.getAttribute('title');
               break;
             case '3': notesNum = Number(html.innerText); break;
