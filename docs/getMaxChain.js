@@ -140,8 +140,9 @@
     var title; // 曲名
 
     return promise.then(function(tables){
+      console.log("function: createListByDataTable(), tables: " + tables);
       [].forEach.call(tables, function(table){
-        console.log(table);
+        console.log(table.toString());
         rows = table.rows;
         console.log(rows);
         rowLen = rows.length;

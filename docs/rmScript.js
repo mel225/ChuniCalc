@@ -4,11 +4,13 @@
     s.id = "rmScripts_" + cnt;
     cnt += 1;
   });
+  console.log("want to remove scripts: cnt=" + cnt);
   cnt -= 1;
   while(cnt > 0){
     document.getElementById("rmScripts_" + cnt).remove();
     cnt -= 1;
   }
+  console.log("finished to remove scripts.");
 }) (document)
 
 /*
