@@ -234,7 +234,7 @@
       }
       /* テキストエリアを作成してCSV形式で書き込む */
       var menu = document.getElementById("目次");
-      var area = document.createElement('textarea');
+      var area = document.createElement('span');
       area.width = menu.parentNode.width;
       area.height = 3000;
       area.innerText = writeString;
