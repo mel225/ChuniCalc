@@ -156,6 +156,7 @@
     var title; // 曲名
     var html; // outerHTML
     var diffName; // 難易度
+    var prevdiff;
     var diffNum; // 難易度番号
     var notesNum; // ノーツ数
 
@@ -170,7 +171,6 @@
           colLen = table.rows[i].cells.length;
           title = undefined;
           diffName = undefined;
-          notesNum = undefined;
           Col0 = false;
           for(j=0; j<colLen; j++){
             html = table.rows[i].cells[j];
@@ -181,11 +181,11 @@
               break;
             case '3': notesNum = Number(html.innerText); break;
             }
-            if(diffName != undefined) Col0 = true;
           }
-          if(Col0 == true && i==10){
-            alert(title + "\n" + diffName + "\n" + notesNum);
+          if(prevdiff != diffName && i==10){
+            alert(title + "\n" + diffName + "\np: " + prevdiff + "\n" + notesNum);
           }
+          prevdiff = diffName;
           if(title != undefined){
             // titleで既にデータが存在してるか確認
             if(musics[title] == undefined){
@@ -193,11 +193,11 @@
             }
             // 難易度番号を取得し、ノーツ数を登録する。
             console.log(musics[title].getTitle());
-            diffNum = musics[title].getDifficultyNum(diffName);
+            diffNum = musics[title].getDifficultyNum(prevDiff);
             musics[title].setNotes(diffNum, notesNum);
             // debug print
             if(onceExe){
-              console.log(title, diffName, diffNum, notesNum);
+              console.log(title, diffName, "p-" + prevdiff, diffNum, notesNum);
               console.log(musics[title]);
               console.log("notes: " + musics[title].getData(diffNum));
             }
