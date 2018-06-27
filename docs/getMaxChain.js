@@ -149,13 +149,7 @@
           for(j=0; j<colLen; j++){
             html = table.rows[i].cells[j];
             if(onceExe){
-              var propNames = [];
-              var o = html;
-              while ( o ) {
-                propNames = propNames.concat( Object.getOwnPropertyNames( o ) );
-                o = Object.getPrototypeOf( o );
-              }
-              console.log(html, propNames);
+              console.log("data-col: " + html.getAttribute('data-col'), "innerHTML: " + html.innerHtml);
             }
             // music = new MusicData(title);
           }
