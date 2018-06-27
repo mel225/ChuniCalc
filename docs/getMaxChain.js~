@@ -98,20 +98,24 @@
   
   function getLevelTables(promise){
     var tables = [];
+    var elements;
+    var mainSection;
+    var docTables;
+    var ar;
+    
     return promise.then(function(docs){
       console.log(docs + "in then function");
       [].forEach.call(docs, function(doc){
-        console.log(doc + " in getLevelTables");
-        var elements = getArrayByList(doc.getElementById("js_async_main_column_text").children);
-        console.log("check end function getArrayByList()");
-        var mainSection = getList_FoundByArray(elements, function(e){return(e.className=='t-line-img');})[0];
-        console.log("check end function getList_FoundByArray()");
+        elements = getArrayByList(doc.getElementById("js_async_main_column_text").children);
+        mainSection = getList_FoundByArray(elements, function(e){return(e.className=='t-line-img');})[0];
         elements = getArrayByList(mainSection.children);
-        var docTables = getList_FoundByArray(elements, function(e){return(e.tagName.toLowerCase()=='table');});
-        tables.push(getList_FoundByArray(docTables, function(t){
+        docTables = getList_FoundByArray(elements, function(e){return(e.tagName.toLowerCase()=='table');});
+        ar = (getList_FoundByArray(docTables, function(t){
           console.log(t);
           return (t.rows[0].length > 1);
         }));
+        console.log("getList(docTables, 最初の行の列数が２以上): " + ar);
+        tables.push(ar);
       });
       console.log(tables);
       return tables;
