@@ -141,6 +141,7 @@
 
     return promise.then(function(tables){
       [].forEach.call(tables, function(table){
+        console.log(table);
         rows = table.rows;
         console.log(rows);
         rowLen = rows.length;

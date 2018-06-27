@@ -132,7 +132,8 @@
 
   /********** 楽曲データ表からデータを抽出 **********/
   function createListByDataTable(promise){
-    var rows, cols; // 行数 列数
+    var rows, cols;
+    var rowLen, colLen; // 行数 列数
     var i, j; // カウンタ
     var music; // MusicData オブジェクト
     var musics = [];
@@ -140,10 +141,14 @@
 
     return promise.then(function(tables){
       [].forEach.call(tables, function(table){
-        rows = table.rows.length;
-        for(i=0; i<rows; i++){
-          cols = table.rows[i].cells.length;
-          for(j=0; j<cols; j++){
+        rows = table.rows;
+        console.log(rows);
+        rowLen = rows.length;
+        for(i=0; i<rowLen; i++){
+          cols = table.rows[i].cells;
+          console.log(cols);
+          colLen = cols.length;
+          for(j=0; j<colLen; j++){
             if(i==0){
               console.log(table.rows[i].cells[j]);
             }
