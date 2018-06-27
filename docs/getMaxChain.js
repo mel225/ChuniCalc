@@ -149,7 +149,7 @@
           for(j=0; j<colLen; j++){
             html = table.rows[i].cells[j];
             if(onceExe){
-              console.log(toStr(html));
+              console.log(html.data-col);
             }
             // music = new MusicData(title);
           }
