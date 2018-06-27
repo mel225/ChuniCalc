@@ -162,7 +162,7 @@
             switch(html.getAttribute('data-col')){
               case '0': diffName = html.innerText; break;
               case '2': title = html.innerText; break;
-              case '3': notesNum = html.innerText; break;
+              case '3': notesNum = Number(html.innerText); break;
             }
           }
           if(title != undefined){
