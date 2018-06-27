@@ -162,6 +162,7 @@
     return promise.then(function(tables){
       console.log("function: createListByDataTable(), tables(" + tables.length + "): " + tables);
       var onceExe = true;
+      var Col0 = false;
       
       [].forEach.call(tables, function(table){
         rowLen = table.rows.length;
@@ -176,6 +177,10 @@
               break;
             case '3': notesNum = Number(html.innerText); break;
             }
+            if(html.getAttribute('data-col') == '0') Col0 = true;
+          }
+          if(Col0){
+            alert(title + "\n" + diffName + "\n" + notesNum);
           }
           if(title != undefined){
             // titleで既にデータが存在してるか確認
@@ -194,6 +199,7 @@
           }
         }
         onceExe = false;
+        Col0 = false;
       });
 
       console.log("musics.length: " + Object.keys(musics).length);
@@ -218,18 +224,19 @@
   };
   
   /********** ファイルへの書き込み **********/
-  function writeTableCSV(promise){
+  function writeTextAreaCSV(promise){
     var writeString = "";
     return promise.then(function(musicList){
       for(key in musicList){
         writeString += musicList[key].print();
       }
-      alert(writeString);
-      /* ファイルを開いてCSV形式で書き込む */
-      var fs = WScript.CreateObject("Scripting.FileSystemObject");
-      var fp = fs.OpenTextFile("MusicData.csv", 8, true);
-      fp.Write(writeString);
-      fp.Close();
+      /* テキストエリアを作成してCSV形式で書き込む */
+      var menu = document.getElementById("目次");
+      var area = document.createElement('textarea');
+      menu.parentNode.insertBefore(textarea, menu);
+      area.width = menu.parentNode.width - 20;
+      area.height = 300;
+      area.innerText = writeString;
     });
   };
     
