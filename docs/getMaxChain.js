@@ -130,7 +130,6 @@
       });
       console.log("Music table objects: " + tables);
       console.log("type of tables: " + typeof tables);
-      console.log("instance of tables: " + instanceof tables);
       console.log("tables.length: " + tables.length);
       return tables;
     });
