@@ -134,6 +134,12 @@
       console.log("Music table objects: " + tables);
       console.log("type of tables: " + typeof tables);
       console.log("tables.length: " + tables.length);
+
+      for(i=1; i<tables.length; i++){
+        tables[0].push(tables[i]);
+      }
+
+      console.log("tables[0](" + tables[0].length + ") .toString: " + toStr(tables[0]));
       return tables;
     });
   };
