@@ -109,7 +109,7 @@
         /* ページ中央の枠内の要素を取得 */
         elements = getArrayByList(doc.getElementById("js_async_main_column_text").children);
 
-        /* 中央の要素から必要な要素のみ取得 */
+        /* 中央の要素から楽曲データの乗った要素を取得 */
         var isClassName = function(e){
           return (e.className == 't-line-img');
         };
@@ -121,14 +121,7 @@
           return (e.tagName.toLowerCase() == 'table');
         }
         docTables = getList_FoundByArray(elements, isTagName);
-
-        /* 取得したtable要素から楽曲データ表のみを抽出 */
-        ar = (getList_FoundByArray(docTables, function(t){
-          console.log(t, "rows.length: " + t.rows.length, "cells.length: " + t.rows[0].cells.length);
-          return (t.rows[0].cells.length > 1);
-        }));
-        console.log("getList(docTables, 最初の行の列数が２以上): " + ar);
-        tables.push(ar);
+        tables += docTables;
       });
       console.log(tables);
       return tables;

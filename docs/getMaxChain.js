@@ -1,7 +1,9 @@
 (function(){
+  console.log("================ Begin Program ================");
   var URLs = getLevelURLs();
   var docs = getHTMLdocsByURLs(URLs);
   var tables = getLevelTables(docs);
+  createListByDataTable(tables);
   
   function getHTMLdocsByURLs(URLs){
     var Docs = [];
@@ -18,6 +20,7 @@
         console.log("loaded: " + xhr.response.toString());
         Docs[index] = xhr.response;
         index++;
+        // 再帰的に全てにアクセスして、すべて終了したらresolveされる。
         resolve(new Promise(pro));
       });
       xhr.addEventListener("error", function(){
@@ -47,7 +50,7 @@
     return URLs;
   };
   
-  /* MusicData Class define */
+  /* クラス MusicData 一曲の曲名と各難易度のノーツ数を保持 */
   MusicData:{
     MusicData = function(title){ /* this is constlactor */
       this.title = title;
@@ -77,12 +80,10 @@
   /* useful method */
   function getArrayByList(list){
     console.log("call function getArrayByList()");
-    //return [].map.call(list, (node)=>{return node;});
     return [].map.call(list, function(item){ return item;});
   };
   var getList_FoundByArray = function(array, callback){
     console.log("call function getList_FoundByArray()");
-    console.log("-- array: " + array);
     var ret = [];
     var index = 0;
     while(true){
@@ -95,7 +96,8 @@
     console.log("returned by getList_FoundByArray(): " + ret);
     return ret;
   };
-  
+
+  /********** 楽曲データ表をすべて取得(Lv.1 - Lv.14) **********/
   function getLevelTables(promise){
     var tables = [];
     var elements;
@@ -123,8 +125,33 @@
         docTables = getList_FoundByArray(elements, isTagName);
         tables += docTables;
       });
-      console.log(tables);
+      console.log("Music table objects: " + tables);
       return tables;
     });
   };
+
+  /********** 楽曲データ表からデータを抽出 **********/
+  function createListByDataTable(promise){
+    var rows, cols; // 行数 列数
+    var i, j; // カウンタ
+    var music; // MusicData オブジェクト
+    var musics = [];
+    var title; // 曲名
+
+    return promise.then(tables){
+      tables.forEach(table){
+        rows = table.rows.length;
+        for(i=0; i<rows; i++){
+          cols = table.rows[i].cells.length;
+          for(j=0; j<cols; j++){
+            if(i==0){
+              console.log(table.rows[i].cells[j])
+            }
+            // music = new MusicData(title);
+          }
+        }
+      }
+    }
+  };
+    
 })(document);
