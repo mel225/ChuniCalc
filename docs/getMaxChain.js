@@ -165,20 +165,20 @@
               case '3': notesNum = html.innerText; break;
             }
           }
-          if(onceExe){
-            console.log("Title: " + title);
-            console.log("-- [" + diffName + "] notes: " + notesNum);
+          if(title != undefined){
+            // titleで既にデータが存在してるか確認
+            if(musics[title] == undefined){
+              musics[title] = new MusicData(title);
+            }
+            // 難易度番号を取得し、ノーツ数を登録する。
+            diffNum = musics[title].getDifficultyNum(diffName);
+            musics[title].setNotes(diffNum, notesNum);
+            // debug print
+            if(onceExe){
+              console.log(musics[title]);
+              console.log("musics.length: " + musics.length);
+            }
           }
-          // titleで既にデータが存在してるか確認
-          if(musics[title] == undefined){
-            musics[title] = new MusicData(title);
-          }
-          if(onceExe){
-            console.log(musics[title]);
-          }
-          // 難易度番号を取得し、ノーツ数を登録する。
-          diffNum = musics[title].getDifficultyNum(diffName);
-          musics[title].setNotes(diffNum, notesNum);
         }
         onceExe = false;
       });
