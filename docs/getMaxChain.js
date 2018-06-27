@@ -166,6 +166,9 @@
       
       [].forEach.call(tables, function(table){
         rowLen = table.rows.length;
+        title = undefined;
+        diffName = undefined;
+        notesNum = undefined;
         for(i=1; i<rowLen; i++){
           colLen = table.rows[i].cells.length;
           for(j=0; j<colLen; j++){
@@ -177,7 +180,7 @@
               break;
             case '3': notesNum = Number(html.innerText); break;
             }
-            if(html.getAttribute('data-col') == '0') Col0 = true;
+            if(diffName != undefined) Col0 = true;
           }
           if(Col0){
             alert(title + "\n" + diffName + "\n" + notesNum);
