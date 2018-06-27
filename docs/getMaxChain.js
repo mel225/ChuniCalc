@@ -176,15 +176,15 @@
             // debug print
             if(onceExe){
               console.log(musics[title]);
-              console.log("musics.length: " + musics.length);
             }
           }
         }
         onceExe = false;
       });
 
-      console.log("musics.length: " + musics.length);
-      for(music in musics){
+      console.log("musics.length: " + Object.keys(musics).length);
+      for(key in musics){
+        music = musics[key];
         console.log("========" + music.getTitle);
         var diffName;
         for(i=1; i<=4; i++){
