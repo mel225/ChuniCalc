@@ -90,7 +90,7 @@
         for(i=1; i<=4; i++){
           s += "," + this.notes[i]; 
         }
-        s += "\n";
+        s += "\r\n";
         return s;
       }
     }
