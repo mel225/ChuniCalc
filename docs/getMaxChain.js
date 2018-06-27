@@ -89,7 +89,6 @@
     var index = 0;
     while(true){
       index = array.findIndex(callback);
-      console.log(index);
       if(index < 0) break;
       ret.push(array[index]);
       array = array.slice(index+1);
@@ -126,7 +125,6 @@
         docTables = getList_FoundByArray(elements, isTagName);
         [].push.apply(tables, docTables);
       });
-      console.log("return tables(" + tables.length + "): " + tables);
       return tables;
     });
   };
@@ -144,7 +142,6 @@
       console.log("function: createListByDataTable(), tables(" + tables.length + "): " + tables);
       [].forEach.call(tables, function(table){
         console.log(table.toString());
-        /*
         rows = table.rows;
         console.log(rows);
         rowLen = rows.length;
@@ -159,7 +156,6 @@
             // music = new MusicData(title);
           }
         }
-        */
       });
       return musics;
     });
