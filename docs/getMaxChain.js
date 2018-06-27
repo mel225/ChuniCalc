@@ -149,7 +149,13 @@
           for(j=0; j<colLen; j++){
             html = table.rows[i].cells[j];
             if(onceExe){
-              console.log(html['data-col']);
+              var propNames = [];
+              var o = html;
+              while ( o ) {
+                propNames = propNames.concat( Object.getOwnPropertyNames( o ) );
+                o = Object.getPrototypeOf( o );
+              }
+              console.log(html, propNames);
             }
             // music = new MusicData(title);
           }
