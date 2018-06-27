@@ -1,5 +1,6 @@
 (function(){
   console.log("================ Begin Program ================");
+  var toStr = Object.prototype.toString.call;
   var URLs = getLevelURLs();
   var docs = getHTMLdocsByURLs(URLs);
   var tables = getLevelTables(docs);
@@ -123,10 +124,12 @@
           return (e.tagName.toLowerCase() == 'table');
         }
         docTables = getList_FoundByArray(elements, isTagName);
-        console.log("docTables: " + docTables);
-        console.log("tables.length: " + tables.length);
+        console.log("docTables(" + docTables.length + "): " + docTables);
+        console.log("toString: " + toStr(docTables));
+        console.log("tables(" + tables.length + "): " + tables);
         tables.push(docTables);
         console.log("after pushed tables.length: " + tables.length);
+        console.log("tables[0].toString: " + toStr(tables[0]));
       });
       console.log("Music table objects: " + tables);
       console.log("type of tables: " + typeof tables);
