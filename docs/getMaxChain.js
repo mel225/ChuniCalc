@@ -175,7 +175,7 @@
             musics[title].setNotes(diffNum, notesNum);
             // debug print
             if(onceExe){
-              console.log(title, diffNum, notesNum);
+              console.log(title, diffName, diffNum, notesNum);
               console.log(musics[title]);
               console.log("notes: " + musics[title].getData(diffNum));
             }
