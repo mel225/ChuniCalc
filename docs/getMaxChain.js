@@ -160,9 +160,12 @@
           for(j=0; j<colLen; j++){
             html = table.rows[i].cells[j];
             switch(html.getAttribute('data-col')){
-              case '0': diffName = html.innerText; break;
-              case '2': title = html.innerText; break;
-              case '3': notesNum = Number(html.innerText); break;
+            case '0': diffName = html.innerText; break;
+            case '2':
+              var tagA = td.getElementsByTagName('a')[0];
+              title = tagA.getAttribute('title');
+              break;
+            case '3': notesNum = Number(html.innerText); break;
             }
           }
           if(title != undefined){
