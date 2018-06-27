@@ -1,6 +1,10 @@
-javascript:(
-function(){
-  var getHTMLdocsByURLs = function(URLs){
+(function(){
+  var URLs = getLevelURLs();
+  var docs = getHTMLdocsByURLs(URLs);
+  var tables = getLevelTables(docs);
+  console.log(docs.length, docs);
+  
+  function getHTMLdocsByURLs(URLs){
     var Docs = [];
     var index = 0;
 
@@ -35,7 +39,7 @@ function(){
     });
   };
   
-  var getLevelURLs = function(){
+  function getLevelURLs(){
     var URLs = [
       "https://chunithm.gamerch.com/CHUNITHM%20STAR%20楽曲一覧（Lv順）",
       "https://chunithm.gamerch.com/CHUNITHM%20STAR%20楽曲一覧（Lv順）2",
@@ -72,31 +76,39 @@ function(){
   }
 
   /* useful method */
-  var getArrayByList = function(list){
-    return [].map.call(list, (node)=>{return node;});
+  function getArrayByList(list){
+    console.log("call function getArrayByList()");
+    //return [].map.call(list, (node)=>{return node;});
+    return [].map.call(list, function(item){ return item;});
   };
   var getList_FoundByArray = function(array, callback){
+    console.log("call function getList_FoundByArray()");
+    console.log("-- array: " + array);
     var ret = [];
     var index = 0;
     while(true){
-      array = array.slice(index);
       index = array.findIndex(callback);
-      if(index == undefined) break;
+      console.log(index);
+      if(index < 0) break;
       ret.push(array[index]);
+      array = array.slice(index+1);
     }
+    console.log("returned by getList_FoundByArray(): " + ret);
     return ret;
   };
   
-  var getLevelTables = function(promise){
+  function getLevelTables(promise){
     var tables = [];
     return promise.then(function(docs){
       console.log(docs + "in then function");
       [].forEach.call(docs, function(doc){
         console.log(doc + " in getLevelTables");
         var elements = getArrayByList(doc.getElementById("js_async_main_column_text").children);
-        var mainSection = getList_FoundByArray(elements, (e)=>{return(e.className=='t-line-img');})[0];
+        console.log("check end function getArrayByList()");
+        var mainSection = getList_FoundByArray(elements, function(e){return(e.className=='t-line-img');})[0];
+        console.log("check end function getList_FoundByArray()");
         elements = getArrayByList(mainSection.children);
-        var docTables = getList_FoundByArray(elements, (e)=>{return(e.tagName=='table');});
+        var docTables = getList_FoundByArray(elements, function(e){return(e.tagName.toLowerCase()=='table');});
         tables.push(getList_FoundByArray(docTables, function(t){
           console.log(t);
           return (t.rows[0].length > 1);
@@ -105,9 +117,4 @@ function(){
       return tables;
     });
   };
-  
-  var URLs = getLevelURLs();
-  var docs = getHTMLdocsByURLs(URLs);
-  var tables = getLevelTables(docs);
-  console.log(docs.length, docs);
 })(document);
