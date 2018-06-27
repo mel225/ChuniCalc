@@ -55,7 +55,7 @@
   MusicData:{
     MusicData = function(title){ /* this is constlactor */
       this.title = title;
-      this.notes = new Array(5);
+      this.notes = [];
       
       /* methods */
       var p = MusicData.prototype;
@@ -175,7 +175,9 @@
             musics[title].setNotes(diffNum, notesNum);
             // debug print
             if(onceExe){
+              console.log(title, diffNum, notesNum);
               console.log(musics[title]);
+              console.log("notes: " + musics[title].getData(diffNum));
             }
           }
         }
