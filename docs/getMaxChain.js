@@ -162,8 +162,7 @@
             switch(html.getAttribute('data-col')){
             case '0': diffName = html.innerText; break;
             case '2':
-              var tagA = html.getElementsByTagName('a')[0];
-              title = tagA.getAttribute('title');
+              title = html.getElementsByTagName('a')[0].getAttribute('title');
               break;
             case '3': notesNum = Number(html.innerText); break;
             }
@@ -190,7 +189,7 @@
       console.log("musics.length: " + Object.keys(musics).length);
       for(key in musics){
         music = musics[key];
-        console.log("========" + music.getTitle);
+        console.log("========" + music.getTitle());
         var diffName;
         for(i=1; i<=4; i++){
           switch(i){
