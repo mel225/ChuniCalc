@@ -100,7 +100,7 @@
 
   /********** 楽曲データ表をすべて取得(Lv.1 - Lv.14) **********/
   function getLevelTables(promise){
-    var tables = [];
+    var tables;
     var elements;
     var mainSection;
     var docTables;
@@ -124,25 +124,20 @@
           return (e.tagName.toLowerCase() == 'table');
         }
         docTables = getList_FoundByArray(elements, isTagName);
+        /*
         console.log("docTables(" + docTables.length + "): " + docTables);
         console.log("toString: " + toStr(docTables));
         console.log("tables(" + tables.length + "): " + tables);
         [].push.apply(tables, docTables);
         console.log("after pushed tables.length: " + tables.length);
         console.log("tables[0].toString: " + toStr(tables[0]));
+          */
+        if(tables == undefined) tables = docTables;
+        else tables.push(docTables);
       });
       console.log("Music table objects: " + tables);
       console.log("type of tables: " + typeof tables);
       console.log("tables.length: " + tables.length);
-
-      /*
-      for(i=1; i<tables.length; i++){
-        tables[0].push(tables[i]);
-      }
-
-      console.log("tables[0](" + tables[0].length + ") .toString: " + toStr(tables[0]));
-      console.log("tables[0]: " + tables[0]);
-        */
       return tables;
     });
   };
