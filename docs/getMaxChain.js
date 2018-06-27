@@ -124,20 +124,9 @@
           return (e.tagName.toLowerCase() == 'table');
         }
         docTables = getList_FoundByArray(elements, isTagName);
-        /*
-        console.log("docTables(" + docTables.length + "): " + docTables);
-        console.log("toString: " + toStr(docTables));
-        console.log("tables(" + tables.length + "): " + tables);
         [].push.apply(tables, docTables);
-        console.log("after pushed tables.length: " + tables.length);
-        console.log("tables[0].toString: " + toStr(tables[0]));
-          */
-        if(tables == undefined) tables = docTables;
-        else tables.push(docTables);
       });
-      console.log("Music table objects: " + tables);
-      console.log("type of tables: " + typeof tables);
-      console.log("tables.length: " + tables.length);
+      console.log("return tables(" + tables.length + "): " + tables);
       return tables;
     });
   };
@@ -152,7 +141,7 @@
     var title; // 曲名
 
     return promise.then(function(tables){
-      console.log("function: createListByDataTable(), tables: " + tables);
+      console.log("function: createListByDataTable(), tables(" + tables.length + "): " + tables);
       [].forEach.call(tables, function(table){
         console.log(table.toString());
         /*
