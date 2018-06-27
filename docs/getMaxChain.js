@@ -138,7 +138,7 @@
     var musics = [];
     var title; // 曲名
 
-    return promise.then(tables){
+    return promise.then(function(tables){
       tables.forEach(table){
         rows = table.rows.length;
         for(i=0; i<rows; i++){
@@ -152,7 +152,7 @@
         }
       };
       return musics;
-    };
+    });
   };
     
 })(document);
