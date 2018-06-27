@@ -127,7 +127,7 @@
         console.log("docTables(" + docTables.length + "): " + docTables);
         console.log("toString: " + toStr(docTables));
         console.log("tables(" + tables.length + "): " + tables);
-        [].push.apply(docTables, tables);
+        [].push.apply(tables, docTables);
         console.log("after pushed tables.length: " + tables.length);
         console.log("tables[0].toString: " + toStr(tables[0]));
       });
