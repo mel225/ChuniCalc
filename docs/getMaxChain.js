@@ -140,8 +140,8 @@
 
     return promise.then(function(tables){
       console.log("function: createListByDataTable(), tables(" + tables.length + "): " + tables);
+      var onceExe = true;
       [].forEach.call(tables, function(table){
-        console.log(table.toString());
         rows = table.rows;
         console.log(rows);
         rowLen = rows.length;
@@ -150,12 +150,13 @@
           console.log(cols);
           colLen = cols.length;
           for(j=0; j<colLen; j++){
-            if(i==0){
-              console.log(table.rows[i].cells[j].length);
+            if(onceExe){
+              console.log(table.rows[i].cells[j]);
             }
             // music = new MusicData(title);
           }
         }
+        onceExe = false;
       });
       return musics;
     });
