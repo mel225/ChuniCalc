@@ -166,6 +166,7 @@
             }
           }
           // titleで既にデータが存在してるか確認
+          console.log(musics[title]);
           if(musics[title]){
             musics[title] = new MusicData(title);
           }
