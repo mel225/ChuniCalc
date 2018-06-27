@@ -1,6 +1,6 @@
 (function(){
   console.log("================ Begin Program ================");
-  var toStr = Object.prototype.toString.call;
+  function toStr(item){ return Object.prototype.toString.call(item); };
   var URLs = getLevelURLs();
   var docs = getHTMLdocsByURLs(URLs);
   var tables = getLevelTables(docs);
