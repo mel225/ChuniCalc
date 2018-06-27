@@ -4,7 +4,8 @@
   var URLs = getLevelURLs();
   var docs = getHTMLdocsByURLs(URLs);
   var tables = getLevelTables(docs);
-  createListByDataTable(tables);
+  var dataes = createListByDataTable(tables);
+  writeTableCSV(dataes);
   
   function getHTMLdocsByURLs(URLs){
     var Docs = [];
@@ -216,6 +217,7 @@
     });
   };
   
+  /********** ファイルへの書き込み **********/
   function writeTableCSV(promise){
     var writeString = "";
     return promise.then(function(musicList){
