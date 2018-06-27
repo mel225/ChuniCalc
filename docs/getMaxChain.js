@@ -58,7 +58,7 @@
       this.notes = [];
       
       /* methods */
-      var p = this.prototype;
+      var p = MusicData.prototype;
       p.setNotes = function(diffNum, notesNum){
         this.notes[diffNum] = notesNum;
       };
