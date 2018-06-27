@@ -170,7 +170,7 @@
             musics[title] = new MusicData(title);
           }
           // 難易度番号を取得し、ノーツ数を登録する。
-          diffNum = MusicData.prototype.getDifficultyNum(diffName);
+          diffNum = musics[title].getDifficultyNum(diffName);
           musics[title].setNotes(diffNum, notesNum);
         }
         onceExe = false;
