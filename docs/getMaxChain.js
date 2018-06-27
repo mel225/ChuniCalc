@@ -5,7 +5,7 @@
   var docs = getHTMLdocsByURLs(URLs);
   var tables = getLevelTables(docs);
   var dataes = createListByDataTable(tables);
-  writeTableCSV(dataes);
+  writeTextAreaCSV(dataes);
   
   function getHTMLdocsByURLs(URLs){
     var Docs = [];
@@ -101,7 +101,7 @@
     console.log("call function getArrayByList()");
     return [].map.call(list, function(item){ return item;});
   };
-  var getList_FoundByArray = function(array, callback){
+  function getList_FoundByArray(array, callback){
     console.log("call function getList_FoundByArray()");
     var ret = [];
     var index = 0;
