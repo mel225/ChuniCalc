@@ -66,10 +66,10 @@
         var diff = difficulty.toLowerCase();
         var ret;
         switch(diff){
-        case "basic": case "BAS": ret = 1; break;
-        case "advance": case "ADV": ret = 2; break;
-        case "expert": case "EXP": ret = 3; break;
-        case "master": case "MAS": ret = 4; break;
+        case "basic": case "bas": ret = 1; break;
+        case "advance": case "adv": ret = 2; break;
+        case "expert": case "exp": ret = 3; break;
+        case "master": case "mas": ret = 4; break;
         default: ret = 0;
         }
         return ret;
