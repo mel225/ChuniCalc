@@ -150,7 +150,7 @@
             // music = new MusicData(title);
           }
         }
-      }
+      };
       return musics;
     };
   };

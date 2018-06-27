@@ -145,13 +145,14 @@
           cols = table.rows[i].cells.length;
           for(j=0; j<cols; j++){
             if(i==0){
-              console.log(table.rows[i].cells[j])
+              console.log(table.rows[i].cells[j]);
             }
             // music = new MusicData(title);
           }
         }
       }
-    }
+      return musics;
+    };
   };
     
 })(document);
