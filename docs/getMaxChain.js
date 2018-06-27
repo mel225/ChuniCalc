@@ -170,7 +170,6 @@
         for(i=1; i<rowLen; i++){
           colLen = table.rows[i].cells.length;
           title = undefined;
-          diffName = undefined;
           Col0 = false;
           for(j=0; j<colLen; j++){
             html = table.rows[i].cells[j];
@@ -185,8 +184,8 @@
           if(prevdiff != diffName && i==10){
             alert(title + "\n" + diffName + "\np: " + prevdiff + "\n" + notesNum);
           }
-          prevdiff = diffName;
           if(title != undefined){
+            prevdiff = diffName;
             // titleで既にデータが存在してるか確認
             if(musics[title] == undefined){
               musics[title] = new MusicData(title);
