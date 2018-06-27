@@ -139,7 +139,7 @@
     var title; // 曲名
 
     return promise.then(function(tables){
-      tables.forEach(table){
+      tables.forEach(function(table){
         rows = table.rows.length;
         for(i=0; i<rows; i++){
           cols = table.rows[i].cells.length;
@@ -150,7 +150,7 @@
             // music = new MusicData(title);
           }
         }
-      };
+      });
       return musics;
     });
   };
