@@ -2,7 +2,6 @@
   var URLs = getLevelURLs();
   var docs = getHTMLdocsByURLs(URLs);
   var tables = getLevelTables(docs);
-  console.log(docs.length, docs);
   
   function getHTMLdocsByURLs(URLs){
     var Docs = [];
@@ -114,6 +113,7 @@
           return (t.rows[0].length > 1);
         }));
       });
+      console.log(tables);
       return tables;
     });
   };
