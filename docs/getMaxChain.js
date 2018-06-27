@@ -83,6 +83,15 @@
       p.getTitle = function(){
         return this.title;
       };
+      p.print = function(){
+        var s = "";
+        s += this.title;
+        for(i=1; i<=4; i++){
+          s += "," + this.notes[i]; 
+        }
+        s += "\n";
+        return s;
+      }
     }
   }
 
@@ -187,6 +196,7 @@
       });
 
       console.log("musics.length: " + Object.keys(musics).length);
+      /*
       for(key in musics){
         music = musics[key];
         console.log("========" + music.getTitle());
@@ -200,9 +210,24 @@
           }
           console.log(diffName, music.getData(i));
         }
-        break;
       }
+      */
       return musics;
+    });
+  };
+  
+  function writeTableCSV(promise){
+    var writeString = "";
+    return promise.then(function(musicList){
+      for(key in musicList){
+        writeString += musicList[key].print();
+      }
+      alert(writeString);
+      /* ファイルを開いてCSV形式で書き込む */
+      var fs = WScript.CreateObject("Scripting.FileSystemObject");
+      var fp = fs.OpenTextFile("MusicData.csv", 8, true);
+      fp.Write(writeString);
+      fp.Close();
     });
   };
     
