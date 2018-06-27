@@ -166,26 +166,19 @@
             }
           }
           // titleで既にデータが存在してるか確認
-          console.log(musics[title]);
           if(musics[title] == undefined){
             musics[title] = new MusicData(title);
           }
-          console.log(musics[title]);
-          var propNames = [];
-          var o = musics[title];
-          while ( o ) {
-            propNames = propNames.concat( Object.getOwnPropertyNames( o ) );
-            o = Object.getPrototypeOf( o );
-          }
-          console.log(propNames);
           // 難易度番号を取得し、ノーツ数を登録する。
           diffNum = musics[title].getDifficultyNum(diffName);
           musics[title].setNotes(diffNum, notesNum);
         }
         onceExe = false;
       });
+
+      console.log("musics.length: " + musics.length);
       for(music in musics){
-        console.log(music.getTitle);
+        console.log("========" + music.getTitle);
         var diffName;
         for(i=1; i<=4; i++){
           switch(i){
@@ -196,6 +189,7 @@
           }
           console.log(diffName, music.getData(i));
         }
+        break;
       }
       return musics;
     });
