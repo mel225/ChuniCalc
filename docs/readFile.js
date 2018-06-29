@@ -3,7 +3,7 @@
     
     function openFile(){
 	var reader;
-	return new promise(function(resolve, reject){
+	return new Promise(function(resolve, reject){
 	    var xhr = new XMLHttpRequest();
 	    xhr.responseType = "text";
 	    xhr.addEventListener("load", function(){
