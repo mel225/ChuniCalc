@@ -1,5 +1,5 @@
 (function(){
-    alert(openFile());
+    readText(openFile());
     
     function openFile(){
 	var reader;
@@ -19,6 +19,14 @@
 	    console.log(e);
 	});
     };
+
+    function readText(promise){
+
+	return promise.then(function(text){
+	    alert(text);
+	});
+    };
+			   
     
 	
 })(document)
