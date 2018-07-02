@@ -10,14 +10,14 @@
     var files = ["MusicData.js", "readFile.js"];
     var index = 0;
     var pro = function(resolve, reject){
-      if(index >= files.length) return index;
-      else{
-        var script = readOuterJs(files[index]);
-        script.onload = function(){
-          index++;
-          return new Promise(pro);
-        };
+      if(index >= files.length){
+        return resolve();
       }
+      var script = readOuterJs(files[index]);
+      script.onload = function(){
+        index++;
+        resolve(Promise(pro));
+      };
     };
     // 時間がかかるのでプロミスにする。
     resolve(new Promise(pro));
