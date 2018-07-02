@@ -23,6 +23,12 @@
   function readText(promise){
     
     return promise.then(function(text){
+      /* 外部ファイルの読み込み (MusicData 使用のため) */
+      var s = document.createElement('script');
+      s.language = "javascript";
+      s.src = "https://mel225.github.io/ChuniCalc/getMaxChain.js";
+      d.getElementsByTagName('head')[0].appendChild(s);
+      
       var line = text.split('\n');
       var musics = [];
       
