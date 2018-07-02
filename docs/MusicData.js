@@ -51,4 +51,5 @@ MusicData:{
       return s;
     }
   }
-}) ()
+}
+})();
