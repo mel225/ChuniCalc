@@ -31,19 +31,19 @@
   function readText(promise){
     
     return promise.then(function(text){
-      
+      text.replace('\r\n', '\n');
       var line = text.split('\n');
       var musics = [];
       
-      if(line.length == 1)
-        line = text.split('\r');
       line.forEach(function(data){
         var dataes = data.split(',');
-        var music = new MusicData(dataes[0]);
-        for(i=1; i<=4; i++){
-          music.setData(i, Number(dataes[i]));
+        if(dataes[0] != ""){
+          var music = new MusicData(dataes[0]);
+          for(i=1; i<=4; i++){
+            music.setData(i, Number(dataes[i]));
+          }
+          musics.push(music);
         }
-        musics.push(music);
       });
       console.log(musics);
       return musics;
