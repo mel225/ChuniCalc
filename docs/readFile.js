@@ -1,4 +1,12 @@
 (function(){
+  /* 外部ファイルの読み込み (MusicData 使用のため) */
+  var id = "mel225_MusicData.js";
+  if(document.getElementById(id) == undefined){
+    var s = document.createElement('script');
+    s.src = "https://mel225.github.io/ChuniCalc/MusicData.js";
+    s.id = id;
+    document.getElementsByTagName('head')[0].appendChild(s);
+  }
   readText(openFile());
   
   function openFile(){
@@ -23,11 +31,6 @@
   function readText(promise){
     
     return promise.then(function(text){
-      /* 外部ファイルの読み込み (MusicData 使用のため) */
-      var s = document.createElement('script');
-      s.language = "javascript";
-      s.src = "https://mel225.github.io/ChuniCalc/getMaxChain.js";
-      document.getElementsByTagName('head')[0].appendChild(s);
       
       var line = text.split('\n');
       var musics = [];

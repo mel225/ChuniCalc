@@ -1,5 +1,14 @@
 (function(){
   console.log("================ Begin Program ================");
+  /* 外部ファイルの読み込み (MusicData 使用のため) */
+  var id = "mel225_MusicData.js";
+  if(document.getElementById(id) == undefined){
+    var s = document.createElement('script');
+    s.src = "https://mel225.github.io/ChuniCalc/MusicData.js";
+    s.id = id;
+    document.getElementsByTagName('head')[0].appendChild(s);
+  }
+  
   function toStr(item){ return Object.prototype.toString.call(item); };
   var URLs = getLevelURLs();
   var docs = getHTMLdocsByURLs(URLs);
@@ -52,49 +61,6 @@
     return URLs;
   };
   
-  /* クラス MusicData 一曲の曲名と各難易度のノーツ数を保持 */
-  MusicData:{
-    MusicData = function(title){ /* this is constlactor */
-      this.title = title;
-      this.notes = [];
-      
-      /* methods */
-      var p = MusicData.prototype;
-      p.setNotes = function(diffNum, notesNum){
-        this.notes[Number(diffNum)] = notesNum;
-      };
-      p.getDifficultyNum = function(difficulty){
-        var diff = difficulty.toLowerCase();
-        var ret;
-        switch(diff){
-        case "basic": case "bas": ret = 1; break;
-        case "advance": case "adv": ret = 2; break;
-        case "expert": case "exp": ret = 3; break;
-        case "master": case "mas": ret = 4; break;
-        default: ret = 0;
-        }
-        return ret;
-      };
-      p.setTitle = function(title){
-        this.title = title;
-      };
-      p.getData = function(diffNum){
-        return this.notes[diffNum];
-      };
-      p.getTitle = function(){
-        return this.title;
-      };
-      p.print = function(){
-        var s = "";
-        s += this.title;
-        for(i=1; i<=4; i++){
-          s += "," + this.notes[i]; 
-        }
-        return s;
-      }
-    }
-  }
-
   /* useful method */
   function getArrayByList(list){
     console.log("call function getArrayByList()");
