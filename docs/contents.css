@@ -21,3 +21,11 @@
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px
 }
+
+.text_shadowing {
+  text-shadow: 
+    2px 2px 1px #000,
+    -2px 2px 1px #000,
+    2px -2px 1px #000,
+    -2px -2px 1px #000;
+}
