@@ -1,6 +1,7 @@
 (function(){
   /* 外部ファイルの読み込み (MusicData 使用のため) */
   readOuterJs("MusicData.js");
+  console.log("readFile 読み込まれました。");
   
   openFile = function(){
     var reader;
@@ -52,5 +53,5 @@
       document.getElementsByTagName('head')[0].appendChild(s);
     }
   };
-})(document)
+}) (document);
  
