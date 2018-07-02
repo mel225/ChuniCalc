@@ -5,7 +5,6 @@
   /* 外部ファイルの読み込み */
   readOuterJs("MusicData.js");
   readOuterJs("readFile.js");
-  readOuterJs("");
 
   alert("選択した値を、ほかの値によって計算します。");
 
@@ -136,7 +135,8 @@
   /* get num of notes by name of the tune */
   function setMaxChain(){
     var title = document.getElementsByClassName('play_musicdata_title')[0].innerText;
-    var promise = readText(openFile());
+    var promise = openFile();
+    promise = readText(promise);
     promise.then(function(musics){
       if(musics[title] == undefined){
         alert(title + " のデータが見つかりませんでした。");
