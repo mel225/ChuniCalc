@@ -28,7 +28,7 @@ MusicData:{
       case 1: ret = "basic"; break;
       case 2: ret = "advanced"; break;
       case 3: ret = "expert"; break;
-      case 4: ret = "master": break;
+      case 4: ret = "master"; break;
       default: ret = undefined;
       }
       return ret;

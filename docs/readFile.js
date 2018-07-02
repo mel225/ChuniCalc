@@ -2,7 +2,7 @@
   /* 外部ファイルの読み込み (MusicData 使用のため) */
   readOuterJs("MusicData.js");
   
-  function openFile(){
+  openFile = function(){
     var reader;
     return new Promise(function(resolve, reject){
       var xhr = new XMLHttpRequest();
@@ -21,7 +21,7 @@
     });
   };
   
-  function readText(promise){
+  readText = function(promise){
     
     return promise.then(function(text){
       text.replace('\r\n', '\n');
