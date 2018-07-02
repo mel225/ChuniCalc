@@ -1,4 +1,4 @@
-/* クラス MusicData 一曲の曲名と各難易度のノーツ数を保持 */
+(function(){/* クラス MusicData 一曲の曲名と各難易度のノーツ数を保持 */
 MusicData:{
   MusicData = function(title){ /* this is constlactor */
     this.title = title;
@@ -51,4 +51,4 @@ MusicData:{
       return s;
     }
   }
-}
+}) ()
