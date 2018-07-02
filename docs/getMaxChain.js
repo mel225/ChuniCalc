@@ -4,7 +4,8 @@
   var URLs = getLevelURLs();
   var docs = getHTMLdocsByURLs(URLs);
   var tables = getLevelTables(docs);
-  createListByDataTable(tables);
+  var dataes = createListByDataTable(tables);
+  writeTextAreaCSV(dataes);
   
   function getHTMLdocsByURLs(URLs){
     var Docs = [];
@@ -83,6 +84,14 @@
       p.getTitle = function(){
         return this.title;
       };
+      p.print = function(){
+        var s = "";
+        s += this.title;
+        for(i=1; i<=4; i++){
+          s += "," + this.notes[i]; 
+        }
+        return s;
+      }
     }
   }
 
@@ -91,7 +100,7 @@
     console.log("call function getArrayByList()");
     return [].map.call(list, function(item){ return item;});
   };
-  var getList_FoundByArray = function(array, callback){
+  function getList_FoundByArray(array, callback){
     console.log("call function getList_FoundByArray()");
     var ret = [];
     var index = 0;
@@ -146,17 +155,21 @@
     var title; // 曲名
     var html; // outerHTML
     var diffName; // 難易度
+    var prevdiff;
     var diffNum; // 難易度番号
     var notesNum; // ノーツ数
 
     return promise.then(function(tables){
       console.log("function: createListByDataTable(), tables(" + tables.length + "): " + tables);
       var onceExe = true;
+      var Col0 = false;
       
       [].forEach.call(tables, function(table){
         rowLen = table.rows.length;
         for(i=1; i<rowLen; i++){
           colLen = table.rows[i].cells.length;
+          title = undefined;
+          Col0 = false;
           for(j=0; j<colLen; j++){
             html = table.rows[i].cells[j];
             switch(html.getAttribute('data-col')){
@@ -167,17 +180,22 @@
             case '3': notesNum = Number(html.innerText); break;
             }
           }
+          if(prevdiff != diffName && i==10){
+            alert(title + "\n" + diffName + "\np: " + prevdiff + "\n" + notesNum);
+          }
           if(title != undefined){
+            prevdiff = diffName;
             // titleで既にデータが存在してるか確認
             if(musics[title] == undefined){
               musics[title] = new MusicData(title);
             }
             // 難易度番号を取得し、ノーツ数を登録する。
-            diffNum = musics[title].getDifficultyNum(diffName);
+            console.log(musics[title].getTitle());
+            diffNum = musics[title].getDifficultyNum(prevdiff);
             musics[title].setNotes(diffNum, notesNum);
             // debug print
             if(onceExe){
-              console.log(title, diffName, diffNum, notesNum);
+              console.log(title, diffName, "p-" + prevdiff, diffNum, notesNum);
               console.log(musics[title]);
               console.log("notes: " + musics[title].getData(diffNum));
             }
@@ -187,6 +205,7 @@
       });
 
       console.log("musics.length: " + Object.keys(musics).length);
+      /*
       for(key in musics){
         music = musics[key];
         console.log("========" + music.getTitle());
@@ -200,9 +219,26 @@
           }
           console.log(diffName, music.getData(i));
         }
-        break;
       }
+      */
       return musics;
+    });
+  };
+  
+  /********** ファイルへの書き込み **********/
+  function writeTextAreaCSV(promise){
+    var writeString = "";
+    return promise.then(function(musicList){
+      for(key in musicList){
+        writeString += musicList[key].print() + "\r\n";
+      }
+      /* テキストエリアを作成してCSV形式で書き込む */
+      var menu = document.getElementById("目次");
+      var area = document.createElement('span');
+      area.width = menu.parentNode.width;
+      area.height = 3000;
+      area.innerText = writeString;
+      menu.parentNode.insertBefore(area, menu);
     });
   };
     
