@@ -2,27 +2,43 @@
   console.log("========== ChuniCalculation.js begin ==========");
   console.log("-- Projected by mel225 (github, Twitter:@casge_pzl)");
 
-  /* 外部ファイルの読み込み */
-  readOuterJs("MusicData.js");
-  readOuterJs("readFile.js");
-
   alert("選択した値を、ほかの値によって計算します。");
-
-  setContentsCSS();
-  console.log("setContentsCSS()");
-  
-  addCalcDiv();
-  console.log("addCalcDiv()");
-
-  setScorePoint();
-  console.log("setScorePoint()");
-  
-  setMaxChain();
-  console.log("setMaxChain()");
-  
-  alert("すべての設定が完了しました。");
-
-  console.log(document.getElementById("calc_button").clientWidth);
+    
+  new Promise(function(resolve, reject){
+    
+    /* 外部ファイルの読み込み */
+    var files = ["MusicData.js", "readFile.js"];
+    var index = 0;
+    var pro = function(resolve, reject){
+      if(index >= files.length) return index;
+      else{
+        var script = readOuterJs(files[index]);
+        script.onload = function(){
+          index++;
+          return new Promise(pro);
+        };
+      }
+    };
+    // 時間がかかるのでプロミスにする。
+    resolve(new Promise(pro));
+  })
+    .then(function(){
+      setContentsCSS();
+      console.log("setContentsCSS()");
+      
+      addCalcDiv();
+      console.log("addCalcDiv()");
+      
+      setScorePoint();
+      console.log("setScorePoint()");
+      
+      setMaxChain();
+      console.log("setMaxChain()");
+      
+      alert("すべての設定が完了しました。");
+      
+      console.log(document.getElementById("calc_button").clientWidth);
+    });
   
   /*
   $('.btn_calc').css({
@@ -156,11 +172,13 @@
   /* 外部ファイルをファイル名から読み込む */
   function readOuterJs(filename){
     var id = "mel225_" + filename;
+    var s;
     if(document.getElementById(id) == undefined){
-      var s = document.createElement('script');
+      s = document.createElement('script');
       s.src = "https://mel225.github.io/ChuniCalc/" + filename;
       s.id = id;
       document.getElementsByTagName('head')[0].appendChild(s);
     }
+    return s;
   };
 }) ();
