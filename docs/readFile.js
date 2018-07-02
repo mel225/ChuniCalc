@@ -1,13 +1,6 @@
 (function(){
   /* 外部ファイルの読み込み (MusicData 使用のため) */
-  var id = "mel225_MusicData.js";
-  if(document.getElementById(id) == undefined){
-    var s = document.createElement('script');
-    s.src = "https://mel225.github.io/ChuniCalc/MusicData.js";
-    s.id = id;
-    document.getElementsByTagName('head')[0].appendChild(s);
-  }
-  readText(openFile());
+  readOuterJs("MusicData.js");
   
   function openFile(){
     var reader;
@@ -42,12 +35,23 @@
           for(i=1; i<=4; i++){
             music.setData(i, Number(dataes[i]));
           }
-          musics.push(music);
+          musics[music.getTitle()] = music;
         }
       });
       console.log(musics);
       return musics;
     });
+  };
+  
+  /* 外部ファイルをファイル名から読み込む */
+  function readOuterJs(filename){
+    var id = "mel225_" + filename;
+    if(document.getElementById(id) == undefined){
+      var s = document.createElement('script');
+      s.src = "https://mel225.github.io/ChuniCalc/" + filename;
+      s.id = id;
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
   };
 })(document)
  

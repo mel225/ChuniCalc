@@ -1,5 +1,5 @@
 (function(){
-  console.log("================ Begin Program ================");
+  console.log("================ getMaxChain.js Begin ================");
   /* 外部ファイルの読み込み (MusicData 使用のため) */
   var id = "mel225_MusicData.js";
   if(document.getElementById(id) == undefined){
@@ -8,13 +8,15 @@
     s.id = id;
     document.getElementsByTagName('head')[0].appendChild(s);
   }
-  
-  function toStr(item){ return Object.prototype.toString.call(item); };
+  /* 順に従って楽曲データを取得 */
   var URLs = getLevelURLs();
   var docs = getHTMLdocsByURLs(URLs);
   var tables = getLevelTables(docs);
   var dataes = createListByDataTable(tables);
   writeTextAreaCSV(dataes);
+
+  // toString() を簡単にしたもの
+  function toStr(item){ return Object.prototype.toString.call(item); };
   
   function getHTMLdocsByURLs(URLs){
     var Docs = [];
@@ -171,34 +173,18 @@
       });
 
       console.log("musics.length: " + Object.keys(musics).length);
-      /*
-      for(key in musics){
-        music = musics[key];
-        console.log("========" + music.getTitle());
-        var diffName;
-        for(i=1; i<=4; i++){
-          switch(i){
-            case 1: diffName = "BASIC"; break;
-            case 2: diffName = "ADVANCED"; break;
-            case 3: diffName = "EXPERT"; break;
-            case 4: diffName = "MASTER"; break;
-          }
-          console.log(diffName, music.getData(i));
-        }
-      }
-      */
       return musics;
     });
   };
   
-  /********** ファイルへの書き込み **********/
+  /********** 画面上の<span>への書き込み **********/
   function writeTextAreaCSV(promise){
     var writeString = "";
     return promise.then(function(musicList){
       for(key in musicList){
         writeString += musicList[key].print() + "\r\n";
       }
-      /* テキストエリアを作成してCSV形式で書き込む */
+      /* <span>タグを作成してCSV形式で書き込む */
       var menu = document.getElementById("目次");
       var area = document.createElement('span');
       area.width = menu.parentNode.width;

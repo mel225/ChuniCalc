@@ -21,6 +21,18 @@ MusicData:{
       return ret;
     };
 
+    // 難易度番号から文字列を取得
+    p.getDifficultyString = function(diffNum){
+      var ret;
+      switch(diffNum){
+      case 1: ret = "basic"; break;
+      case 2: ret = "advanced"; break;
+      case 3: ret = "expert"; break;
+      case 4: ret = "master": break;
+      default: ret = undefined;
+      }
+      return ret;
+    }
     // 指定難易度のノーツ数を設定
     p.setData = function(diffNum, notesNum){
       this.notes[Number(diffNum)] = notesNum;
