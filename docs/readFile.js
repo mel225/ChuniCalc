@@ -19,10 +19,9 @@
     }).catch((e)=>{
       console.log(e);
     });
-  };
+  }
   
   readText = function(promise){
-    
     return promise.then(function(text){
       text.replace('\r\n', '\n');
       var line = text.split('\n');
@@ -41,7 +40,7 @@
       console.log(musics);
       return musics;
     });
-  };
+  }
   
   /* 外部ファイルをファイル名から読み込む */
   function readOuterJs(filename){
