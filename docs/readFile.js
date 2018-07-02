@@ -27,7 +27,7 @@
       var s = document.createElement('script');
       s.language = "javascript";
       s.src = "https://mel225.github.io/ChuniCalc/getMaxChain.js";
-      d.getElementsByTagName('head')[0].appendChild(s);
+      document.getElementsByTagName('head')[0].appendChild(s);
       
       var line = text.split('\n');
       var musics = [];
