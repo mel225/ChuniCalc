@@ -16,7 +16,7 @@
       var script = readOuterJs(files[index]);
       script.onload = function(){
         index++;
-        resolve(Promise(pro));
+        resolve(new Promise(pro));
       };
     };
     // 時間がかかるのでプロミスにする。
