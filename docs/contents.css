@@ -24,8 +24,8 @@
 
 .text_shadowing {
   text-shadow: 
-    1px 1px 0 #000,
-    -1px 1px 0 #000,
-    1px -1px 0 #000,
-    -1px -1px 0 #000;
+    1px 1px 0 #ff813d,
+    -1px 1px 0 #ff813d,
+    1px -1px 0 #ff813d,
+    -1px -1px 0 #ff813d;
 }
