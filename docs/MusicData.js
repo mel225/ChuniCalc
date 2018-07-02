@@ -22,7 +22,7 @@ MusicData:{
     };
 
     // 指定難易度のノーツ数を設定
-    p.setNotes = function(diffNum, notesNum){
+    p.setData = function(diffNum, notesNum){
       this.notes[Number(diffNum)] = notesNum;
     };
 
