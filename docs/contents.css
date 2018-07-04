@@ -23,12 +23,13 @@
 }
 
 .maxChain {
+  display: block;
   padding-right: 3px;
   padding-left: 3px;
-  box-radius: 3px;
+  border-radius: 3px;
   text-shadow: 
-    1px 1px 0 rgba(255, 255, 255, 0.8),
-    -1px 1px 0 rgba(255, 255, 255, 0.8),
-    1px -1px 0 rgba(255, 255, 255, 0.8),
-    -1px -1px 0 rgba(255, 255, 255, 0.8);
+    1px 1px 0 rgba(255, 255, 255, 0.4),
+    -1px 1px 0 rgba(255, 255, 255, 0.4),
+    1px -1px 0 rgba(255, 255, 255, 0.4),
+    -1px -1px 0 rgba(255, 255, 255, 0.4);
 }
