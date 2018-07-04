@@ -27,11 +27,11 @@
   padding: 2px 4px 2px 4px;
   border-radius: 3px;
   text-shadow: 
-    1px 1px 0 #ffc600,
-    -1px 1px 0 #ffc600,
-    1px -1px 0 #ffc600,
-    -1px -1px 0 #ffc600;
+    2px 2px 0 #ffc600,
+    -2px 2px 0 #ffc600,
+    2px -2px 0 #ffc600,
+    -2px -2px 0 #ffc600;
   color: #ffffff;
   font-weight: bolder; 
-  letter-spacing: 3px;
+  letter-spacing: 2px;
 }
