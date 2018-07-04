@@ -181,7 +181,7 @@
     return s;
   };
 
-  function calculate(){
-    alert(this);
+  function calculate(element){
+    alert(element);
   }
 }) ();
