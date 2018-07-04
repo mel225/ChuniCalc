@@ -82,12 +82,12 @@
     var scoreDiv = document.createElement("div"); // SCORE 数値枠
     var notesDiv = document.createElement("div"); // JC 以外の数値枠
     var buttonDiv = document.createElement("div"); // 計算ボタン枠
-    var maxChain = document.createElement("span"); // ノーツ数表示枠
+    var maxChain = document.createElement("p"); // ノーツ数表示枠
     
     scoreDiv.className = "block_underline ptb_5";
     notesDiv.className = "block_underline ptb_5";
     buttonDiv.className = "block_underline ptb_5";
-    maxChain.className = "ml_10 mb-10 font_90 text_critical text_shadowing　bg_" + difficulty;
+    maxChain.className = "ml_10 mb-10 font_90 text_critical text_shadowing bg_" + difficulty;
     
     scoreDiv.id = "scoreDiv_" + difficulty;
     notesDiv.id = "notesDiv_" + difficulty;
