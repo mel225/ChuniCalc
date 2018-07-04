@@ -27,10 +27,10 @@
   padding: 2px 4px 2px 4px;
   border-radius: 3px;
   text-shadow: 
-    1px 1px 0 rgba(255, 255, 255, 0.4),
-    -1px 1px 0 rgba(255, 255, 255, 0.4),
-    1px -1px 0 rgba(255, 255, 255, 0.4),
-    -1px -1px 0 rgba(255, 255, 255, 0.4);
-  color: rgba(0, 0, 0, 0.8);
+    1px 1px 0 rgba(0, 0, 0, 0.2),
+    -1px 1px 0 rgba(0, 0, 0, 0.2),
+    1px -1px 0 rgba(0, 0, 0, 0.2),
+    -1px -1px 0 rgba(0, 0, 0, 0.2);
+  color: rgba(255, 255, 255, 0.4);
   font-weight: bolder; 
 }
