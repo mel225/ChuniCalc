@@ -5,7 +5,7 @@
   background-image: url(https://chunithm-net.com/mobile/common/images/honor_bg_silver.png);
   background-repeat: no-repeat;
   background-size: 100%;
-  width: 400px;
+  width: 380px;
   height: 42px;
   padding: 8px 10px;
   position: relative;
@@ -13,11 +13,11 @@
   color: #000;
   font-weight: bolder;
   overflow: hidden;
-  opacity: 0.4;
+  opacity: 1.0;
 }
 
 .btn_calc :hovor{
-  opacity: 0.8;
+  opacity: 0.6;
 }
 
 .btn_calc_back {
