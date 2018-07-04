@@ -103,17 +103,17 @@
     
     /* innerHTML, innerText */
     scoreDiv.innerHTML = '' + 
-      '<input type="radio" name="'+difficulty+'"　checked="checked">' + 
+      '<input type="radio" name="radio_'+difficulty+'" checked="checked">' + 
         '<input type="text" style="width:150px;" id="score_'+difficulty+'">(SCORE)';
     notesDiv.innerHTML = '' + 
-      '<div><input type="radio" name="'+difficulty+'">'+
+      '<div><input type="radio" name="radio_'+difficulty+'">'+
         '<input type="text" style="width:80px;" id="justice_'+difficulty+'">JUSTICE</div>' +
-          '<div><input type="radio" name="'+difficulty+'">'+
+          '<div><input type="radio" name=radio_"'+difficulty+'">'+
             '<input type="text" style="width:80px;" id="attack_'+difficulty+'">ATTACK</div>' +
-              '<div><input type="radio" name="'+difficulty+'">' +
+              '<div><input type="radio" name="radio_'+difficulty+'">' +
                 '<input type="text"  style="width:80px;" id="miss_'+difficulty+'">MISS</div>';
     buttonDiv.innerHTML = '' +
-      '<a herf="javascript:void(0);" onclick="test2" class="btn_calc_back">' + 
+      '<a herf="javascript:void(0);" onclick="calculate(this)" class="btn_calc_back">' + 
         '<div id="calc_button" class="honor_now btn_calc">計算</div></a>';
     maxChain.innerText = 'MaxChain: ';
   };
@@ -180,4 +180,8 @@
     }
     return s;
   };
+
+  function calculate(){
+    alert(this);
+  }
 }) ();
