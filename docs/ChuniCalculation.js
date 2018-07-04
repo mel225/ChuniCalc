@@ -113,9 +113,11 @@
               '<div><input type="radio" name="radio_'+difficulty+'">' +
                 '<input type="text"  style="width:80px;" id="miss_'+difficulty+'">MISS</div>';
     buttonDiv.innerHTML = '' +
-      '<a herf="javascript:void(0);" onclick="calculate(this)" class="btn_calc_back">' + 
-        '<div id="calc_button" class="honor_now btn_calc">計算</div></a>';
+      '<a herf="javascript:void(0);" onclick="JavaScript:calculate(this)" class="btn_calc_back">' + 
+        '<div id="calc_button_'+difficulty+'" class="honor_now btn_calc">計算</div></a>';
     maxChain.innerText = 'MaxChain: ';
+
+    /* 計算ボタンのクリック属性を
   };
   
   /* setting of contents.css in this repositry */
@@ -181,7 +183,7 @@
     return s;
   };
 
-  var calculate = function(element){
+  function calculate(element){
     alert(element);
   }
 }) ();
