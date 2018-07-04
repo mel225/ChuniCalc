@@ -82,12 +82,12 @@
     var scoreDiv = document.createElement("div"); // SCORE 数値枠
     var notesDiv = document.createElement("div"); // JC 以外の数値枠
     var buttonDiv = document.createElement("div"); // 計算ボタン枠
-    var maxChain = document.createElement("span"); // ノーツ数表示枠
+    var maxChain = document.createElement("div"); // ノーツ数表示枠
     
     scoreDiv.className = "block_underline ptb_5";
     notesDiv.className = "block_underline ptb_5";
     buttonDiv.className = "block_underline ptb_5";
-    maxChain.className = "ml_10 mb-10 font_90 text_critical maxChain bg_" + difficulty;
+    maxChain.className = "ml_10 mb-10 font_90 text_justice maxChain bg_" + difficulty;
     
     scoreDiv.id = "scoreDiv_" + difficulty;
     notesDiv.id = "notesDiv_" + difficulty;
@@ -104,8 +104,7 @@
     /* innerHTML, innerText */
     scoreDiv.innerHTML = '' + 
       '<input type="radio" name="'+difficulty+'"　checked="checked">' + 
-        '<input type="text" style="width:150px;" id="score_'+difficulty+'">(SCORE)'/* +
-              '<a href="javascript:void(0);" onclick="test2()"><strong>test2</strong></a>'*/;
+        '<input type="text" style="width:150px;" id="score_'+difficulty+'">(SCORE)';
     notesDiv.innerHTML = '' + 
       '<div><input type="radio" name="'+difficulty+'">'+
         '<input type="text" style="width:80px;" id="justice_'+difficulty+'">JUSTICE</div>' +
