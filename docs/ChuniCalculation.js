@@ -114,7 +114,7 @@
 
     /* buttonDiv に乗せるボタンの設定 */
     var calcButton = document.createElement('div');
-    calcButton.className = "calc_btn honor_now";
+    calcButton.className = "btn_calc honor_now";
     calcButton.addEventListener("click", calculate);
     calcButton.innerText = "計算";
     buttonDiv.appendChild(calcButton);
