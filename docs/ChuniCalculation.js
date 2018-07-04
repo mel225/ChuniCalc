@@ -87,7 +87,7 @@
     scoreDiv.className = "block_underline ptb_5";
     notesDiv.className = "block_underline ptb_5";
     buttonDiv.className = "block_underline ptb_5";
-    maxChain.className = "ml_10 mb-10 font_90 text_justice maxChain bg_" + difficulty;
+    maxChain.className = "ml_10 mb-10 font_90 maxChain bg_" + difficulty;
     
     scoreDiv.id = "scoreDiv_" + difficulty;
     notesDiv.id = "notesDiv_" + difficulty;
