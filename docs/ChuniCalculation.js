@@ -113,7 +113,8 @@
     maxChain.innerText = 'MaxChain: ';
 
     /* buttonDiv に乗せるボタンの設定 */
-    var calcButton = document.createElement('div');
+    var calcButton = document.createElement('a');
+    calcButton.href = "JavaScript:void(0);";
     calcButton.className = "btn_calc";
     calcButton.addEventListener("click", calculate);
     calcButton.innerText = "計算";
