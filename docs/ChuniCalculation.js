@@ -36,8 +36,6 @@
       console.log("setMaxChain()");
       
       alert("すべての設定が完了しました。");
-      
-      console.log(document.getElementById("calc_button").clientWidth);
     });
   
   /*
@@ -112,10 +110,14 @@
             '<input type="text" style="width:80px;" id="attack_'+difficulty+'">ATTACK</div>' +
               '<div><input type="radio" name="radio_'+difficulty+'">' +
                 '<input type="text"  style="width:80px;" id="miss_'+difficulty+'">MISS</div>';
-    buttonDiv.innerHTML = '' +
-      '<a herf="javascript:void(0);" onclick="JavaScript:calculate(this)" class="btn_calc_back">' + 
-        '<div id="calc_button_'+difficulty+'" class="honor_now btn_calc">計算</div></a>';
     maxChain.innerText = 'MaxChain: ';
+
+    /* buttonDiv に乗せるボタンの設定 */
+    var calcButton = document.createElement('div');
+    calcButton.className = "calc_btn honor_now";
+    calcButton.addEventListener("click", calculate);
+    calcButton.innerText = "計算";
+    buttonDiv.appendChild(calcButton);
   };
   
   /* setting of contents.css in this repositry */
@@ -181,7 +183,7 @@
     return s;
   };
 
-  function calculate(element){
-    alert(element);
+  function calculate(){
+    alert("EventListener");
   }
 }) ();
