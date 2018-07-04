@@ -4,14 +4,10 @@
   display: block;
   background-image: url(https://chunithm-net.com/mobile/common/images/honor_bg_silver.png);
   background-repeat: no-repeat;
-  opacity: 1.0;
   width: 100%;
+  padding: 0;
   text-align: center;
-  position absolute;
-}
-
-.btn_calc:hover{
-  opacity: 0.7;
+  position: relative;
 }
 
 .btn_calc_back {
