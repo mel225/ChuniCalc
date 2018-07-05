@@ -312,6 +312,7 @@
 
   /* 文字列から数字以外を削除した新たな文字列を取得 */
   function getNum(str){
-    return str.replace(/[^-0-9]/g, '');
+    str = str.replace(/[^-0-9]/g, ''); // マイナスと数字以外の文字を消去
+    return str.slice(0, 1) + str.slice(1).replace(/-/g, ''); // ２文字目以降のマイナス文字を消去
   }
 }) ();
