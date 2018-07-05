@@ -201,7 +201,7 @@
           
           document.getElementById('justiceDiv_' + diff).appendChild(justiceDif);
           document.getElementById('attackDiv_' + diff).appendChild(attackDif);
-          document.getElementById('miss_Div' + diff).appendChild(missDif);
+          document.getElementById('missDiv_' + diff).appendChild(missDif);
         }
       }
       return;
