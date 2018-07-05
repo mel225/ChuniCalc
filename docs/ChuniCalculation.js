@@ -133,12 +133,12 @@
     function show_hide(){
       if(musicBox.value == "show"){
         for(i=2; i<musicBox.children.length; i++){
-          musicBox.children.style.display = "none";
+          musicBox.children[i].style.display = "none";
         }
         musicBox.value = "hide";
       }else{
         for(i=2; i<musicBox.children.length; i++){
-          musicBox.children.style.display = "block";
+          musicBox.children[i].style.display = "block";
         }
         musicBox.value = "show";
       }
