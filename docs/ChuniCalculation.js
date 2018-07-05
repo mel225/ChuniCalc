@@ -271,7 +271,7 @@
     /* ノーツ数を取得する */
     n = Number(document.getElementById("maxChain_" + difficulty).value);
 
-    if(isNan(n)){
+    if(isNaN(n)){
       alert("maxChain の value がおかしいらしい");
     }
 
