@@ -280,6 +280,13 @@
                   );
     }
 
+    console.log("score: " + score,
+                "justice: " + justice,
+                "attack: " + attack,
+                "miss: " + miss,
+                "notes: " + n
+                );
+
     /* 計算を行い、フォームに値をセットし、アラートする */
     switch(variable){
     case "score":
@@ -290,7 +297,7 @@
     case "justice":
       justice = ((1010000 - score) * n - 510000 * attack - 1010000 * miss) / 10000;
       alert("JUSTICE の値は " + justice + " です。");
-      div_j.value = String(score);
+      div_j.value = String(justice);
       break;
     case "attack":
       attack = ((1010000 - score) * n - 10000 * justice - 1010000 * miss) / 510000;
