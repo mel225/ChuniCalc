@@ -236,7 +236,7 @@
 
     /* 入力欄に入力された値を取得する */
     div_s = document.getElementById("score_" + difficulty);
-    alert(document);
+    alert(document.getElementsByTagName("head")[0];
     alert(div_s);
     score = Number(getNum(div_s.value));
     div_j = document.getElementById("justice_" + difficulty);
