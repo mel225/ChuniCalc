@@ -315,11 +315,13 @@
         if(old_justice == justice){
           alert("ATTACK が [" + attack + "] になりました。");
         }else{
-          alert("ATTACK が [" + attack + "] になり、JUSTICE が [" + old_justice + "+" + (justice - old_justice) + "] に補正されました。");
+          alert("ATTACK が [" + attack + "] になり、" +
+                "JUSTICE が [" + old_justice + "+" + (justice - old_justice) +
+                "] に補正されました。");
+          div_j.value = String(old_justice) + "+" + String(justice - old_justice);
         }
       }
       div_a.value = String(attack);
-      div_j.value = String(old_justice) + "+" + String(old_justice - justice);
       break;
     case "miss":
       var old_justice = justice;
@@ -329,11 +331,13 @@
         if(old_justice == justice){
           alert("MISS が [" + miss + "] になりました。");
         }else{
-          alert("MISS が [" + miss + "] になり、JUSTICE が [" + old_justice + "+" + (justice - old_justice) + "] に補正されました。");
+          alert("MISS が [" + miss + "] になり、" +
+                "JUSTICE が [" + old_justice + "+" + (justice - old_justice) +
+                "] に補正されました。");
+          div_j.value = String(old_justice) + "+" + String(justice - old_justice);
         }
       }
       div_m.value = String(miss);
-      div_j.value = String(old_justice) + "+" + String(old_justice - justice);
       break;
     default:
       console.log("ラジオボタンの設定を見直すべきだ");
