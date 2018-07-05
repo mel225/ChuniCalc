@@ -104,14 +104,14 @@
     
     /* innerHTML, innerText */
     scoreDiv.innerHTML = '' + 
-      '<input type="radio" name="radio_'+difficulty+'" checked="checked">' + 
+      '<input type="radio" name="radio_'+difficulty+'" value="score">' + 
         '<input type="text" style="width:150px;" id="score_'+difficulty+'">(SCORE)';
     notesDiv.innerHTML = '' + 
-      '<div><input type="radio" name="radio_'+difficulty+'">'+
+      '<div><input type="radio" name="radio_'+difficulty+'" checked="checked" value="justice">'+
         '<input type="text" style="width:80px;" id="justice_'+difficulty+'">JUSTICE</div>' +
-          '<div><input type="radio" name=radio_"'+difficulty+'">'+
+          '<div><input type="radio" name=radio_"'+difficulty+'" value="attack">'+
             '<input type="text" style="width:80px;" id="attack_'+difficulty+'">ATTACK</div>' +
-              '<div><input type="radio" name="radio_'+difficulty+'">' +
+              '<div><input type="radio" name="radio_'+difficulty+'" value="miss">' +
                 '<input type="text"  style="width:80px;" id="miss_'+difficulty+'">MISS</div>';
     maxChain.innerText = 'MaxChain: ';
 
@@ -128,20 +128,21 @@
     showButton.className = "btn_show";
     showButton.addEventListener("click", show_hide);
     showButton.innerText = "hide";
-    databox.value = "show";
+    showButton.value = "showing";
+    showButton.id = "showhide_" + difficulty;
     databox.insertBefore(showButton, databox.firstElementChild);
     function show_hide(){
-      if(databox.value == "show"){
-        for(i=2; i<databox.children.length; i++){
+      if(databox.value == "showing"){
+        for(i=3; i<databox.children.length; i++){
           databox.children[i].style.display = "none";
         }
-        databox.value = "hide";
+        showButton.value = "hiding";
         showButton.innerText = "show";
       }else{
-        for(i=2; i<databox.children.length; i++){
+        for(i=3; i<databox.children.length; i++){
           databox.children[i].style.display = "block";
         }
-        databox.value = "show";
+        showButton.value = "showing";
         showButton.innerText = "hide";
       }
     }
@@ -170,7 +171,7 @@
       
       /* get high score */
       var highScoreDiv = databox.getElementsByClassName("text_b")[0];
-      var highScore = highScoreDiv.textContent.replace(/[^0-9]/g, '');
+      var highScore = getNum(highScoreDiv.textContent);
       
       scoreInput.value = highScore;
     });
@@ -191,9 +192,25 @@
           var maxChain = document.getElementById('maxChain_' + diff);
           if(maxChain != undefined){
             maxChain.innerText += music.getData(i);
+            maxChain.value = music.getData(i);
           }
         }
       }
+    });
+  }
+
+  /* 入力欄を初期化する */
+  function initCalcDiv(){
+    var p = MusicData.prototype;
+    var diffs = [p.getDifficultyName(1),
+                 p.getDifficultyName(2),
+                 p.getDifficultyName(3),
+                 p.getDifficultyName(4)];
+    diffs.forEach(function(difficulty){
+      document.getElementById("justice_" + difficulty).value = "0";
+      document.getElementById("attack_" + difficulty).value = "0";
+      document.getElementById("miss_" + difficulty).value = "0";
+      calculate(difficulty);
     });
   }
 
@@ -210,7 +227,81 @@
     return s;
   };
 
-  function calculate(){
-    alert(this);
+  /* 入力された数値をもとに計算を行う */
+  function calculate(element){
+    if(element == undefined){
+      var difficulty = this.id.replace("showhide_", "");
+    }else{
+      alert(element);
+      var difficulty = element;
+    }
+    var variable = "";
+    var radioGroup;
+    var div_s;
+    var div_j;
+    var div_a;
+    var div_m;
+    var score = 0;
+    var justice = 0;
+    var attack = 0;
+    var miss = 0;
+    var n = 0;
+
+    /* ラジオボタンからどの値を計算するのかを探す */
+    radioGroup = document.getElementsByName("radio_"+difficulty);
+    radioGroup.forEach(function(item){
+      if(item.checked){
+        variable = item.value;
+        break;
+      }
+    });
+
+    /* 入力欄に入力された値を取得する */
+    div_s = document.getElementById("score_" + difficulty);
+    score = Number(getNum(div_s.value));
+    div_j = document.getElementById("justice_" + difficulty);
+    justice = Number(getNum(div_j.value));
+    div_a = document.getElementById("attack_" + difficulty);
+    attack = Number(getNum(div_a.value));
+    div_m = document.getElementById("miss_" + difficulty);
+    miss = Number(getNum(div_m.value));
+
+    /* ノーツ数を取得する */
+    n = Number(getElementById("maxChain_" + difficulty).value);
+
+    if(isNan(n)){
+      alert("maxChain の value がおかしいらしい");
+    }
+
+    /* 計算を行い、フォームに値をセットし、アラートする */
+    switch(variable){
+    case "score":
+      score = 1010000 - (justice + 51 * attack + 101 * miss) * 10000 / n;
+      alert("SCORE の値は " + score + " です。");
+      div_s.value = String(score);
+      break;
+    case "justice":
+      justice = (score * n - 510000 * attack - 1010000 * miss) / n;
+      alert("JUSTICE の値は " + justice + " です。");
+      div_j.value = String(score);
+      break;
+    case "attack":
+      attack = (score * n - 10000 * justice - 1010000 * miss) / n;
+      alert("ATTACK の値は " + attack + " です。");
+      div_a.value = String(attack);
+      break;
+    case "miss":
+      miss = (score * n - 10000 * justice - 510000 * attack) / n;
+      alert("MISS の値は " + miss + " です。");
+      div_m.value = String(miss);
+      break;
+    default:
+      alert("ラジオボタンの設定を見直すべきだ");
+    }
+  }
+
+  /* 文字列から数字以外を削除した新たな文字列を取得 */
+  function getNum(str){
+    return str.replace(/[^0-9]/g, '');
   }
 }) ();
