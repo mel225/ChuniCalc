@@ -55,9 +55,13 @@
     
     /* それぞれのプロパティを設定 */
     var scoreDiv = document.createElement("div"); // SCORE 数値枠
-    var notesDiv = document.createElement("div"); // JC 以外の数値枠
+    var notesDiv = document.createElement("div"); // 各判定の数値枠の親
     var buttonDiv = document.createElement("div"); // 計算ボタン枠
     var maxChain = document.createElement("span"); // ノーツ数表示枠
+
+    var justiceDiv = document.createElement("div"); // justice 数値枠
+    var attackDiv = document.createElement("div"); // attack 数値枠
+    var missDiv = document.createElement("div"); // miss 数値枠
     
     scoreDiv.className = "block_underline ptb_5";
     notesDiv.className = "block_underline ptb_5";
@@ -68,6 +72,9 @@
     notesDiv.id = "notesDiv_" + difficulty;
     buttonDiv.id = "buttonDiv_" + difficulty;
     maxChain.id = "maxChain_" + difficulty;
+    justiceDiv.id = "justiceDiv_" + diffculty;
+    attackDiv.id = "attackDiv_" + difficulty;
+    missDiv.id = "missDiv_" + difficulty;
     
     var musicBox = databox.getElementsByClassName("box02 w400")[0];
     var scoreBox = musicBox.firstElementChild;
@@ -83,15 +90,23 @@
     scoreDiv.innerHTML = '' + 
       '<input type="radio" name="radio_'+difficulty+'" value="score">' + 
         '<input type="text" style="width:150px;" id="score_'+difficulty+'">(SCORE)';
-    notesDiv.innerHTML = '' + 
-      '<div><input type="radio" name="radio_'+difficulty+'" checked="checked" value="justice">'+
-        '<input type="text" style="width:80px;" id="justice_'+difficulty+'">JUSTICE</div>' +
-          '<div><input type="radio" name="radio_'+difficulty+'" value="attack">'+
-            '<input type="text" style="width:80px;" id="attack_'+difficulty+'">ATTACK</div>' +
-              '<div><input type="radio" name="radio_'+difficulty+'" value="miss">' +
-                '<input type="text"  style="width:80px;" id="miss_'+difficulty+'">MISS</div>';
+    justiceDiv.innerHTML = '' +
+      '<input type="radio" name="radio_'+difficulty+'" checked="checked" value="justice">'+
+        '<input type="text" style="width:80px;" id="justice_'+difficulty+'">' +
+          '<span class="ml_10">JUSTICE</span>';
+    attackDiv.innerHTML = '' +
+      '<input type="radio" name="radio_'+difficulty+'" value="attack">' +
+        '<input type="text" style="width:80px;" id="attack_'+difficulty+'">' +
+          '<span class="ml_10">ATTACK</span>';
+    missDiv.innerHTML = '' + 
+      '<input type="radio" name="radio_'+difficulty+'" value="miss">' +
+        '<input type="text"  style="width:80px;" id="miss_'+difficulty+'">' + 
+          '<span class="ml_10">MISS</span>';
     maxChain.innerText = 'MaxChain: ';
     maxChain.value = "";
+    notesDiv.appendChild(justiceDiv);
+    notesDiv.appendChild(attackDiv);
+    notesDiv.appendChild(missDiv);
 
     /* buttonDiv に乗せるボタンの設定 */
     var calcButton = document.createElement('div');
@@ -170,9 +185,23 @@
           var n = Number(notes);
           maxChain.innerText += notes;
           maxChain.value = notes;
-          document.getElementById('justice_' + diff).innerText += parseInt(10000/n);
-          document.getElementById('attack_' + diff).innerText += parseInt(510000/n);
-          document.getElementById('miss_' + diff).innerText += parseInt(1010000/n);
+
+          /* 減分の表示 */
+          var justiceDif = document.createElement("span");
+          var attackDif = document.createElement("span");
+          var missDif = document.createElement("span");
+          
+          justiceDif.className = "ml_10 text_red";
+          attackDif.className = "ml_10 text_red";
+          missDif.className = "ml_10 text_red";
+          
+          justiceDif.innerText = "(-" + parseInt(10000/n) + ")";
+          attackDif.innerText = "(-" + parseInt(510000/n) + ")";
+          missDif.innerText = "(-" + parseInt(1010000/n) + ")";
+          
+          document.getElementById('justiceDiv_' + diff).appendChild(justiceDif);
+          document.getElementById('attackDiv_' + diff).appendChild(attakDif);
+          document.getElementById('miss_Div' + diff).appendChild(missDif);
         }
       }
       return;
