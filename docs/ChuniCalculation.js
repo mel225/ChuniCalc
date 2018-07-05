@@ -208,6 +208,7 @@
 
   /* 入力された数値をもとに計算を行う */
   function calculate(element){
+    console.log("element typeof: " + typeof element);
     if((typeof element) != "string"){
       var difficulty = this.id.replace("showhide_", "");
     }else{
@@ -236,8 +237,6 @@
 
     /* 入力欄に入力された値を取得する */
     div_s = document.getElementById("score_" + difficulty);
-    console.log(document.getElementById("mel225_ChuniCalculation.js"));
-    console.log("div_s: " + div_s);
     score = Number(getNum(div_s.value));
     div_j = document.getElementById("justice_" + difficulty);
     justice = Number(getNum(div_j.value));
