@@ -50,5 +50,5 @@
   padding: 1px 1px 1px 1px;
   letter-spacing: 1px;
   text-align: left;
-  position: static;
+  position: absolute;
 }
