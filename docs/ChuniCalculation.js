@@ -208,7 +208,7 @@
 
   /* 入力された数値をもとに計算を行う */
   function calculate(element){
-    console.log("element typeof: " + typeof element);
+    console.log(element, this);
     if((typeof element) != "string"){
       var difficulty = this.id.replace("showhide_", "");
     }else{
