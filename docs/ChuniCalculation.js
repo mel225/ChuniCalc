@@ -350,6 +350,7 @@
     for(str in str_s){
       num += Number(str);
     }
+    console.log("  " + num);
     return String(num);
   }
 }) ();
