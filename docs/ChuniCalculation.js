@@ -312,6 +312,6 @@
 
   /* 文字列から数字以外を削除した新たな文字列を取得 */
   function getNum(str){
-    return str.replace(/[^0-9]/g, '');
+    return str.replace(/[^-0-9]/g, '');
   }
 }) ();
