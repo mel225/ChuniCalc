@@ -236,8 +236,8 @@
 
     /* 入力欄に入力された値を取得する */
     div_s = document.getElementById("score_" + difficulty);
-    alert(document.innerHTML);
-    alert(div_s);
+    console.log(document.innerHTML);
+    console.log("div_s: " + div_s);
     score = Number(getNum(div_s.value));
     div_j = document.getElementById("justice_" + difficulty);
     justice = Number(getNum(div_j.value));
