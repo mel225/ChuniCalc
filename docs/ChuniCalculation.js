@@ -3,10 +3,9 @@
   console.log("-- Projected by mel225 (github, Twitter:@casge_pzl)");
 
   alert("選択した値を、ほかの値によって計算します。");
-    
-  new Promise(function(resolve, reject){
-    
-    /* 外部ファイルの読み込み */
+  
+  /* 外部ファイルの読み込み */
+  new Promise(function(resolve, reject){ // 時間がかかるのでプロミスにする。
     var files = ["MusicData.js", "readFile.js"];
     var index = 0;
     var pro = function(resolve, reject){
@@ -19,50 +18,25 @@
         resolve(new Promise(pro));
       };
     };
-    // 時間がかかるのでプロミスにする。
     resolve(new Promise(pro));
-  })
-    .then(function(){
-      setContentsCSS();
-      console.log("setContentsCSS()");
-      
-      addCalcDiv();
-      console.log("addCalcDiv()");
-      
-      setScorePoint();
-      console.log("setScorePoint()");
-      
-      setMaxChain();
-      console.log("setMaxChain()");
-
-      initCalcDiv();
-      console.log("initCalcDiv()");
-      
-      alert("すべての設定が完了しました。");
-    });
-  
-  /*
-  $('.btn_calc').css({
-    "display":"inline-block",
-    "padding":"0.5em, 1em",
-    "ext-decoration":"none",
-    "font-weight":"bold",
-    "border-radius":"4px",
-    "color":"rgba(0, 69, 212, 0.47)",
-    "text-shadow":"1px 1px 1px rgba(255, 255, 255, 0.5)",
-    "background-image":"-webkit-linear-gradient(#6795fd 0%, #67ceff 100%)",
-    "background-image":"linear-gradient(#6795fd 0%, #67ceff 100%)",
-    "box-shadow":"0px, 2px, 2px, rgba(0, 0, 0, 0.29)",
-    "border-bottom":"solid 3px #5e7fca"
-    });
-  $('.btn_calc:active').css({
-    "-ms-transform":"translateY(4px)",
-    "-webkit-transform":"translateY(4px)",
-    "transform":"translateY(4px)",
-    "box-shadow":"0px 0px 1px rgba(0, 0, 0, 0.2)",
-    "border-bottom":"none"
-    });
-  */
+  }).then(function(){
+    setContentsCSS();
+    console.log("setContentsCSS()");
+    
+    addCalcDiv();
+    console.log("addCalcDiv()");
+    
+    setScorePoint();
+    console.log("setScorePoint()");
+    
+    return setMaxChain();
+    console.log("setMaxChain()");
+  }).then(function(){
+    initCalcDiv();
+    console.log("initCalcDiv()");
+    
+    alert("すべての設定が完了しました。");
+  });
   
   /* add <div> Tag */
   function addCalcDiv(){
@@ -186,7 +160,7 @@
     var title = document.getElementsByClassName('play_musicdata_title')[0].innerText;
     var promise = openFile();
     promise = readText(promise);
-    promise.then(function(musics){
+    return promise.then(function(musics){
       if(musics[title] == undefined){
         alert(title + " のデータが見つかりませんでした。");
       }else{
@@ -197,12 +171,10 @@
           if(maxChain != undefined){
             maxChain.innerText += music.getData(i);
             maxChain.value = music.getData(i);
-            console.log(music.getData(i), maxChain.value);
-          }else{
-            console.log(music.getData(i), maxChain);
           }
         }
       }
+      resolve();
     });
   }
 
