@@ -269,7 +269,7 @@
     miss = Number(getNum(div_m.value));
 
     /* ノーツ数を取得する */
-    n = Number(getElementById("maxChain_" + difficulty).value);
+    n = Number(document.getElementById("maxChain_" + difficulty).value);
 
     if(isNan(n)){
       alert("maxChain の value がおかしいらしい");
