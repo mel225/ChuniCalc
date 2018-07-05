@@ -198,6 +198,8 @@
             maxChain.innerText += music.getData(i);
             maxChain.value = music.getData(i);
             console.log(music.getData(i), maxChain.value);
+          }else{
+            console.log(music.getData(i), maxChain);
           }
         }
       }
