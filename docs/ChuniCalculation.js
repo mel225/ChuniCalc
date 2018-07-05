@@ -210,7 +210,7 @@
   function calculate(element){
     console.log(element, this);
     if((typeof element) != "string"){
-      var difficulty = this.id.replace("showhide_", "");
+      var difficulty = this.parentNode.id.replace("buttonDiv_", "");
     }else{
       var difficulty = element;
     }
