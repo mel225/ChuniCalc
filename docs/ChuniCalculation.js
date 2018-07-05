@@ -345,10 +345,10 @@
     str = str.replace(/[^\+\-0-9]/g, ''); // プラス、マイナス及び数字以外の文字を消去
     str =  str.slice(0, 1) + str.slice(1).replace(/-/g, ''); // ２文字目以降のマイナス文字を消去
     var str_s = str.split('+'); // プラスで区切って足し合わせる
-    console.log(str, str_s[0], "in getNum");
+    console.log(str, str_s, "in getNum");
     var num = 0;
-    for(str in str_s){
-      num += Number(str);
+    for(var i=0; i<str_s.length; i++){
+      num += Number(str_s[i]);
     }
     console.log("  " + num);
     return String(num);
