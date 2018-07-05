@@ -117,6 +117,7 @@
               '<div><input type="radio" name="radio_'+difficulty+'" value="miss">' +
                 '<input type="text"  style="width:80px;" id="miss_'+difficulty+'">MISS</div>';
     maxChain.innerText = 'MaxChain: ';
+    maxChain.value = "";
 
     /* buttonDiv に乗せるボタンの設定 */
     var calcButton = document.createElement('div');
