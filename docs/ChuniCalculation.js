@@ -125,7 +125,7 @@
     databox.insertBefore(showButton, databox.firstElementChild);
     function show_hide(){
       console.log("EventListener called.");
-      if(databox.value == "showing"){
+      if(showButton.value == "showing"){
         for(i=3; i<databox.children.length; i++){
           databox.children[i].style.display = "none";
         }
