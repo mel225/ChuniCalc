@@ -200,7 +200,7 @@
           missDif.innerText = "(-" + parseInt(1010000/n) + ")";
           
           document.getElementById('justiceDiv_' + diff).appendChild(justiceDif);
-          document.getElementById('attackDiv_' + diff).appendChild(attakDif);
+          document.getElementById('attackDiv_' + diff).appendChild(attackDif);
           document.getElementById('miss_Div' + diff).appendChild(missDif);
         }
       }
