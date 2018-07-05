@@ -255,7 +255,6 @@
     radioGroup.forEach(function(item){
       if(item.checked){
         variable = item.value;
-        break;
       }
     });
 
