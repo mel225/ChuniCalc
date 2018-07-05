@@ -271,10 +271,12 @@
 
     /* ノーツ数を取得する */
     n = Number(document.getElementById("maxChain_" + difficulty).value);
-    alert(document.getElementById("maxChain_" + difficulty).value);
 
     if(isNaN(n)){
-      alert("maxChain の value がおかしいらしい");
+      console.log("maxChain の value がおかしいらしい",
+                  document.getElementById("maxChain_"+difficulty),
+                  document.getElementById("maxChain_"+difficulty).value
+                  );
     }
 
     /* 計算を行い、フォームに値をセットし、アラートする */
@@ -300,7 +302,7 @@
       div_m.value = String(miss);
       break;
     default:
-      alert("ラジオボタンの設定を見直すべきだ");
+      console.log("ラジオボタンの設定を見直すべきだ");
     }
   }
 
