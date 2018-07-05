@@ -101,7 +101,6 @@
 
     /* 後で設定しやすいようにmusicBoxにidを付ける */
     musicBox.id = "music_box_" + difficulty;
-    musicBox.value = "show";
     
     /* innerHTML, innerText */
     scoreDiv.innerHTML = '' + 
@@ -128,19 +127,22 @@
     var showButton = document.createElement('div');
     showButton.className = "btn_show";
     showButton.addEventListener("click", show_hide);
-    showButton.innerText = "show";
-    musicBox.insertBefore(showButton, musicBox.firstElementChild);
+    showButton.innerText = "hide";
+    databox.value = "show";
+    databox.insertBefore(showButton, databox.firstElementChild);
     function show_hide(){
-      if(musicBox.value == "show"){
-        for(i=2; i<musicBox.children.length; i++){
-          musicBox.children[i].style.display = "none";
+      if(databox.value == "show"){
+        for(i=2; i<databox.children.length; i++){
+          databox.children[i].style.display = "none";
         }
-        musicBox.value = "hide";
+        databox.value = "hide";
+        showButton.innerText = "show";
       }else{
-        for(i=2; i<musicBox.children.length; i++){
-          musicBox.children[i].style.display = "block";
+        for(i=2; i<databox.children.length; i++){
+          databox.children[i].style.display = "block";
         }
-        musicBox.value = "show";
+        databox.value = "show";
+        showButton.innerText = "hide";
       }
     }
   };
