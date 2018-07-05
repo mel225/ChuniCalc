@@ -34,6 +34,9 @@
       
       setMaxChain();
       console.log("setMaxChain()");
+
+      initCalcDiv();
+      console.log("initCalcDiv()");
       
       alert("すべての設定が完了しました。");
     });
