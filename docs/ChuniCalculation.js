@@ -124,6 +124,7 @@
     showButton.id = "showhide_" + difficulty;
     databox.insertBefore(showButton, databox.firstElementChild);
     function show_hide(){
+      console.log("EventListener called.");
       if(databox.value == "showing"){
         for(i=3; i<databox.children.length; i++){
           databox.children[i].style.display = "none";
@@ -148,7 +149,7 @@
     document.getElementsByTagName('head')[0].appendChild(link_tag);
   };
 
-  /* setting of score point */
+  /* スコアの値をdocumentから探してコピーする */
   function setScorePoint() {
     var databoxes = document.getElementsByClassName("w420 music_box");
 
@@ -168,7 +169,7 @@
     });
   }
   
-  /* get num of notes by name of the tune */
+  /* MaxChain 数（ノーツ数）をファイルから取得する */
   function setMaxChain(){
     var title = document.getElementsByClassName('play_musicdata_title')[0].innerText;
     var promise = openFile();
