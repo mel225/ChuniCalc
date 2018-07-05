@@ -211,6 +211,6 @@
   };
 
   function calculate(){
-    alert("EventListener");
+    alert(this);
   }
 }) ();
