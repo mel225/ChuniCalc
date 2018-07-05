@@ -208,10 +208,9 @@
 
   /* 入力された数値をもとに計算を行う */
   function calculate(element){
-    if(element == undefined){
+    if((typeof element) != "string"){
       var difficulty = this.id.replace("showhide_", "");
     }else{
-      alert(element);
       var difficulty = element;
     }
     var variable = "";
