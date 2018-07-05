@@ -219,7 +219,7 @@
       document.getElementById("justice_" + difficulty).value = "0";
       document.getElementById("attack_" + difficulty).value = "0";
       document.getElementById("miss_" + difficulty).value = "0";
-      calculate(difficulty);
+      calculate(difficulty, true);
     });
   }
 
@@ -237,7 +237,7 @@
   };
 
   /* 入力された数値をもとに計算を行う */
-  function calculate(element){
+  function calculate(element, isInit){
     var difficulty;
     var variable = "";
     var radioGroup;
@@ -286,6 +286,7 @@
                 "miss: " + miss,
                 "notes: " + n
                 );
+    
     /* 取得した値が数値変換後の値なのでその値に変える */
     div_s.value = String(score);
     div_j.value = String(justice);
@@ -296,22 +297,26 @@
     switch(variable){
     case "score":
       score = parseInt(1010000 - (justice + 51 * attack + 101 * miss) * 10000 / n, 10);
-      alert("SCORE が [" + score + "] になりました。");
+      if(!isInit)
+        alert("SCORE が [" + score + "] になりました。");
       div_s.value = String(score);
       break;
     case "justice":
       justice = parseInt(((1010000 - score) * n - 510000 * attack - 1010000 * miss) / 10000, 10);
-      alert("JUSTICE が [" + justice + "] になりました。");
+      if(!isInit)
+        alert("JUSTICE が [" + justice + "] になりました。");
       div_j.value = String(justice);
       break;
     case "attack":
       var old_justice = justice;
       attack = parseInt(((1010000 - score) * n - 10000 * justice - 1010000 * miss) / 510000, 10);
       justice = parseInt(((1010000 - score) * n - 510000 * attack - 1010000 * miss) / 10000, 10);
-      if(old_justice == justice){
-        alert("ATTACK が [" + attack + "] になりました。");
-      }else{
-        alert("ATTACK が [" + attack + "] になり、JUSTICE が [" + old_justice + "+" + (justice - old_justice) + "] に補正されました。");
+      if(!isInit){
+        if(old_justice == justice){
+          alert("ATTACK が [" + attack + "] になりました。");
+        }else{
+          alert("ATTACK が [" + attack + "] になり、JUSTICE が [" + old_justice + "+" + (justice - old_justice) + "] に補正されました。");
+        }
       }
       div_a.value = String(attack);
       div_j.value = String(old_justice) + "+" + String(old_justice - justice);
@@ -320,10 +325,12 @@
       var old_justice = justice;
       miss = parseInt(((1010000 - score) * n - 10000 * justice - 510000 * attack) / 1010000, 10);
       justice = parseInt(((1010000 - score) * n - 510000 * attack - 1010000 * miss) / 10000, 10);
-      if(old_justice == justice){
-        alert("MISS が [" + miss + "] になりました。");
-      }else{
-        alert("MISS が [" + miss + "] になり、JUSTICE が [" + old_justice + "+" + (justice - old_justice) + "] に補正されました。");
+      if(!isInit){
+        if(old_justice == justice){
+          alert("MISS が [" + miss + "] になりました。");
+        }else{
+          alert("MISS が [" + miss + "] になり、JUSTICE が [" + old_justice + "+" + (justice - old_justice) + "] に補正されました。");
+        }
       }
       div_m.value = String(miss);
       div_j.value = String(old_justice) + "+" + String(old_justice - justice);
@@ -338,6 +345,7 @@
     str = str.replace(/[^+-0-9]/g, ''); // プラス、マイナス及び数字以外の文字を消去
     str =  str.slice(0, 1) + str.slice(1).replace(/-/g, ''); // ２文字目以降のマイナス文字を消去
     var str_s = str.split('+'); // プラスで区切って足し合わせる
+    console.log(str, str_s[0], "in getNum");
     var num = 0;
     for(str in str_s){
       num += Number(str);
