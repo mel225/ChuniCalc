@@ -166,10 +166,13 @@
         for(i=1; i<=4; i++){
           var diff = music.getDifficultyString(i);
           var maxChain = document.getElementById('maxChain_' + diff);
-          if(maxChain != undefined){
-            maxChain.innerText += music.getData(i);
-            maxChain.value = music.getData(i);
-          }
+          var notes = music.getData(i);
+          var n = Number(notes);
+          maxChain.innerText += notes;
+          maxChain.value = notes;
+          document.getElementById('justice_' + diff).innerText += parseInt(10000/n);
+          document.getElementById('attack_' + diff).innerText += parseInt(510000/n);
+          document.getElementById('miss_' + diff).innerText += parseInt(1010000/n);
         }
       }
       return;
@@ -236,16 +239,16 @@
 
     /* 入力欄に入力された値を取得する */
     div_s = document.getElementById("score_" + difficulty);
-    score = Number(getNum(div_s.value));
+    score = parseInt(getNum(div_s.value), 10);
     div_j = document.getElementById("justice_" + difficulty);
-    justice = Number(getNum(div_j.value));
+    justice = parseInt(getNum(div_j.value), 10);
     div_a = document.getElementById("attack_" + difficulty);
-    attack = Number(getNum(div_a.value));
+    attack = parseInt(getNum(div_a.value), 10);
     div_m = document.getElementById("miss_" + difficulty);
-    miss = Number(getNum(div_m.value));
+    miss = parseInt(getNum(div_m.value), 10);
 
     /* ノーツ数を取得する */
-    n = Number(document.getElementById("maxChain_" + difficulty).value);
+    n = parseInt(document.getElementById("maxChain_" + difficulty).value, 10);
 
     /* 取得した数値をコンソールで確認する */
     console.log("score: " + score,
@@ -258,19 +261,19 @@
     /* 計算を行い、フォームに値をセットし、アラートする */
     switch(variable){
     case "score":
-      score = 1010000 - (justice + 51 * attack + 101 * miss) * 10000 / n;
+      score = parseInt(1010000 - (justice + 51 * attack + 101 * miss) * 10000 / n, 10);
       div_s.value = String(score);
       break;
     case "justice":
-      justice = ((1010000 - score) * n - 510000 * attack - 1010000 * miss) / 10000;
+      justice = parseInt(((1010000 - score) * n - 510000 * attack - 1010000 * miss) / 10000, 10);
       div_j.value = String(justice);
       break;
     case "attack":
-      attack = ((1010000 - score) * n - 10000 * justice - 1010000 * miss) / 510000;
+      attack = parseInt(((1010000 - score) * n - 10000 * justice - 1010000 * miss) / 510000, 10);
       div_a.value = String(attack);
       break;
     case "miss":
-      miss = ((1010000 - score) * n - 10000 * justice - 510000 * attack) / 1010000;
+      miss = parseInt(((1010000 - score) * n - 10000 * justice - 510000 * attack) / 1010000, 10);
       div_m.value = String(miss);
       break;
     default:
