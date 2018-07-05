@@ -205,10 +205,10 @@
   /* 入力欄を初期化する */
   function initCalcDiv(){
     var p = MusicData.prototype;
-    var diffs = [p.getDifficultyName(1),
-                 p.getDifficultyName(2),
-                 p.getDifficultyName(3),
-                 p.getDifficultyName(4)];
+    var diffs = [p.getDifficultyString(1),
+                 p.getDifficultyString(2),
+                 p.getDifficultyString(3),
+                 p.getDifficultyString(4)];
     diffs.forEach(function(difficulty){
       document.getElementById("justice_" + difficulty).value = "0";
       document.getElementById("attack_" + difficulty).value = "0";
