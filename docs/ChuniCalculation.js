@@ -204,7 +204,8 @@
 
   /* 入力欄を初期化する */
   function initCalcDiv(){
-    var func = MusicData.prototype.getDifficultyString;
+    var func = MusicData.prototype.getDifficultyString(1);
+    alert(func);
     var diff = func(1);
     var p = MusicData.prototype;
     var diffs = [p.getDifficultyString.call(1),
