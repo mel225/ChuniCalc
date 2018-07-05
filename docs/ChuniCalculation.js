@@ -195,7 +195,7 @@
           var maxChain = document.getElementById('maxChain_' + diff);
           if(maxChain != undefined){
             maxChain.innerText += music.getData(i);
-            maxChain.value = music.getData(i);
+            maxChain.value = String(music.getData(i));
           }
         }
       }
@@ -260,6 +260,7 @@
 
     /* 入力欄に入力された値を取得する */
     div_s = document.getElementById("score_" + difficulty);
+    alert(div_s);
     score = Number(getNum(div_s.value));
     div_j = document.getElementById("justice_" + difficulty);
     justice = Number(getNum(div_j.value));
@@ -270,6 +271,7 @@
 
     /* ノーツ数を取得する */
     n = Number(document.getElementById("maxChain_" + difficulty).value);
+    alert(document.getElementById("maxChain_" + difficulty).value);
 
     if(isNaN(n)){
       alert("maxChain の value がおかしいらしい");
