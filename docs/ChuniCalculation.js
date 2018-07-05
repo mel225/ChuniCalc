@@ -86,7 +86,7 @@
     notesDiv.innerHTML = '' + 
       '<div><input type="radio" name="radio_'+difficulty+'" checked="checked" value="justice">'+
         '<input type="text" style="width:80px;" id="justice_'+difficulty+'">JUSTICE</div>' +
-          '<div><input type="radio" name=radio_"'+difficulty+'" value="attack">'+
+          '<div><input type="radio" name="radio_'+difficulty+'" value="attack">'+
             '<input type="text" style="width:80px;" id="attack_'+difficulty+'">ATTACK</div>' +
               '<div><input type="radio" name="radio_'+difficulty+'" value="miss">' +
                 '<input type="text"  style="width:80px;" id="miss_'+difficulty+'">MISS</div>';
@@ -95,7 +95,6 @@
 
     /* buttonDiv に乗せるボタンの設定 */
     var calcButton = document.createElement('div');
-    //calcButton.href = "JavaScript:void(0);";
     calcButton.className = "btn_calc";
     calcButton.addEventListener("click", calculate);
     calcButton.innerText = "計算";
@@ -144,7 +143,6 @@
       /* get input statement of SCORE */
       var boxesclass = databox.className;
       var difficulty = boxesclass.slice(boxesclass.indexOf(str) + str.length);
-      console.log(difficulty);
       var scoreInput = document.getElementById("score_" + difficulty);
       
       /* get high score */
@@ -189,7 +187,6 @@
       document.getElementById("justice_" + difficulty).value = "0";
       document.getElementById("attack_" + difficulty).value = "0";
       document.getElementById("miss_" + difficulty).value = "0";
-      calculate(difficulty);
     });
   }
 
@@ -208,13 +205,7 @@
 
   /* 入力された数値をもとに計算を行う */
   function calculate(element){
-    console.log(element, this);
-    if((typeof element) != "string"){
-      var difficulty = this.parentNode.id.replace("buttonDiv_", "");
-    }else{
-      var difficulty = element;
-    }
-    console.log(difficulty + " in calculate()");
+    var difficulty;
     var variable = "";
     var radioGroup;
     var div_s;
@@ -226,6 +217,13 @@
     var attack = 0;
     var miss = 0;
     var n = 0;
+
+    /* 難易度を取得する */
+    if((typeof element) == "string"){
+      var difficulty = element;
+    }else{
+      var difficulty = this.parentNode.id.replace("buttonDiv_", "");
+    }
 
     /* ラジオボタンからどの値を計算するのかを探す */
     radioGroup = document.getElementsByName("radio_"+difficulty);
@@ -248,13 +246,7 @@
     /* ノーツ数を取得する */
     n = Number(document.getElementById("maxChain_" + difficulty).value);
 
-    if(isNaN(n)){
-      console.log("maxChain の value がおかしいらしい",
-                  document.getElementById("maxChain_"+difficulty),
-                  document.getElementById("maxChain_"+difficulty).value
-                  );
-    }
-
+    /* 取得した数値をコンソールで確認する */
     console.log("score: " + score,
                 "justice: " + justice,
                 "attack: " + attack,
@@ -266,22 +258,18 @@
     switch(variable){
     case "score":
       score = 1010000 - (justice + 51 * attack + 101 * miss) * 10000 / n;
-      alert("SCORE の値は " + score + " です。");
       div_s.value = String(score);
       break;
     case "justice":
       justice = ((1010000 - score) * n - 510000 * attack - 1010000 * miss) / 10000;
-      alert("JUSTICE の値は " + justice + " です。");
       div_j.value = String(justice);
       break;
     case "attack":
       attack = ((1010000 - score) * n - 10000 * justice - 1010000 * miss) / 510000;
-      alert("ATTACK の値は " + attack + " です。");
       div_a.value = String(attack);
       break;
     case "miss":
       miss = ((1010000 - score) * n - 10000 * justice - 510000 * attack) / 1010000;
-      alert("MISS の値は " + miss + " です。");
       div_m.value = String(miss);
       break;
     default:
