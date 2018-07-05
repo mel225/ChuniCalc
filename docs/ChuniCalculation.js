@@ -72,7 +72,7 @@
     notesDiv.id = "notesDiv_" + difficulty;
     buttonDiv.id = "buttonDiv_" + difficulty;
     maxChain.id = "maxChain_" + difficulty;
-    justiceDiv.id = "justiceDiv_" + diffculty;
+    justiceDiv.id = "justiceDiv_" + difficulty;
     attackDiv.id = "attackDiv_" + difficulty;
     missDiv.id = "missDiv_" + difficulty;
     
