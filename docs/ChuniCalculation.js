@@ -213,6 +213,7 @@
     }else{
       var difficulty = element;
     }
+    console.log(difficulty + " in calculate()");
     var variable = "";
     var radioGroup;
     var div_s;
@@ -235,6 +236,7 @@
 
     /* 入力欄に入力された値を取得する */
     div_s = document.getElementById("score_" + difficulty);
+    alert(document);
     alert(div_s);
     score = Number(getNum(div_s.value));
     div_j = document.getElementById("justice_" + difficulty);
