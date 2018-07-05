@@ -187,6 +187,7 @@
       document.getElementById("justice_" + difficulty).value = "0";
       document.getElementById("attack_" + difficulty).value = "0";
       document.getElementById("miss_" + difficulty).value = "0";
+      calculate(difficulty);
     });
   }
 

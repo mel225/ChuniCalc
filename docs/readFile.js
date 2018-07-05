@@ -38,7 +38,6 @@
           musics[music.getTitle()] = music;
         }
       });
-      console.log(musics);
       return musics;
     });
   }
