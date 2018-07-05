@@ -41,3 +41,14 @@
   font-weight: bolder; 
   letter-spacing: 2px;
 }
+
+.btn_show {
+  display: inline-block;
+  background-color: #000;
+  color: #FFF;
+  border-radius: 2px;
+  padding: 1px 1px 1px 1px;
+  letter-spacing: 1px;
+  text-align: left;
+  position: static;
+}

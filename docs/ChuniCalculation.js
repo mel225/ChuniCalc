@@ -98,6 +98,10 @@
     musicBox.insertBefore(notesDiv, musicBox.lastElementChild);
     musicBox.insertBefore(buttonDiv, musicBox.lastElementChild);
     scoreBox.appendChild(maxChain);
+
+    /* 後で設定しやすいようにmusicBoxにidを付ける */
+    musicBox.id = "music_box_" + difficulty;
+    musicBox.value = "show";
     
     /* innerHTML, innerText */
     scoreDiv.innerHTML = '' + 
@@ -119,6 +123,26 @@
     calcButton.addEventListener("click", calculate);
     calcButton.innerText = "計算";
     buttonDiv.appendChild(calcButton);
+
+    /* 表示/非表示ボタンを付けて織り込めるようにする */
+    var showButton = document.createElement('div');
+    showButton.className = "btn_show";
+    showButton.addEventListener("click", show_hide);
+    showButton.innerText = "show";
+    musicBox.insertBefore(showButton, musicBox.firstElementChild);
+    function show_hide(){
+      if(musicBox.value == "show"){
+        for(i=2; i<musicBox.children.length; i++){
+          musicBox.children.style.display = "none";
+        }
+        musicBox.value = "hide";
+      }else{
+        for(i=2; i<musicBox.children.length; i++){
+          musicBox.children.style.display = "block";
+        }
+        musicBox.value = "show";
+      }
+    }
   };
   
   /* setting of contents.css in this repositry */
