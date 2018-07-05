@@ -195,7 +195,7 @@
           var maxChain = document.getElementById('maxChain_' + diff);
           if(maxChain != undefined){
             maxChain.innerText += music.getData(i);
-            maxChain.value = String(music.getData(i));
+            maxChain.value = music.getData(i);
           }
         }
       }
@@ -285,17 +285,17 @@
       div_s.value = String(score);
       break;
     case "justice":
-      justice = (score * n - 510000 * attack - 1010000 * miss) / n;
+      justice = ((1010000 - score) * n - 510000 * attack - 1010000 * miss) / 10000;
       alert("JUSTICE の値は " + justice + " です。");
       div_j.value = String(score);
       break;
     case "attack":
-      attack = (score * n - 10000 * justice - 1010000 * miss) / n;
+      attack = ((1010000 - score) * n - 10000 * justice - 1010000 * miss) / 510000;
       alert("ATTACK の値は " + attack + " です。");
       div_a.value = String(attack);
       break;
     case "miss":
-      miss = (score * n - 10000 * justice - 510000 * attack) / n;
+      miss = ((1010000 - score) * n - 10000 * justice - 510000 * attack) / 1010000;
       alert("MISS の値は " + miss + " です。");
       div_m.value = String(miss);
       break;
