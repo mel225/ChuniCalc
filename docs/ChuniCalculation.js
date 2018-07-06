@@ -89,18 +89,19 @@
     /* innerHTML, innerText */
     scoreDiv.innerHTML = '' + 
       '<input type="radio" name="radio_'+difficulty+'" value="score">' + 
-        '<input type="text" style="width:150px;" id="score_'+difficulty+'">(SCORE)';
+        '<input type="text" style="width:150px;" id="score_'+difficulty+'" class="ml_10">' +
+          '<span class=ml_10">(SCORE)</span>';
     justiceDiv.innerHTML = '' +
-      '<input type="radio" name="radio_'+difficulty+'" checked="checked" value="justice">'+
-        '<input type="text" style="width:80px;" id="justice_'+difficulty+'">' +
+      '<input type="radio" name="radio_'+difficulty+'" checked="checked" value="justice" >'+
+        '<input type="text" style="width:80px;" id="justice_'+difficulty+'" class="ml_10">' +
           '<span class="ml_10">JUSTICE</span>';
     attackDiv.innerHTML = '' +
       '<input type="radio" name="radio_'+difficulty+'" value="attack">' +
-        '<input type="text" style="width:80px;" id="attack_'+difficulty+'">' +
+        '<input type="text" style="width:80px;" id="attack_'+difficulty+'" class="ml_10">' +
           '<span class="ml_10">ATTACK</span>';
     missDiv.innerHTML = '' + 
       '<input type="radio" name="radio_'+difficulty+'" value="miss">' +
-        '<input type="text"  style="width:80px;" id="miss_'+difficulty+'">' + 
+        '<input type="text"  style="width:80px;" id="miss_'+difficulty+'" class="ml_10">' + 
           '<span class="ml_10">MISS</span>';
     maxChain.innerText = 'MaxChain: ';
     maxChain.value = "";
@@ -181,27 +182,29 @@
         for(i=1; i<=4; i++){
           var diff = music.getDifficultyString(i);
           var maxChain = document.getElementById('maxChain_' + diff);
-          var notes = music.getData(i);
-          var n = Number(notes);
-          maxChain.innerText += notes;
-          maxChain.value = notes;
-
-          /* 減分の表示 */
-          var justiceDif = document.createElement("span");
-          var attackDif = document.createElement("span");
-          var missDif = document.createElement("span");
-          
-          justiceDif.className = "ml_10 text_red";
-          attackDif.className = "ml_10 text_red";
-          missDif.className = "ml_10 text_red";
-          
-          justiceDif.innerText = "(-" + parseInt(10000/n) + ")";
-          attackDif.innerText = "(-" + parseInt(510000/n) + ")";
-          missDif.innerText = "(-" + parseInt(1010000/n) + ")";
-          
-          document.getElementById('justiceDiv_' + diff).appendChild(justiceDif);
-          document.getElementById('attackDiv_' + diff).appendChild(attackDif);
-          document.getElementById('missDiv_' + diff).appendChild(missDif);
+          if(maxChain != undefined){ // データがない難易度には何もしない。
+            var notes = music.getData(i);
+            var n = Number(notes);
+            maxChain.innerText += notes;
+            maxChain.value = notes;
+            
+            /* 減分の表示 */
+            var justiceDif = document.createElement("span");
+            var attackDif = document.createElement("span");
+            var missDif = document.createElement("span");
+            
+            justiceDif.className = "ml_10 text_red";
+            attackDif.className = "ml_10 text_red";
+            missDif.className = "ml_10 text_red";
+            
+            justiceDif.innerText = "(-" + parseInt(10000/n) + ")";
+            attackDif.innerText = "(-" + parseInt(510000/n) + ")";
+            missDif.innerText = "(-" + parseInt(1010000/n) + ")";
+            
+            document.getElementById('justiceDiv_' + diff).appendChild(justiceDif);
+            document.getElementById('attackDiv_' + diff).appendChild(attackDif);
+            document.getElementById('missDiv_' + diff).appendChild(missDif);
+          }
         }
       }
       return;
