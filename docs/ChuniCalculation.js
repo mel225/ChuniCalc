@@ -31,6 +31,7 @@
 
     getMaxChainByFile();
     console.log("getMaxChainByFile()");
+    console.log(maxChainData);
   }).then(function(){
     /* 各難易度のBOXに対して処理を行う */
     for(var i=1; i<=4; i++){
