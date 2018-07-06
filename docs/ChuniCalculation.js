@@ -197,37 +197,35 @@
 
   function setMaxChain(){
     var music = musics[title];
-        for(i=1; i<=4; i++){
-          var diff = music.getDifficultyString(i);
-          var maxChain = document.getElementById('maxChain_' + diff);
-          if(maxChain != undefined){ // データがない難易度には何もしない。
-            var notes = music.getData(i);
-            var n = Number(notes);
-            maxChain.innerText += notes;
-            maxChain.value = notes;
-            
-            /* 減分の表示 */
-            var justiceDif = document.createElement("span");
-            var attackDif = document.createElement("span");
-            var missDif = document.createElement("span");
-            
-            justiceDif.className = "ml_10 text_red";
-            attackDif.className = "ml_10 text_red";
-            missDif.className = "ml_10 text_red";
-            
-            justiceDif.innerText = "(-" + parseInt(10000/n) + ")";
-            attackDif.innerText = "(-" + parseInt(510000/n) + ")";
-            missDif.innerText = "(-" + parseInt(1010000/n) + ")";
-            
-            document.getElementById('justiceDiv_' + diff).appendChild(justiceDif);
-            document.getElementById('attackDiv_' + diff).appendChild(attackDif);
-            document.getElementById('missDiv_' + diff).appendChild(missDif);
-          }
-        }
+    for(i=1; i<=4; i++){
+      var diff = music.getDifficultyString(i);
+      var maxChain = document.getElementById('maxChain_' + diff);
+      if(maxChain != undefined){ // データがない難易度には何もしない。
+        var notes = music.getData(i);
+        var n = Number(notes);
+        maxChain.innerText += notes;
+        maxChain.value = notes;
+        
+        /* 減分の表示 */
+        var justiceDif = document.createElement("span");
+        var attackDif = document.createElement("span");
+        var missDif = document.createElement("span");
+        
+        justiceDif.className = "ml_10 text_red";
+        attackDif.className = "ml_10 text_red";
+        missDif.className = "ml_10 text_red";
+        
+        justiceDif.innerText = "(-" + parseInt(10000/n) + ")";
+        attackDif.innerText = "(-" + parseInt(510000/n) + ")";
+        missDif.innerText = "(-" + parseInt(1010000/n) + ")";
+        
+        document.getElementById('justiceDiv_' + diff).appendChild(justiceDif);
+        document.getElementById('attackDiv_' + diff).appendChild(attackDif);
+        document.getElementById('missDiv_' + diff).appendChild(missDif);
       }
-      return;
-    });
-  }
+    }
+    return;
+  };
 
   /* 入力欄を初期化する */
   function initCalcDiv(box, difficulty){
