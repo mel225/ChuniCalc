@@ -41,7 +41,7 @@
         setMaxChain(musicBox, i); // MaxChainをページ上に設定する
         initCalcDiv(musicBox, i); // スコア以外の値を初期化する
       }
-      console.log("finished to set in " + difficulty);
+      console.log("finished to set in " + new MusicData().getDifficultyString(i));
     }
     return;
   }).then(function(){
