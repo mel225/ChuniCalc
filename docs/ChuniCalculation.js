@@ -34,12 +34,12 @@
   }).then(function(){
     /* 各難易度のBOXに対して処理を行う */
     for(var i=1; i<=4; i++){
-      var dataBox = dataBoxes.getData(i);
-      if(dataBox != undefined){
-        addCalcDiv(dataBox, i); // 計算に必要な要素をページに追加する
-        setScorePoint(dataBox, i); // スコアをページ上に設定する
-        setMaxChain(dataBox, i); // MaxChainをページ上に設定する
-        initCalcDiv(dataBox, i); // スコア以外の値を初期化する
+      var musicBox = musicBoxes.getData(i);
+      if(musicBox != undefined){
+        addCalcDiv(musicBox, i); // 計算に必要な要素をページに追加する
+        setScorePoint(musicBox, i); // スコアをページ上に設定する
+        setMaxChain(musicBox, i); // MaxChainをページ上に設定する
+        initCalcDiv(musicBox, i); // スコア以外の値を初期化する
       }
       console.log("finished to set in " + difficulty);
     }
