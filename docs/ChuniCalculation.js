@@ -203,7 +203,7 @@
 
     /* MaxChainを表示する要素にChain数を書き込む */
     var maxChainDiv = document.getElementById("maxChain_" + difficulty);
-    var notes = maxChainData.getData(i);
+    var notes = maxChainData.getData(difficultyNum);
     var n = Number(notes);
     maxChainDiv.innerText += notes;
     maxChainDiv.value = notes;
