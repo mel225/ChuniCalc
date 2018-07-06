@@ -46,7 +46,7 @@ MusicData:{
 
     // 指定難易度のノーツ数を取得
     p.getData = function(diffNum){
-      return this.notes[diffNum];
+      return this.data[diffNum];
     };
 
     // 曲名を取得
