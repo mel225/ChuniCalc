@@ -166,7 +166,7 @@
   function setScorePoint(box, difficultyNum) {
     var difficulty = new MusicData().getDifficultyString(difficultyNum);
     /* スコア枠にあるinputタグ(テキストフィールド) */
-    var scoreInput = box.getElementById("score_" + difficulty);
+    var scoreInput = document.getElementById("score_" + difficulty);
       
     /* ページ上のハイスコアが記載されたelement */
     var highScoreDiv = box.getElementsByClassName("text_b")[0];
