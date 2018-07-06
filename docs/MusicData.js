@@ -3,7 +3,7 @@
 MusicData:{
   MusicData = function(title){ /* this is constlactor */
     this.title = title;
-    this.notes = [];
+    this.data = [];
     
     /* methods */
     var p = MusicData.prototype;
@@ -36,7 +36,7 @@ MusicData:{
     }
     // 指定難易度のノーツ数を設定
     p.setData = function(diffNum, notesNum){
-      this.notes[Number(diffNum)] = notesNum;
+      this.data[Number(diffNum)] = notesNum;
     };
 
     // 曲名を設定
@@ -59,7 +59,7 @@ MusicData:{
       var s = "";
       s += this.title;
       for(i=1; i<=4; i++){
-        s += "," + this.notes[i]; 
+        s += "," + this.data[i]; 
       }
       return s;
     }

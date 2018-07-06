@@ -3,6 +3,9 @@
   console.log("-- Projected by mel225 (github, Twitter:@casge_pzl)");
 
   alert("選択した値を、ほかの値によって計算します。");
+
+  var maxChainData; // 
+  var musicBoxes; // ページ上の各難易度のBOXをelementで保持する
   
   /* 外部ファイルの読み込み */
   new Promise(function(resolve, reject){ // 時間がかかるのでプロミスにする。
@@ -22,36 +25,52 @@
   }).then(function(){
     setContentsCSS();
     console.log("setContentsCSS()");
-    
-    addCalcDiv();
-    console.log("addCalcDiv()");
-    
-    setScorePoint();
-    console.log("setScorePoint()");
-    
-    return setMaxChain();
-    console.log("setMaxChain()");
+
+    getDataByPage();
+    console.log("getDataByPage()");
+
+    maxChainData = getMaxChainByFile();
+    console.log("getMaxChainByFile()");
   }).then(function(){
+    /* 各難易度のBOXに対して処理を行う */
+    for(var i=1; i<=4; i++){
+      var dataBox = dataBoxes.getData(i);
+      if(dataBox != undefined){
+        var difficulty = dataBoxes.getDifficultyString(i);
+        addCalcDiv(dataBox, difficulty);
+        setScorePoint(dataBox, difficulty);
+        initCalcDiv(dataBox, difficulty);
+      }
+    }
+  }).then(function(){
+    console.log("execute initCalcDiv()");
+    for(var i=1; i<=4; i++){
+      var dataBox = dataBoxes.getData(i);
+      if(dataBox !
+    }
     initCalcDiv();
     console.log("initCalcDiv()");
     
     alert("すべての設定が完了しました。");
   });
   
-  /* add <div> Tag */
-  function addCalcDiv(){
-    databoxes = document.getElementsByClassName("w420 music_box");
-    
-    Array.prototype.forEach.call(databoxes, setCalcDiv);
+  /* それぞれのDivを乗せるBOXをデータとして取得 */
+  function getDataByPage(){
+    musicboxes = document.getElementsByClassName("w420 music_box");
+    musicBoxes = new MusicData(getTitle());
+    var difficulty;
+    for(var i=1; i<=4; i++){
+      difficulty = musicBoxes.getDifficultyString(i);
+      [].forEach.call(musicboxes, function(musicbox){
+        if(musicbox.className.indexOf(difficulty) != -1){ // 難易度文字列が見つかった時データとして追加
+          musicBoxes.setData(i, musicbox);
+        }
+      });
+    }
   };
   
-  /* set <div> statement */
-  function setCalcDiv(databox){
-    parentclass = databox.className;
-    
-    /* get difficulty of databox */
-    str = 'bg_'
-    difficulty = parentclass.slice(parentclass.indexOf(str) + str.length);
+  /* BOXデータにDivを追加する */
+  function addCalcDiv(box, difficulty){
     
     /* それぞれのプロパティを設定 */
     var scoreDiv = document.createElement("div"); // SCORE 数値枠
@@ -75,16 +94,14 @@
     justiceDiv.id = "justiceDiv_" + difficulty;
     attackDiv.id = "attackDiv_" + difficulty;
     missDiv.id = "missDiv_" + difficulty;
-    
-    var musicBox = databox.getElementsByClassName("box02 w400")[0];
-    var scoreBox = musicBox.firstElementChild;
-    musicBox.insertBefore(scoreDiv, musicBox.lastElementChild);
-    musicBox.insertBefore(notesDiv, musicBox.lastElementChild);
-    musicBox.insertBefore(buttonDiv, musicBox.lastElementChild);
-    scoreBox.appendChild(maxChain);
 
-    /* 後で設定しやすいようにmusicBoxにidを付ける */
-    musicBox.id = "music_box_" + difficulty;
+    /* BOXデータ内のdataBoxを取得し、そこにDivを追加していく */
+    var dataBox = box.getElementsByClassName("box02 w400")[0];
+    var scoreBox = dataBox.firstElementChild;
+    musicBox.insertBefore(scoreDiv, dataBox.lastElementChild);
+    musicBox.insertBefore(notesDiv, dataBox.lastElementChild);
+    musicBox.insertBefore(buttonDiv, dataBox.lastElementChild);
+    scoreBox.appendChild(maxChain);
     
     /* innerHTML, innerText */
     scoreDiv.innerHTML = '' + 
@@ -114,6 +131,7 @@
     calcButton.className = "btn_calc";
     calcButton.addEventListener("click", calculate);
     calcButton.innerText = "計算";
+    calcButton.value = difficulty;
     buttonDiv.appendChild(calcButton);
 
     /* 表示/非表示ボタンを付けて織り込めるようにする */
@@ -150,35 +168,41 @@
   };
 
   /* スコアの値をdocumentから探してコピーする */
-  function setScorePoint() {
-    var databoxes = document.getElementsByClassName("w420 music_box");
+  function setScorePoint(box, difficulty) {
+    /* スコア枠にあるinputタグ(テキストフィールド) */
+    var scoreInput = box.getElementById("score_" + difficulty);
+      
+    /* ページ上のハイスコアが記載されたelement */
+    var highScoreDiv = box.getElementsByClassName("text_b")[0];
 
-    Array.prototype.forEach.call(databoxes, function(databox){
-      var str = 'bg_';
-      
-      /* get input statement of SCORE */
-      var boxesclass = databox.className;
-      var difficulty = boxesclass.slice(boxesclass.indexOf(str) + str.length);
-      var scoreInput = document.getElementById("score_" + difficulty);
-      
-      /* get high score */
-      var highScoreDiv = databox.getElementsByClassName("text_b")[0];
-      var highScore = getNum(highScoreDiv.textContent);
-      
-      scoreInput.value = highScore;
-    });
+    /* ハイスコアを数値文字列で取得 */
+    var highScore = getNum(highScoreDiv.textContent);
+
+    /* テキストフィールドに値を設定 */
+    scoreInput.value = highScore;
+  }
+
+  /* 開いているページの曲のタイトルを取得する */
+  function getTitleByPage(){
+    return document.getElementsByClassName('play_musicdata_title')[0].innerText;
   }
   
   /* MaxChain 数（ノーツ数）をファイルから取得する */
-  function setMaxChain(){
-    var title = document.getElementsByClassName('play_musicdata_title')[0].innerText;
-    var promise = openFile();
-    promise = readText(promise);
-    return promise.then(function(musics){
+  function getMaxChainByFile(){
+    var title = musicBoxes.getTitle();
+    return readText(openFile()).then(function(musics){
       if(musics[title] == undefined){
         alert(title + " のデータが見つかりませんでした。");
+        return Promise.reject();
       }else{
-        var music = musics[title];
+        maxChainData = musics[title];
+        return;
+      }
+    });
+  }
+
+  function setMaxChain(){
+    var music = musics[title];
         for(i=1; i<=4; i++){
           var diff = music.getDifficultyString(i);
           var maxChain = document.getElementById('maxChain_' + diff);
@@ -212,18 +236,11 @@
   }
 
   /* 入力欄を初期化する */
-  function initCalcDiv(){
-    var p = new MusicData("");
-    var diffs = [p.getDifficultyString(1),
-                 p.getDifficultyString(2),
-                 p.getDifficultyString(3),
-                 p.getDifficultyString(4)];
-    diffs.forEach(function(difficulty){
-      document.getElementById("justice_" + difficulty).value = "0";
-      document.getElementById("attack_" + difficulty).value = "0";
-      document.getElementById("miss_" + difficulty).value = "0";
-      calculate(difficulty, true);
-    });
+  function initCalcDiv(box, difficulty){
+    box.getElementById("justice_" + difficulty).value = "0";
+    box.getElementById("attack_" + difficulty).value = "0";
+    box.getElementById("miss_" + difficulty).value = "0";
+    calculate(difficulty, true); // true: 非表示
   }
 
   /* 外部ファイルをファイル名から読み込む */
@@ -240,7 +257,7 @@
   };
 
   /* 入力された数値をもとに計算を行う */
-  function calculate(element, isInit){
+  function calculate(element, isDisp = true){ // isDisp = true:アラートする false:しない
     var difficulty;
     var variable = "";
     var radioGroup;
@@ -257,8 +274,9 @@
     /* 難易度を取得する */
     if((typeof element) == "string"){
       var difficulty = element;
-    }else{
-      var difficulty = this.parentNode.id.replace("buttonDiv_", "");
+    }else{ // ボタンの clickEvent に関数を登録すると第一引数に MouseEventObject が渡される
+      // この場合は this がボタン本体を示す
+      var difficulty = this.value;
     }
 
     /* ラジオボタンからどの値を計算するのかを探す */
@@ -300,13 +318,13 @@
     switch(variable){
     case "score":
       score = parseInt(1010000 - (justice + 51 * attack + 101 * miss) * 10000 / n, 10);
-      if(!isInit)
+      if(isDisp)
         alert("SCORE が [" + score + "] になりました。");
       div_s.value = String(score);
       break;
     case "justice":
       justice = parseInt(((1010000 - score) * n - 510000 * attack - 1010000 * miss) / 10000, 10);
-      if(!isInit)
+      if(isDisp)
         alert("JUSTICE が [" + justice + "] になりました。");
       div_j.value = String(justice);
       break;
@@ -314,7 +332,7 @@
       var old_justice = justice;
       attack = parseInt(((1010000 - score) * n - 10000 * justice - 1010000 * miss) / 510000, 10);
       justice = parseInt(((1010000 - score) * n - 510000 * attack - 1010000 * miss) / 10000, 10);
-      if(!isInit){
+      if(isDisp){
         if(old_justice == justice){
           alert("ATTACK が [" + attack + "] になりました。");
         }else{
@@ -330,7 +348,7 @@
       var old_justice = justice;
       miss = parseInt(((1010000 - score) * n - 10000 * justice - 510000 * attack) / 1010000, 10);
       justice = parseInt(((1010000 - score) * n - 510000 * attack - 1010000 * miss) / 10000, 10);
-      if(!isInit){
+      if(isDisp){
         if(old_justice == justice){
           alert("MISS が [" + miss + "] になりました。");
         }else{
