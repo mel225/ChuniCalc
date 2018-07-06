@@ -4,7 +4,7 @@
 
   alert("選択した値を、ほかの値によって計算します。");
 
-  var maxChainData; // 
+  var maxChainData; // 各難易度のmaxChainを保持する
   var musicBoxes; // ページ上の各難易度のBOXをelementで保持する
   
   /* 外部ファイルの読み込み */
@@ -36,10 +36,10 @@
     for(var i=1; i<=4; i++){
       var dataBox = dataBoxes.getData(i);
       if(dataBox != undefined){
-        var difficulty = dataBoxes.getDifficultyString(i);
-        addCalcDiv(dataBox, difficulty);
-        setScorePoint(dataBox, difficulty);
-        initCalcDiv(dataBox, difficulty);
+        addCalcDiv(dataBox, i); // 計算に必要な要素をページに追加する
+        setScorePoint(dataBox, i); // スコアをページ上に設定する
+        setMaxChain(dataBox, i); // MaxChainをページ上に設定する
+        initCalcDiv(dataBox, i); // スコア以外の値を初期化する
       }
       console.log("finished to set in " + difficulty);
     }
@@ -51,7 +51,7 @@
   /* それぞれのDivを乗せるBOXをデータとして取得 */
   function getDataByPage(){
     musicboxes = document.getElementsByClassName("w420 music_box");
-    musicBoxes = new MusicData(getTitle());
+    musicBoxes = new MusicData(getTitleByPage());
     var difficulty;
     for(var i=1; i<=4; i++){
       difficulty = musicBoxes.getDifficultyString(i);
@@ -64,7 +64,8 @@
   };
   
   /* BOXデータにDivを追加する */
-  function addCalcDiv(box, difficulty){
+  function addCalcDiv(box, difficultyNum){
+    var difficulty = new MusicData().getDifficultyString(difficultyNum);
     
     /* それぞれのプロパティを設定 */
     var scoreDiv = document.createElement("div"); // SCORE 数値枠
@@ -162,7 +163,8 @@
   };
 
   /* スコアの値をdocumentから探してコピーする */
-  function setScorePoint(box, difficulty) {
+  function setScorePoint(box, difficultyNum) {
+    var difficulty = new MusicData().getDifficultyString(difficultyNum);
     /* スコア枠にあるinputタグ(テキストフィールド) */
     var scoreInput = box.getElementById("score_" + difficulty);
       
@@ -195,40 +197,39 @@
     });
   }
 
-  function setMaxChain(){
-    var music = musics[title];
-    for(i=1; i<=4; i++){
-      var diff = music.getDifficultyString(i);
-      var maxChain = document.getElementById('maxChain_' + diff);
-      if(maxChain != undefined){ // データがない難易度には何もしない。
-        var notes = music.getData(i);
-        var n = Number(notes);
-        maxChain.innerText += notes;
-        maxChain.value = notes;
+  /* MaxChainの値をページ上に設定し、各判定の減点分を表示する */
+  function setMaxChain(box, difficultyNum){
+    var difficulty = new MusicData().getDifficultyString(difficultyNum);
+
+    /* MaxChainを表示する要素にChain数を書き込む */
+    var maxChainDiv = document.getElementById("maxChain_" + difficulty);
+    var notes = maxChainData.getData(i);
+    var n = Number(notes);
+    maxChainDiv.innerText += notes;
+    maxChainDiv.value = notes;
         
-        /* 減分の表示 */
-        var justiceDif = document.createElement("span");
-        var attackDif = document.createElement("span");
-        var missDif = document.createElement("span");
+    /* 減分の表示 */
+    var justiceDif = document.createElement("span");
+    var attackDif = document.createElement("span");
+    var missDif = document.createElement("span");
         
-        justiceDif.className = "ml_10 text_red";
-        attackDif.className = "ml_10 text_red";
-        missDif.className = "ml_10 text_red";
+    justiceDif.className = "ml_10 text_red";
+    attackDif.className = "ml_10 text_red";
+    missDif.className = "ml_10 text_red";
         
-        justiceDif.innerText = "(-" + parseInt(10000/n) + ")";
-        attackDif.innerText = "(-" + parseInt(510000/n) + ")";
-        missDif.innerText = "(-" + parseInt(1010000/n) + ")";
+    justiceDif.innerText = "(-" + parseInt(10000/n) + ")";
+    attackDif.innerText = "(-" + parseInt(510000/n) + ")";
+    missDif.innerText = "(-" + parseInt(1010000/n) + ")";
         
-        document.getElementById('justiceDiv_' + diff).appendChild(justiceDif);
-        document.getElementById('attackDiv_' + diff).appendChild(attackDif);
-        document.getElementById('missDiv_' + diff).appendChild(missDif);
-      }
-    }
+    document.getElementById('justiceDiv_' + diff).appendChild(justiceDif);
+    document.getElementById('attackDiv_' + diff).appendChild(attackDif);
+    document.getElementById('missDiv_' + diff).appendChild(missDif);
     return;
   };
 
   /* 入力欄を初期化する */
-  function initCalcDiv(box, difficulty){
+  function initCalcDiv(box, difficultyNum){
+    var difficulty = new MusicData().getDifficultyString(difficultyNum);
     box.getElementById("justice_" + difficulty).value = "0";
     box.getElementById("attack_" + difficulty).value = "0";
     box.getElementById("miss_" + difficulty).value = "0";
@@ -290,7 +291,7 @@
     miss = parseInt(getNum(div_m.value), 10);
 
     /* ノーツ数を取得する */
-    n = parseInt(document.getElementById("maxChain_" + difficulty).value, 10);
+    n = parseInt(maxChainData.getData(maxChainData.getDifficultyNum(difficulty)), 10);
 
     /* 取得した数値をコンソールで確認する */
     console.log("score: " + score,
@@ -314,16 +315,22 @@
         alert("SCORE が [" + score + "] になりました。");
       div_s.value = String(score);
       break;
+      
     case "justice":
       justice = parseInt(((1010000 - score) * n - 510000 * attack - 1010000 * miss) / 10000, 10);
       if(isDisp)
         alert("JUSTICE が [" + justice + "] になりました。");
       div_j.value = String(justice);
       break;
+      
     case "attack":
       var old_justice = justice;
       attack = parseInt(((1010000 - score) * n - 10000 * justice - 1010000 * miss) / 510000, 10);
       justice = parseInt(((1010000 - score) * n - 510000 * attack - 1010000 * miss) / 10000, 10);
+      if(justice < old_justice){
+        attack--;
+        justice += 51;
+      }
       if(isDisp){
         if(old_justice == justice){
           alert("ATTACK が [" + attack + "] になりました。");
@@ -336,10 +343,15 @@
       }
       div_a.value = String(attack);
       break;
+      
     case "miss":
       var old_justice = justice;
       miss = parseInt(((1010000 - score) * n - 10000 * justice - 510000 * attack) / 1010000, 10);
       justice = parseInt(((1010000 - score) * n - 510000 * attack - 1010000 * miss) / 10000, 10);
+      if(justice < old_justice){
+        miss--;
+        justice += 101;
+      }
       if(isDisp){
         if(old_justice == justice){
           alert("MISS が [" + miss + "] になりました。");
@@ -352,6 +364,7 @@
       }
       div_m.value = String(miss);
       break;
+      
     default:
       console.log("ラジオボタンの設定を見直すべきだ");
     }
