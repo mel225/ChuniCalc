@@ -93,9 +93,9 @@
     /* BOXデータ内のdataBoxを取得し、そこにDivを追加していく */
     var dataBox = box.getElementsByClassName("box02 w400")[0];
     var scoreBox = dataBox.firstElementChild;
-    musicBox.insertBefore(scoreDiv, dataBox.lastElementChild);
-    musicBox.insertBefore(notesDiv, dataBox.lastElementChild);
-    musicBox.insertBefore(buttonDiv, dataBox.lastElementChild);
+    box.insertBefore(scoreDiv, dataBox.lastElementChild);
+    box.insertBefore(notesDiv, dataBox.lastElementChild);
+    box.insertBefore(buttonDiv, dataBox.lastElementChild);
     scoreBox.appendChild(maxChain);
     
     /* innerHTML, innerText */
@@ -136,7 +136,7 @@
     showButton.innerText = "hide";
     showButton.value = "showing";
     showButton.id = "showhide_" + difficulty;
-    databox.insertBefore(showButton, databox.firstElementChild);
+    databox.insertBefore(showButton, box.firstElementChild);
     function show_hide(){
       if(showButton.value == "showing"){
         for(i=3; i<databox.children.length; i++){
