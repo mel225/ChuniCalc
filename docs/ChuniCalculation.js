@@ -136,7 +136,7 @@
     showButton.innerText = "hide";
     showButton.value = "showing";
     showButton.id = "showhide_" + difficulty;
-    databox.insertBefore(showButton, box.firstElementChild);
+    box.insertBefore(showButton, box.firstElementChild);
     function show_hide(){
       if(showButton.value == "showing"){
         for(i=3; i<databox.children.length; i++){
