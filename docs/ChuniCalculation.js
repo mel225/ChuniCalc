@@ -29,7 +29,7 @@
     getDataByPage();
     console.log("getDataByPage()");
 
-    maxChainData = getMaxChainByFile();
+    getMaxChainByFile();
     console.log("getMaxChainByFile()");
   }).then(function(){
     /* 各難易度のBOXに対して処理を行う */
