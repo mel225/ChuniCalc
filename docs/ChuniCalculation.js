@@ -41,16 +41,10 @@
         setScorePoint(dataBox, difficulty);
         initCalcDiv(dataBox, difficulty);
       }
+      console.log("finished to set in " + difficulty);
     }
+    return;
   }).then(function(){
-    console.log("execute initCalcDiv()");
-    for(var i=1; i<=4; i++){
-      var dataBox = dataBoxes.getData(i);
-      if(dataBox !
-    }
-    initCalcDiv();
-    console.log("initCalcDiv()");
-    
     alert("すべての設定が完了しました。");
   });
   
