@@ -232,9 +232,9 @@
   /* 入力欄を初期化する */
   function initCalcDiv(box, difficultyNum){
     var difficulty = new MusicData().getDifficultyString(difficultyNum);
-    box.getElementById("justice_" + difficulty).value = "0";
-    box.getElementById("attack_" + difficulty).value = "0";
-    box.getElementById("miss_" + difficulty).value = "0";
+    document.getElementById("justice_" + difficulty).value = "0";
+    document.getElementById("attack_" + difficulty).value = "0";
+    document.getElementById("miss_" + difficulty).value = "0";
     calculate(difficulty, true); // true: 非表示
   }
 
