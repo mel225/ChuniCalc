@@ -2,28 +2,10 @@
   /* 外部ファイルの読み込み (MusicData 使用のため) */
   readOuterJs("MusicData.js");
   console.log("readFile 読み込まれました。");
-  
-  openFile = function(){
-    var reader;
-    return new Promise(function(resolve, reject){
-      var xhr = new XMLHttpRequest();
-      xhr.responseType = "text";
-      xhr.addEventListener("load", function(){
-        resolve(xhr.response);
-      });
-      xhr.addEventListener("error", function(){
-        console.log("Error occared");
-        reject();
-      });
-      xhr.open('GET', "https://mel225.github.io/ChuniCalc/NotesDataTable.txt", true);
-      xhr.send("");
-    }).catch((e)=>{
-      console.log(e);
-    });
-  }
-  
-  readText = function(promise){
-    return promise.then(function(text){
+
+  /* URLで指定したテキストファイルからMusicDataを生成する */
+  getMusicDataByURL = function(fileURL){
+    return openTextFile(fileURL).then(function(text){
       text.replace('\r\n', '\n');
       var line = text.split('\n');
       var musics = [];
@@ -42,7 +24,27 @@
     });
   }
   
-  /* 外部ファイルをファイル名から読み込む */
+  /* URLで指定したファイルをテキストデータで受け取り、プロミスで返す */
+  openTextFile = function(fileURL){
+    var reader;
+    return new Promise(function(resolve, reject){
+      var xhr = new XMLHttpRequest();
+      xhr.responseType = "text";
+      xhr.addEventListener("load", function(){
+        resolve(xhr.response);
+      });
+      xhr.addEventListener("error", function(){
+        console.log("Error occared");
+        reject();
+      });
+      xhr.open('GET', fileURL, true);
+      xhr.send("");
+    }).catch((e)=>{
+      console.log(e);
+    });
+  }
+
+  /* 外部jsファイルをファイル名から読み込む */
   function readOuterJs(filename){
     var id = "mel225_" + filename;
     if(document.getElementById(id) == undefined){

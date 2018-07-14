@@ -188,7 +188,8 @@
   /* MaxChain 数（ノーツ数）をファイルから取得する */
   function getMaxChainByFile(){
     var title = musicBoxes.getTitle();
-    return readText(openFile()).then(function(musics){
+    var fileURL = "https://mel225.github.io/ChuniCalc/NotesDataTable.txt";
+    return getMusicDataByURL(fileURL).then(function(musics){
       if(musics[title] == undefined){
         alert(title + " のデータが見つかりませんでした。");
         return Promise.reject();
