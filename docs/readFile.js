@@ -15,7 +15,7 @@
         console.log("Error occared");
         reject();
       });
-      xhr.open('GET', "https://mel225.github.io/ChuniCalc/ChuniNotesDataTable.txt", true);
+      xhr.open('GET', "https://mel225.github.io/ChuniCalc/NotesDataTable.txt", true);
       xhr.send("");
     }).catch((e)=>{
       console.log(e);

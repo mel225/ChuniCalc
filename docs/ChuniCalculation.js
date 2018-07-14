@@ -29,10 +29,11 @@
     getDataByPage();
     console.log("getDataByPage()");
 
-    getMaxChainByFile();
+    return getMaxChainByFile();
     console.log("getMaxChainByFile()");
-    console.log(maxChainData);
+    console.log("before: " + maxChainData);
   }).then(function(){
+    console.log("after: " + maxChainData);
     /* 各難易度のBOXに対して処理を行う */
     for(var i=1; i<=4; i++){
       var musicBox = musicBoxes.getData(i);
