@@ -223,9 +223,9 @@
     attackDif.innerText = "(-" + parseInt(510000/n) + ")";
     missDif.innerText = "(-" + parseInt(1010000/n) + ")";
         
-    document.getElementById('justiceDiv_' + diff).appendChild(justiceDif);
-    document.getElementById('attackDiv_' + diff).appendChild(attackDif);
-    document.getElementById('missDiv_' + diff).appendChild(missDif);
+    document.getElementById('justiceDiv_' + difficulty).appendChild(justiceDif);
+    document.getElementById('attackDiv_' + difficulty).appendChild(attackDif);
+    document.getElementById('missDiv_' + difficulty).appendChild(missDif);
     return;
   };
 
