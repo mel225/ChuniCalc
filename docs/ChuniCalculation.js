@@ -1,4 +1,6 @@
 (function() {
+  /*=*=*=*=*=*=*=*=*=*= 以下 main 処理 =*=*=*=*=*=*=*=*=*=*/
+  
   console.log("========== ChuniCalculation.js begin ==========");
   console.log("-- Projected by mel225 (github, Twitter:@casge_pzl)");
 
@@ -7,41 +9,21 @@
   var maxChainData; // 各難易度のmaxChainを保持する
   var musicBoxes; // ページ上の各難易度のBOXをelementで保持する
   
-  /* 外部ファイルの読み込み */
+  /* 外部 js ファイルの読み込み */
   var  files = ["MusicData.js", "readFile.js"];
   Promise.all(files.map(function(filename){ // 時間がかかるのでプロミスにする。
     return new Promise(function(resolve, reject){
-      var script = readOuterJs(filename);
+      var script = readOuterJs(filename); // script を追加する
       script.onload = function(){
         console.log("loaded: " + filename);
         resolve();
       }
     });
-/*
-    var index = 0;
-    var pro = function(resolve, reject){
-      if(index >= files.length){
-        return resolve();
-      }
-      var script = readOuterJs(files[index]);
-      script.onload = function(){
-        index++;
-        resolve(new Promise(pro));
-      };
-    };
-    resolve(new Promise(pro));
-  */
   })).then(function(){
-    setContentsCSS();
-    console.log("setContentsCSS()");
-
-    getDataByPage();
-    console.log("getDataByPage()");
-
-    getMaxChainByFile();
-    console.log("getMaxChainByFile()");
-    console.log("before: " + maxChainData);
-    return;
+  /* 続けて、各種データの読み込み */
+    return Promise.all([setContentsCSS(),
+                        getDataByPage(),
+                        getMaxChainByFile()]);
   }).then(function(){
     console.log("after: " + maxChainData);
     /* 各難易度のBOXに対して処理を行う */
@@ -59,21 +41,83 @@
   }).then(function(){
     alert("すべての設定が完了しました。");
   });
+
+  /*=*=*=*=*=*=*=*=*=*= 以上 main 処理 =*=*=*=*=*=*=*=*=*=*/
+
+  /*=*=*=*=*=*=*=*=*=*= 以下 各種読み込みメソッド =*=*=*=*=*=*=*=*=*=*/
   
   /* それぞれのDivを乗せるBOXをデータとして取得 */
   function getDataByPage(){
-    musicboxes = document.getElementsByClassName("w420 music_box");
-    musicBoxes = new MusicData(getTitleByPage());
-    var difficulty;
-    for(var i=1; i<=4; i++){
-      difficulty = musicBoxes.getDifficultyString(i);
-      [].forEach.call(musicboxes, function(musicbox){
-        if(musicbox.className.indexOf(difficulty) != -1){ // 難易度文字列が見つかった時データとして追加
-          musicBoxes.setData(i, musicbox);
-        }
-      });
-    }
+    return new Promise(function(resolve, reject){
+      musicboxes = document.getElementsByClassName("w420 music_box");
+      musicBoxes = new MusicData(getTitleByPage());
+      var difficulty;
+      for(var i=1; i<=4; i++){
+        difficulty = musicBoxes.getDifficultyString(i);
+        [].forEach.call(musicboxes, function(musicbox){
+          if(musicbox.className.indexOf(difficulty) != -1){ // 難易度文字列が見つかった時データとして追加
+            musicBoxes.setData(i, musicbox);
+          }
+        });
+      }
+      console.log("finished getDataByPage()");
+      resolve();
+    });
   };
+  
+  /* 開いているページの曲のタイトルを取得する */
+  function getTitleByPage(){
+    return document.getElementsByClassName('play_musicdata_title')[0].innerText;
+  }
+  
+  /* css ファイルを読み込む (link タグを head に挿入する) */
+  function setContentsCSS(){
+    return new Promise(function(resolve, reject){
+      var link_tag = document.createElement('link');
+      link_tag.rel = "stylesheet";
+      link_tag.href = "https://mel225.github.io/ChuniCalc/contents.css";
+      link_tag.onload = function(){
+        console.log("finished setContentsCSS()");
+        resolve();
+      }
+      document.getElementsByTagName('head')[0].appendChild(link_tag);
+    });
+  };
+  
+  /* MaxChain 数（ノーツ数）をファイルから取得する */
+  function getMaxChainByFile(){
+    return new Promise(function(resolve, reject){
+      var title = musicBoxes.getTitle();
+      var fileURL = "https://mel225.github.io/ChuniCalc/NotesDataTable.txt";
+      return getMusicDataByURL(fileURL).then(function(musics){
+        if(musics[title] == undefined){
+          alert(title + " のデータが見つかりませんでした。");
+          return Promise.reject();
+        }else{
+          console.log("finished getMaxChainByFile()");
+          maxChainData = musics[title];
+          return;
+        }
+      }
+    });
+  }
+
+  /* 外部ファイルをファイル名から読み込む */
+  function readOuterJs(filename){
+    var id = "mel225_" + filename;
+    var s;
+    if(document.getElementById(id) == undefined){
+      s = document.createElement('script');
+      s.src = "https://mel225.github.io/ChuniCalc/" + filename;
+      s.id = id;
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+    return s;
+  };
+
+  /*=*=*=*=*=*=*=*=*=*= 以上 各種読み込みメソッド =*=*=*=*=*=*=*=*=*=*/
+  
+  /*=*=*=*=*=*=*=*=*=*= 以下 ページ操作メソッド =*=*=*=*=*=*=*=*=*=*/
   
   /* BOXデータにDivを追加する */
   function addCalcDiv(box, difficultyNum){
@@ -165,14 +209,6 @@
       }
     }
   };
-  
-  /* setting of contents.css in this repositry */
-  function setContentsCSS(){
-    var link_tag = document.createElement('link');
-    link_tag.rel = "stylesheet";
-    link_tag.href = "https://mel225.github.io/ChuniCalc/contents.css";
-    document.getElementsByTagName('head')[0].appendChild(link_tag);
-  };
 
   /* スコアの値をdocumentから探してコピーする */
   function setScorePoint(box, difficultyNum) {
@@ -188,26 +224,6 @@
 
     /* テキストフィールドに値を設定 */
     scoreInput.value = highScore;
-  }
-
-  /* 開いているページの曲のタイトルを取得する */
-  function getTitleByPage(){
-    return document.getElementsByClassName('play_musicdata_title')[0].innerText;
-  }
-  
-  /* MaxChain 数（ノーツ数）をファイルから取得する */
-  function getMaxChainByFile(){
-    var title = musicBoxes.getTitle();
-    var fileURL = "https://mel225.github.io/ChuniCalc/NotesDataTable.txt";
-    return getMusicDataByURL(fileURL).then(function(musics){
-      if(musics[title] == undefined){
-        alert(title + " のデータが見つかりませんでした。");
-        return Promise.reject();
-      }else{
-        maxChainData = musics[title];
-        return;
-      }
-    });
   }
 
   /* MaxChainの値をページ上に設定し、各判定の減点分を表示する */
@@ -249,18 +265,7 @@
     calculate(difficulty, true); // true: 非表示
   }
 
-  /* 外部ファイルをファイル名から読み込む */
-  function readOuterJs(filename){
-    var id = "mel225_" + filename;
-    var s;
-    if(document.getElementById(id) == undefined){
-      s = document.createElement('script');
-      s.src = "https://mel225.github.io/ChuniCalc/" + filename;
-      s.id = id;
-      document.getElementsByTagName('head')[0].appendChild(s);
-    }
-    return s;
-  };
+  /*=*=*=*=*=*=*=*=*=*= 以上 ページ操作メソッド =*=*=*=*=*=*=*=*=*=*/
 
   /* 入力された数値をもとに計算を行う */
   function calculate(element, isDisp = true){ // isDisp = true:アラートする false:しない
@@ -393,4 +398,6 @@
     }
     return String(num);
   }
+
+  
 }) ();
