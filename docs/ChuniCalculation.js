@@ -10,16 +10,15 @@
   /* 外部ファイルの読み込み */
   new Promise(function(resolve, reject){ // 時間がかかるのでプロミスにする。
     var files = ["MusicData.js", "readFile.js"];
-    function pro(filename){
-      var script = readOuterJs(filename);
-      script.onload = function(){
-        Promise.resolve();
-      }
-    };
-    console.log(files.map(function(filename){
-      return pro();
-    }));
-    return Promise.all(pro);
+    var promises = files.map(function(filename){
+      return new Promise(function(resolve, reject){
+        var script = readOuterJs(filename);
+        script.onload = function(){
+          resolve();
+        }
+      });
+    });
+    return Promise.all(promises);
 /*
     var index = 0;
     var pro = function(resolve, reject){
