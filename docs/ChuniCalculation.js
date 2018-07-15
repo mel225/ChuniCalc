@@ -16,7 +16,7 @@
         script.onload = function(){
           resolve();
         }
-      };
+      }();
     }));
 /*
     var index = 0;
