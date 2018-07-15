@@ -8,17 +8,15 @@
   var musicBoxes; // ページ上の各難易度のBOXをelementで保持する
   
   /* 外部ファイルの読み込み */
-  new Promise(function(resolve, reject){ // 時間がかかるのでプロミスにする。
-    var files = ["MusicData.js", "readFile.js"];
-    var promises = files.map(function(filename){
-      return new Promise(function(resolve, reject){
-        var script = readOuterJs(filename);
-        script.onload = function(){
-          resolve();
-        }
-      });
+  var  files = ["MusicData.js", "readFile.js"];
+  Promise.all(files.map(function(filename){ // 時間がかかるのでプロミスにする。
+    return new Promise(function(resolve, reject){
+      var script = readOuterJs(filename);
+      script.onload = function(){
+        console.log("loaded: " + filename);
+        resolve();
+      }
     });
-    return Promise.all(promises);
 /*
     var index = 0;
     var pro = function(resolve, reject){
