@@ -98,7 +98,7 @@
           maxChainData = musics[title];
           return;
         }
-      }
+      });
     });
   }
 
