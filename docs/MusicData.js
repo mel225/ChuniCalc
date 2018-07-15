@@ -14,7 +14,7 @@ MusicData:{
       var ret;
       switch(diff){
       case "basic": case "bas": ret = 1; break;
-      case "advance": case "adv": ret = 2; break;
+      case "advanced": case "adv": ret = 2; break;
       case "expert": case "exp": ret = 3; break;
       case "master": case "mas": ret = 4; break;
       default: ret = 0;
