@@ -29,9 +29,10 @@
     getDataByPage();
     console.log("getDataByPage()");
 
-    return getMaxChainByFile();
+    getMaxChainByFile();
     console.log("getMaxChainByFile()");
     console.log("before: " + maxChainData);
+    return;
   }).then(function(){
     console.log("after: " + maxChainData);
     /* 各難易度のBOXに対して処理を行う */
@@ -202,7 +203,6 @@
 
   /* MaxChainの値をページ上に設定し、各判定の減点分を表示する */
   function setMaxChain(box, difficultyNum){
-    console.log(maxChainData);
     var difficulty = new MusicData().getDifficultyString(difficultyNum);
 
     /* MaxChainを表示する要素にChain数を書き込む */
@@ -294,7 +294,7 @@
     div_m = document.getElementById("miss_" + difficulty);
     miss = parseInt(getNum(div_m.value), 10);
 
-    /* ノーツ数を取得する */
+    /* ノーツ数を取得する (parseIntの最後は 10 進数の指定) */
     n = parseInt(maxChainData.getData(maxChainData.getDifficultyNum(difficulty)), 10);
 
     /* 取得した数値をコンソールで確認する */
@@ -302,10 +302,7 @@
                 "justice: " + justice,
                 "attack: " + attack,
                 "miss: " + miss,
-                "notes: " + n,
-                difficulty,
-                maxChainData.getDifficultyNum(difficulty),
-                maxChainData.getData(maxChainData.getDifficultyNum(difficulty))
+                "notes: " + n
                 );
     
     /* 取得した値が数値変換後の値なのでその値に変える */
