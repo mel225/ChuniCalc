@@ -11,12 +11,13 @@
   new Promise(function(resolve, reject){ // 時間がかかるのでプロミスにする。
     var files = ["MusicData.js", "readFile.js"];
     return Promise.all(files.map(function(filename){
-      return function(resolve, reject){
+      function pro(resolve, reject){
         var script = readOuterJs(filename);
         script.onload = function(){
           resolve();
         }
-      }();
+      };
+      return pro();
     }));
 /*
     var index = 0;
