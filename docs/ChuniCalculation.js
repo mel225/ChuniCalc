@@ -21,9 +21,13 @@
     });
   })).then(function(){
   /* 続けて、各種データの読み込み */
-    return Promise.all([setContentsCSS(),
-                        getDataByPage(),
-                        getMaxChainByFile()]);
+    var funcs = [setContentsCSS(), // css を設定
+                 getDataByPage(), // ページ上の BOX データを取得
+                 getMaxChainByFile() // MaxChain をテキストファイルから取得
+                 ];
+    return Promise.all(funcs).then(function(){
+      return Promise.resolve();
+    });
   }).then(function(){
     console.log("after: " + maxChainData);
     /* 各難易度のBOXに対して処理を行う */
