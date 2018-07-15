@@ -10,6 +10,15 @@
   /* 外部ファイルの読み込み */
   new Promise(function(resolve, reject){ // 時間がかかるのでプロミスにする。
     var files = ["MusicData.js", "readFile.js"];
+    return Promise.all(files.map(function(filename){
+      return function(resolve, reject){
+        var script = readOuterJs(filename);
+        script.onload = function(){
+          resolve();
+        }
+      };
+    }));
+/*
     var index = 0;
     var pro = function(resolve, reject){
       if(index >= files.length){
@@ -22,6 +31,7 @@
       };
     };
     resolve(new Promise(pro));
+  */
   }).then(function(){
     setContentsCSS();
     console.log("setContentsCSS()");
@@ -258,10 +268,7 @@
     var difficulty;
     var variable = "";
     var radioGroup;
-    var div_s;
-    var div_j;
-    var div_a;
-    var div_m;
+    var div_s, div_j, div_a, div_m;
     var score = 0;
     var justice = 0;
     var attack = 0;
@@ -280,7 +287,7 @@
     radioGroup = document.getElementsByName("radio_"+difficulty);
     radioGroup.forEach(function(item){
       if(item.checked){
-        variable = item.value;
+        variable = item.value; // value には難易度文字列が登録されている
       }
     });
 
@@ -312,16 +319,17 @@
     div_m.value = String(miss);
     
     /* 計算を行い、フォームに値をセットし、アラートする */
+    /* 等式 1010000 - (J + 51A + 101M)*10000/n = SCORE から計算する */
     switch(variable){
     case "score":
-      score = parseInt(1010000 - (justice + 51 * attack + 101 * miss) * 10000 / n, 10);
+      score = parseInt(1010000 - (justice + 51*attack + 101*miss) * 10000 / n, 10);
       if(isDisp)
         alert("SCORE が [" + score + "] になりました。");
       div_s.value = String(score);
       break;
       
     case "justice":
-      justice = parseInt(((1010000 - score) * n - 510000 * attack - 1010000 * miss) / 10000, 10);
+      justice = parseInt(((1010000 - score) * n - 510000*attack - 1010000*miss) / 10000, 10);
       if(isDisp)
         alert("JUSTICE が [" + justice + "] になりました。");
       div_j.value = String(justice);
@@ -329,8 +337,8 @@
       
     case "attack":
       var old_justice = justice;
-      attack = parseInt(((1010000 - score) * n - 10000 * justice - 1010000 * miss) / 510000, 10);
-      justice = parseInt(((1010000 - score) * n - 510000 * attack - 1010000 * miss) / 10000, 10);
+      attack = parseInt(((1010000 - score) * n - 10000*justice - 1010000*miss) / 510000, 10);
+      justice = parseInt(((1010000 - score) * n - 510000*attack - 1010000*miss) / 10000, 10);
       if(justice < old_justice){
         attack--;
         justice += 51;
@@ -350,8 +358,8 @@
       
     case "miss":
       var old_justice = justice;
-      miss = parseInt(((1010000 - score) * n - 10000 * justice - 510000 * attack) / 1010000, 10);
-      justice = parseInt(((1010000 - score) * n - 510000 * attack - 1010000 * miss) / 10000, 10);
+      miss = parseInt(((1010000 - score) * n - 10000*justice - 510000*attack) / 1010000, 10);
+      justice = parseInt(((1010000 - score) * n - 510000*attack - 1010000*miss) / 10000, 10);
       if(justice < old_justice){
         miss--;
         justice += 101;
