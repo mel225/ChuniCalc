@@ -31,7 +31,7 @@
     };
     resolve(new Promise(pro));
   */
-  }).then(function(){
+  })).then(function(){
     setContentsCSS();
     console.log("setContentsCSS()");
 
