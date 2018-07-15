@@ -17,7 +17,7 @@
           Promise.resolve();
         }
       };
-      return pro();
+      return pro;
     }));
 /*
     var index = 0;
