@@ -302,7 +302,8 @@
                 "justice: " + justice,
                 "attack: " + attack,
                 "miss: " + miss,
-                "notes: " + n
+                "notes: " + n,
+                difficulty
                 );
     
     /* 取得した値が数値変換後の値なのでその値に変える */
