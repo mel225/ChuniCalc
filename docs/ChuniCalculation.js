@@ -21,13 +21,11 @@
     });
   })).then(function(){
   /* 続けて、各種データの読み込み */
-    var funcs = [setContentsCSS(), // css を設定
-                 getDataByPage(), // ページ上の BOX データを取得
-                 getMaxChainByFile() // MaxChain をテキストファイルから取得
-                 ];
-    return Promise.all(funcs).then(function(){
-      return Promise.resolve();
-    });
+    var funcs = 
+    return Promise.all([setContentsCSS(), // css を設定
+                        getDataByPage(), // ページ上の BOX データを取得
+                        getMaxChainByFile() // MaxChain をテキストファイルから取得
+                        ]);
   }).then(function(){
     console.log("after: " + maxChainData);
     /* 各難易度のBOXに対して処理を行う */
@@ -100,7 +98,7 @@
         }else{
           console.log("finished getMaxChainByFile()");
           maxChainData = musics[title];
-          return;
+          return Promise.resolve();
         }
       });
     });
