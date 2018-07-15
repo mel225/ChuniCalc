@@ -303,7 +303,9 @@
                 "attack: " + attack,
                 "miss: " + miss,
                 "notes: " + n,
-                difficulty
+                difficulty,
+                maxChainData.getDifficultyNum(difficulty),
+                maxChainData.getData(maxChainData.getDifficultyNum(difficulty))
                 );
     
     /* 取得した値が数値変換後の値なのでその値に変える */
