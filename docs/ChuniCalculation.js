@@ -21,7 +21,6 @@
     });
   })).then(function(){
   /* 続けて、各種データの読み込み */
-    var funcs = 
     return Promise.all([setContentsCSS(), // css を設定
                         getDataByPage(), // ページ上の BOX データを取得
                         getMaxChainByFile() // MaxChain をテキストファイルから取得
