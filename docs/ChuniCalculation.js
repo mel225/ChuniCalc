@@ -202,6 +202,7 @@
 
   /* MaxChainの値をページ上に設定し、各判定の減点分を表示する */
   function setMaxChain(box, difficultyNum){
+    console.log(maxChainData);
     var difficulty = new MusicData().getDifficultyString(difficultyNum);
 
     /* MaxChainを表示する要素にChain数を書き込む */
