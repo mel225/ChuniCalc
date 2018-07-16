@@ -87,6 +87,21 @@
   
   /* MaxChain 数（ノーツ数）をファイルから取得する */
   function getMaxChainByFile(){
+    var title = musicBoxes.getTitle();
+    var fileURL = "https://mel225.github.io/ChuniCalc/NotesDataTable.txt";
+    return getMusicDataByURL(fileURL).then(function(musics){
+      if(musics[title] == undefined){
+        alert(title + " のデータが見つかりませんでした。");
+        Promise.reject();
+        return;
+      }else{
+        maxChainData = musics[title];
+        console.log("finished getMaxChainByFile()");
+        Promise.resolve();
+        return;
+      }
+    });
+    /*
     return new Promise(function(resolve, reject){
       var title = musicBoxes.getTitle();
       var fileURL = "https://mel225.github.io/ChuniCalc/NotesDataTable.txt";
@@ -101,6 +116,7 @@
         }
       });
     });
+      */
   }
 
   /* 外部ファイルをファイル名から読み込む */
