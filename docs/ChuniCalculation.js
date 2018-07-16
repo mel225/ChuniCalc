@@ -101,22 +101,6 @@
         return;
       }
     });
-    /*
-    return new Promise(function(resolve, reject){
-      var title = musicBoxes.getTitle();
-      var fileURL = "https://mel225.github.io/ChuniCalc/NotesDataTable.txt";
-      return getMusicDataByURL(fileURL).then(function(musics){
-        if(musics[title] == undefined){
-          alert(title + " のデータが見つかりませんでした。");
-          return Promise.reject();
-        }else{
-          console.log("finished getMaxChainByFile()");
-          maxChainData = musics[title];
-          return Promise.resolve();
-        }
-      });
-    });
-      */
   }
 
   /* 外部ファイルをファイル名から読み込む */
