@@ -36,6 +36,7 @@
       var notExists = [];
       [].forEach.call(document.getElementsByClassName("w388 musiclist_box bg_master"), function(item){
         var title = item.firstElementChild.innerText;
+        console.log(musics[title]);
         if(musics[title] == undefined){
           notExists.push(title);
         }
