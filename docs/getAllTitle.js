@@ -1,6 +1,6 @@
 (function(){
   readOuterJs("readFile.js").then(function(){
-    return openTextFile("https://mel225.github.io/ChuniCalc/NotesDataTable.txt");
+    return getMusicDataByURL("https://mel225.github.io/ChuniCalc/NotesDataTable.txt");
   }).then(function(musics){
     return getTitles(musics);
   }).then(function(notExists){
