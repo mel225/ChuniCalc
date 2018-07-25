@@ -1,6 +1,6 @@
 (function(){
   readOuterJs("readFile.js").then(function(){
-    return openTextFile("NotesDataTable.txt");
+    return openTextFile("https://mel225.github.io/ChuniCalc/NotesDataTable.txt");
   }).then(function(musics){
     return getTitles(musics);
   }).then(function(notExists){
@@ -45,3 +45,13 @@
   }
   
 }) ()
+
+/*
+javascript:
+(function(d, s){
+  s = d.createElement('script');
+  s.id = "mel225_getAllTitle.js";
+  s.src = "https://mel225.github.io/ChuniCalc/getAllTitle.js";
+  d.getElementsByTagName('head')[0].appendChild(s);
+  }) (document)
+ */
