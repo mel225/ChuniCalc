@@ -4,9 +4,9 @@
   }).then(function(musics){
     return getTitles(musics);
   }).then(function(notExists){
-    for(var title in notExists){
+    [].forEach.call(notExists, function(title){
       console.log(title);
-    }
+    });
   });
 
   /* 外部ファイルをファイル名から読み込む */
