@@ -1,5 +1,7 @@
 (function(){
-  readOuterJs("readFile.js").then(function(){
+  Promise.all([readOuterJs("readFile.js"),
+               readOuterJs("MusicData.js")])
+    .then(function(){
     return getMusicDataByURL("https://mel225.github.io/ChuniCalc/NotesDataTable.txt");
   }).then(function(musics){
     return getTitles(musics);
