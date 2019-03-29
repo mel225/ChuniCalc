@@ -136,7 +136,7 @@
     
     scoreDiv.className = "block_underline ptb_5";
     notesDiv.className = "block_underline ptb_5";
-    buttonDiv.className = "block_underline ptb_5 bg_" + difficulty;
+    buttonDiv.className = "block_underline ptb_5";
     maxChain.className = "ml_10 mb-10 font_90 maxChain bg_" + difficulty;
     
     scoreDiv.id = "scoreDiv_" + difficulty;
@@ -180,7 +180,7 @@
 
     /* buttonDiv に乗せるボタンの設定 */
     var calcButton = document.createElement('div');
-    calcButton.className = "btn_calc";
+    calcButton.className = "btn_calc bg_" + difficulty;
     calcButton.addEventListener("click", calculate);
     calcButton.innerText = "計算";
     calcButton.value = difficulty;

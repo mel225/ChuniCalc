@@ -2,9 +2,6 @@
 
 .btn_calc {
   display: block;
-/*  background-image: url(https://chunithm-net.com/mobile/common/images/honor_bg_silver.png);*/
-  background-repeat: no-repeat;
-  background-size: 100%;
   width: 380px;
   height: 42px;
   padding: 8px 10px;
@@ -14,16 +11,17 @@
   font-weight: bolder;
   overflow: hidden;
   opacity: 1.0;
+  cursor: pointer;
+  line-height: 42px;
+  border-radius: 8px;
 }
 
 .btn_calc :hovor{
   opacity: 0.6;
-  cursor: pointer;
 }
 
 .btn_calc_back {
   display: block;
-//  background: #000;
   border-radius: 8px;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px
